@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import pickle 
 
 # Titre de l'application
 st.title("Analyse des résultats - Mangetamain")
@@ -12,38 +13,40 @@ Cette application vous permet d'explorer les résultats de notre étude.
 Modifiez les paramètres ci-dessous pour voir comment les résultats changent.
 """)
 
-# Chargement des données
-# Remplace avec tes propres données ou une méthode d'import des données
-@st.cache
-def load_data():
-    data = pd.read_csv("data/archive/RAW_recipes.csv")  # Remplace par tes données
-    return data
 
-data = load_data()
 
-data['submitted'] = pd.to_datetime(data['submitted'], errors='coerce')
-st.write(data.dtypes)
 
-# Sidebar pour l'interactivité
-st.sidebar.header("Options d'analyse")
-selected_month = st.sidebar.selectbox("Choisissez un mois", data['submitted'].dt.month.unique())
+# Charger le dictionnaire depuis le fichier pickle
+try:
+    with open('../Backend/src/webapp_assets/recettes_par_saison.pkl', 'rb') as fichier:
+        recettes_par_saison = pickle.load(fichier)
 
-# Filtrage des données
-filtered_data = data[data['submitted'].dt.month == selected_month]
+         # Tracer le diagramme camembert
+        labels = list(recettes_par_saison.keys())
+        values = list(recettes_par_saison.values())
 
-# Affichage des données filtrées
-st.write(f"### Données pour le mois sélectionné : {selected_month}")
-st.dataframe(filtered_data)
+        fig, ax = plt.subplots(figsize=(6, 6))  # Définir la taille du graphique
+        ax.pie(values, labels=labels, autopct='%1.1f%%', startangle=90)
+        ax.axis('equal')  # Assure que le camembert est bien rond
+        ax.set_title("Répartition des recettes par saison")
 
-# Graphique interactif
-st.write("### Graphique des résultats")
-fig, ax = plt.subplots()
-filtered_data.groupby('variable_a_plotter').size().plot(kind='bar', ax=ax)
-st.pyplot(fig)
+        # Afficher le graphique dans Streamlit
+        st.pyplot(fig)
 
-# Conclusion avec storytelling
-st.write("""
-## Conclusion
-Nous espérons que cette analyse vous a aidé à comprendre les enjeux de cette étude. 
-N'hésitez pas à utiliser les options sur la gauche pour explorer les résultats par vous-même.
-""")
+    with open('../Backend/src/webapp_assets/dates_plus_postees.pkl', 'rb') as fichier_liste:
+        ma_liste = pickle.load(fichier_liste)
+        st.write("Top des dates avec le plus de posts:")
+        st.text(", ".join(map(str, ma_liste)))  # Afficher la liste en format texte avec les valeurs qui se suivent
+
+
+
+except FileNotFoundError:
+    st.error("Le fichier 'recettes_par_saison.pkl' est introuvable. Assurez-vous qu'il est bien dans le dossier 'webapp_assets'.")
+except Exception as e:
+    st.error(f"Une erreur est survenue lors du chargement : {e}")
+
+
+
+
+#Ca pourrait être pas mal d'afficher un calendrier averc les fêtes pour qu'on voit quand certaines fêtes sont proches de dates de recettes postées 
+
