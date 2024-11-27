@@ -50,3 +50,30 @@ except Exception as e:
 
 #Ca pourrait être pas mal d'afficher un calendrier averc les fêtes pour qu'on voit quand certaines fêtes sont proches de dates de recettes postées 
 
+
+# Charger le fichier .pkl
+
+with open('../Backend/src/webapp_assets/cursor.pkl', 'rb') as fichier :
+    df = pd.read_pickle(fichier)
+    df = df.fillna(0)
+
+    saisons = ['Printemps_%', 'Hiver_%', 'Ete_%', 'Automne_%']
+    labels = ['Printemps', 'Hiver', 'Été', 'Automne']
+# Curseur pour sélectionner le temps de cuisson
+    temps_cuisson = st.slider("Choisissez un temps de cuisson (en minutes)", min_value=1, max_value=int(df.index.max()), step=1)
+    st.write(f"Temps de cuisson sélectionné : {temps_cuisson} minutes")
+
+# Filtrer les données pour le temps de cuisson sélectionné
+if temps_cuisson in df.index:  # Vérifie que l'intervalle existe
+    data = df.loc[temps_cuisson]
+
+    # Extraire et nettoyer les pourcentages pour le camembert
+    valeurs = data[saisons].values.flatten()
+    valeurs = [0 if pd.isna(v) else v for v in valeurs]
+
+
+# Afficher le camembert
+fig, ax = plt.subplots()
+ax.pie(valeurs, labels=labels, autopct='%1.1f%%', startangle=90)
+ax.set_title(f"Répartition des recettes pour {temps_cuisson} minutes")
+st.pyplot(fig)
