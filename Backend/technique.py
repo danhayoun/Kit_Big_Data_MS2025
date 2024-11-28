@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import json
+import pickle
 
 pd.set_option('display.max_columns', None)
 
@@ -118,6 +119,9 @@ def merge_technique_date(df1,df2):
     return df_join
 
 def get_season(date):
+    """
+    Return the season associated with the review 
+    """
     if date.month in [4,5] or (date.month == 3 and date.day >=20) or (date.month == 6 and date.day <20):
         return "spring"
     elif date.month in [7,8] or (date.month == 6 and date.day >=20) or (date.month == 9 and date.day <20):
@@ -136,7 +140,7 @@ def analyze_correlation(df):
         df[technique] = df['techniques'].apply(lambda x: 1 if technique in x else 0)
     
     # Create dummy variables for seasons
-    season_dummies = pd.get_dummies(df['season'], prefix='season')
+    season_dummies = pd.get_dummies(df['season'])
     df = pd.concat([df.drop(columns=['season']), season_dummies], axis=1)
     
     # Calculate correlation matrix
@@ -151,8 +155,6 @@ if __name__ == "__main__":
     techniques = df_techniques(recipes)
     df_tech_by_date = merge_technique_date(techniques,interactions)
     season_correlations = analyze_correlation(df_tech_by_date)
-    # Visualize the correlation matrix
-    plt.figure(figsize=(15, 18))
-    sns.heatmap(season_correlations, annot=True, cmap='coolwarm', center=0)
-    plt.title('Correlation between Techniques and Seasons')
-    plt.show()
+    # Sauvegarder la matrice de corrélation en fichier pickle
+    with open("./Frontend/season_correlations.pkl", "wb") as f:
+        pickle.dump(season_correlations, f)
