@@ -162,7 +162,7 @@ cython_debug/
 #.idea/
 
 
-/data/
+/Data/archive
 data.txt
 
 *.DS_Store
