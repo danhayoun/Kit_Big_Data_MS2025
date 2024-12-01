@@ -80,8 +80,8 @@ def load_data():
     """
     Load data and convert the pandas object to a python type
     """
-    interactions = pd.read_csv('data/RAW_interactions.csv')
-    recipes = pd.read_csv('data/PP_recipes.csv')
+    interactions = pd.read_csv('data/raw/RAW_interactions.csv')
+    recipes = pd.read_csv('data/raw/PP_recipes.csv')
     converting_list(recipes)
     converting_list(interactions)
     interactions["date"]= pd.to_datetime(interactions.date)
@@ -153,8 +153,10 @@ def analyze_correlation(df):
 if __name__ == "__main__":
     recipes, interactions = load_data()
     techniques = df_techniques(recipes)
+    with open("./data/preprocess/techniques.pkl", "wb") as f:
+        pickle.dump(techniques, f)
     df_tech_by_date = merge_technique_date(techniques,interactions)
     season_correlations = analyze_correlation(df_tech_by_date)
     # Sauvegarder la matrice de corrélation en fichier pickle
-    with open("./Frontend/season_correlations.pkl", "wb") as f:
+    with open("./data/preprocess/season_correlations.pkl", "wb") as f:
         pickle.dump(season_correlations, f)

@@ -108,7 +108,8 @@ venv.bak/
 dmypy.json
 
 # data
-/data/
+/data/raw/
+/data/preprocess/*.csv
 data.txt
 
 # Vscode

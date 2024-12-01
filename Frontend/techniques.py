@@ -18,11 +18,11 @@ def main():
         with open("season_correlations.pkl", "rb") as f:
             season_correlations = pickle.load(f)
         
-        st.success("Matrice de corrélation chargée avec succès !")
+        #st.success("Matrice de corrélation chargée avec succès !")
 
         # Affichage de la matrice sous forme de tableau
-        st.subheader("Matrice de Corrélation")
-        st.dataframe(season_correlations)
+        #st.subheader("Matrice de Corrélation")
+        #st.dataframe(season_correlations)
         
         st.subheader("Heatmap Interactive des Corrélations")
         
