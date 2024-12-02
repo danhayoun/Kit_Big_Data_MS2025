@@ -1,0 +1,5 @@
+ Pour les analyses, on essaie de dire à quoi on s'attend, puis on check avec les données et on note les écarts, on les interprète et on essaie de comprendre où est-ce que nos hypothèses sont fausses, pourquoi elles sont fausses. 
+
+Il nous faut des hypothèses de base. Par exemple,pour les dates : on suppose que les nb recettes/jour sont les plus élevés avant Thanksgiving, Pâques et Noël. On se rendra étrangement compte que des fois c'est pas toujours vérifié et on essaiera de comprendre pourquoi 
+
+
