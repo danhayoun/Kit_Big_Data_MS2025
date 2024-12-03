@@ -1,11 +1,12 @@
-streamlit==1.40.0
-pandas==1.5.3
-numpy
-matplotlib==3.7.1
-seaborn==0.12.2
-scikit-learn==1.2.2
-requests==2.28.1
+streamlit
+pandas
+numpy == 1.23.5
+matplotlib == 3.9.2
+seaborn == 0.12.2
+scikit-learn
+requests
 pathlib
 datetime
 plotly
-spacy
+spacy == 3.7.2
+sphinx

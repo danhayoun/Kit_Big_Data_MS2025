@@ -1,11 +1,10 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import json
+import ast
 import pickle
-from typing import Tuple, List
+from typing import List
 import logging
+import spacy
 
 # Configure logging
 logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -85,21 +84,23 @@ class DataLoader:
         return pd.read_csv(filepath)
 
     @staticmethod
-    def converting_list_column(dataframe: pd.DataFrame):
+    def converting_list_column(df: pd.DataFrame,column_list_to_convert):
         """
         Convert the csv's imported list which was transform wrongly to a string to a python list
         """
-        for col in dataframe:
-            if isinstance(dataframe[col][0], str) and dataframe[col][0].startswith('['):
-                dataframe[col] = dataframe[col].apply(json.loads)
+        for col in column_list_to_convert:
+            if col !='tags': # si on veut traiter la colonne tags, il faudra gérer les erreurs de frappe de l'utilisateur
+                if isinstance(df[col][0], str) and df[col][0].startswith('['):
+                    df[col] = df[col].apply(ast.literal_eval)
 
-    def load_data(self, csv_path: str, date = None) -> pd.DataFrame:
+    def load_data(self, csv_path: str,  column_list_to_convert = None, date = None) -> pd.DataFrame:
         """
         Load data from CSV files and convert necessary columns into python type
         """
         try :
             df = self.load_csv(csv_path)
-            self.converting_list_column(df)
+            if column_list_to_convert:
+                self.converting_list_column(df, column_list_to_convert= column_list_to_convert)
             if date and date in df.columns:
                 df[date] = pd.to_datetime(df[date])
             return df
@@ -115,6 +116,37 @@ class TechniqueProcessor:
     
     def __init__(self, techniques_list: List[str]):
         self.techniques_list = techniques_list
+    
+    def binarize_step_to_technique(self, steps):
+        """
+        transform into a binary list 
+        """
+        techniques_in_step = [0] * len(self.techniques_list)
+        for token in steps:
+            if token.lemma_ in self.techniques_list:
+                index = self.techniques_list.index(token.lemma_)
+                techniques_in_step[index] = 1
+        return techniques_in_step
+        
+    def get_binary_techniques_list(self,raw_recipes_df):
+        """
+        Analyze steps using spaCy to detect techniques
+        """    
+        # Charge le modèle de langue anglaise de spaCy
+        nlp = spacy.load("en_core_web_sm")
+        
+        # Ensure 'steps' column exists in the dataframe
+        if 'steps' in raw_recipes_df.columns:
+            # Concaténe les étapes pour chaque recette afin de pouvoir utiliser nlp.pipe
+            steps_concat = raw_recipes_df['steps'].apply(lambda steps: " ".join(steps))
+        else:
+            raise KeyError("'steps' column is missing in the dataframe given")    
+            
+        # Traiter les données en utilisant nlp.pipe
+        lst_techniques = []
+        for steps in nlp.pipe(steps_concat, batch_size=1000):
+            lst_techniques.append(self.binarize_step_to_technique(steps))
+        return lst_techniques
 
     def get_technique_name(self, techniques_flags: List[int]) -> List[str]:
         """
@@ -124,41 +156,20 @@ class TechniqueProcessor:
         """
         return [self.techniques_list[i] for i, flag in enumerate(techniques_flags) if flag == 1]
 
-    def process_techniques(self, recipes: pd.DataFrame) -> pd.DataFrame:
+    def create_technique_df(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Create a DataFrame with recipe IDs, the name and the count of techniques.
         """
-        recipes_PP = pd.DataFrame()
-        recipes_PP["recipe_id"] = recipes["id"]
-        recipes_PP["techniques"] = recipes["techniques"].apply(self.get_technique_name)
-        recipes_PP["nb_techniques"] = recipes["techniques"].apply(sum)
-        return recipes_PP
-
-class DataMerger:
-    """Class responsible for merging datasets and adding additional information."""
-    
-    @staticmethod
-    def get_season(date: pd.Timestamp) -> str:
-        """
-        Determine the season based on the date associated with the review given by a user
-        """
-        if date.month in [4, 5] or (date.month == 3 and date.day >= 20) or (date.month == 6 and date.day < 20):
-            return "Spring"
-        elif date.month in [7, 8] or (date.month == 6 and date.day >= 20) or (date.month == 9 and date.day < 20):
-            return "Summer"
-        elif date.month in [10, 11] or (date.month == 9 and date.day >= 20) or (date.month == 12 and date.day < 20):
-            return "Fall"
-        else:
-            return "Winter"
-
-    def merge_technique_date(self, techniques_df: pd.DataFrame, interactions_df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Merge techniques data with interaction data to include dates and seasons of when the techniques were used
-        """
-        df_join = pd.merge(techniques_df, interactions_df[['recipe_id', 'date']], on='recipe_id', how='outer')
-        df_join.sort_values("date", ascending=True, inplace=True, ignore_index=True)
-        df_join["season"] = df_join["date"].apply(self.get_season)
-        return df_join
+        lst_techniques = self.get_binary_techniques_list(df)
+        techniques_df = pd.DataFrame()
+        techniques_df["recipe_id"] = df["id"]
+        techniques_df["name"] = df["name"] 
+        techniques_df['techniques_binary'] = lst_techniques
+        techniques_df["techniques"] = techniques_df["techniques_binary"].apply(self.get_technique_name)
+        techniques_df["nb_techniques"] = techniques_df["techniques_binary"].apply(sum)
+        techniques_df["season"] = df["season"] 
+        techniques_df["weighted_rating"] = df["weighted_rating"] 
+        return techniques_df
 
 class CorrelationAnalyzer:
     """Class responsible for analyzing correlations between techniques and seasons."""
@@ -191,24 +202,27 @@ class CorrelationAnalyzer:
 if __name__ == "__main__":
     data_loader = DataLoader()
     technique_processor = TechniqueProcessor(TECHNIQUES_LIST)
-    data_merger = DataMerger()
     correlation_analyzer = CorrelationAnalyzer(TECHNIQUES_LIST)
-
+    
     # Load data
-    recipes = data_loader.load_data('data/raw/PP_recipes.csv')
-    interactions = data_loader.load_data('data/raw/RAW_interactions.csv', 'date')
+    recipes = data_loader.load_data('../data/raw/RAW_recipes.csv',['steps'])
+    interactions = data_loader.load_data('../data/raw/RAW_interactions.csv', date = 'date')
+    filter_recipes = pd.read_pickle('../data/preprocess/recipe_filtered.pkl')
+    #filter_recipes.rename(columns={'id': 'recipe_id'}, inplace=True)
+
+    df_steps = pd.merge(recipes[['id','name','steps']], filter_recipes, on='id', how='right')
 
     # Process techniques
-    techniques = technique_processor.process_techniques(recipes)
+    techniques = technique_processor.create_technique_df(df_steps)
 
     # Save processed techniques
-    with open("./data/preprocess/techniques.pkl", "wb") as f:
-        pickle.dump(techniques, f)
+    #with open("../data/preprocess/techniques.pkl", "wb") as f:
+    #    pickle.dump(techniques, f)
 
     # Merge data and analyze correlations
-    df_tech_by_date = data_merger.merge_technique_date(techniques, interactions)
-    season_correlations = correlation_analyzer.analyze_correlation(df_tech_by_date)
+    #df_tech_by_date = pd.merge(techniques, interactions[['recipe_id', 'date']],on='recipe_id', how='outer')
+    season_correlations = correlation_analyzer.analyze_correlation(techniques)
 
     # Save correlation analysis results
-    with open("./data/preprocess/season_correlations.pkl", "wb") as f:
-        pickle.dump(season_correlations, f)
+    #with open("../data/preprocess/season_correlations.pkl", "wb") as f:
+    #    pickle.dump(season_correlations, f)
