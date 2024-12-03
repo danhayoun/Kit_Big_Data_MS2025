@@ -208,7 +208,6 @@ if __name__ == "__main__":
     recipes = data_loader.load_data('../data/raw/RAW_recipes.csv',['steps'])
     interactions = data_loader.load_data('../data/raw/RAW_interactions.csv', date = 'date')
     filter_recipes = pd.read_pickle('../data/preprocess/recipe_filtered.pkl')
-    #filter_recipes.rename(columns={'id': 'recipe_id'}, inplace=True)
 
     df_steps = pd.merge(recipes[['id','name','steps']], filter_recipes, on='id', how='right')
 
@@ -216,13 +215,13 @@ if __name__ == "__main__":
     techniques = technique_processor.create_technique_df(df_steps)
 
     # Save processed techniques
-    #with open("../data/preprocess/techniques.pkl", "wb") as f:
-    #    pickle.dump(techniques, f)
+    with open("../data/preprocess/techniques.pkl", "wb") as f:
+        pickle.dump(techniques, f)
 
     # Merge data and analyze correlations
     #df_tech_by_date = pd.merge(techniques, interactions[['recipe_id', 'date']],on='recipe_id', how='outer')
     season_correlations = correlation_analyzer.analyze_correlation(techniques)
 
     # Save correlation analysis results
-    #with open("../data/preprocess/season_correlations.pkl", "wb") as f:
-    #    pickle.dump(season_correlations, f)
+    with open("../data/preprocess/season_correlations.pkl", "wb") as f:
+        pickle.dump(season_correlations, f)
