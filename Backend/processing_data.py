@@ -108,7 +108,7 @@ class DataProcessor:
         return recipe.merge(average_ratings, on='id', how='left')
     
     @staticmethod
-    def scale_column_to_range(self, df, column_name, target_max=20):
+    def scale_column_to_range(df, column_name, target_max=20):
         if column_name not in df.columns:
             raise ValueError(f"La colonne '{column_name}' n'existe pas dans le DataFrame.")
         
@@ -127,7 +127,7 @@ class DataProcessor:
         return df
     
     @staticmethod
-    def weigthed_ratings_recipe(self, interaction, recipe):
+    def weigthed_ratings_recipe(interaction, recipe):
         # création of column weigth
         interaction_counts = (
             interaction.groupby('id')
@@ -212,8 +212,9 @@ class Pipeline:
         self.save_processed_data(processed_recipe)
 
 if __name__ == "__main__":
-    folder_path = Path(ABSOLUTE_PATH) / ".." / ".." / ".." / "data" / "raw"
-    output_path = Path(ABSOLUTE_PATH) / ".." / ".." / ".." / "data" / "preprocess" / "recipe_filtered.pkl"
+    folder_path = Path(ABSOLUTE_PATH) / ".." / ".." / "data" / "raw"
+    output_path = Path(ABSOLUTE_PATH) / ".." / ".." / "data" / "preprocess" / "recipe_filtered.pkl"
     print(folder_path, '\n', output_path)
     pipeline = Pipeline(folder_path, output_path, k=5)
     pipeline.run()
+    
