@@ -5,9 +5,12 @@ class FileManager:
     @staticmethod
     def get_next_item(dict_data, index = 1):
         iterator = iter(dict_data.items())
-        for i in range(1, index):
-            next(iterator)
-        return next(iterator)
+        try:
+            for i in range(1, index):
+                next(iterator)
+            return next(iterator)
+        except StopIteration:
+            raise ValueError("L'itérateur est vide ou n'a plus d'éléments.")
 
     @staticmethod
     def read_file(file_path):

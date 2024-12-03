@@ -2,10 +2,15 @@ import numpy as np
 from pathlib import Path
 import pandas as pd
 import os
+import sys
+
+# Ajouter le répertoire parent de 'utils' au chemin de recherche des modules
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 #---------------------------------------------------------------
 # import classes from utils
-from ..utils import file_manager
-#from ..utils.data_processor import DataProcessor
+from utils.file_manager import FileManager
+from utils.data_processor import DataProcessor
 
 ABSOLUTE_PATH = os.path.abspath(__file__)
 
