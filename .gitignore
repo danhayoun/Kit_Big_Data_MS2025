@@ -109,6 +109,8 @@ dmypy.json
 
 # data
 /Data/archive
+/data/raw/
+/data/preprocess/*.csv
 data.txt
 # Vscode
 *.DS_Store
