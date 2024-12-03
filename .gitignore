@@ -108,7 +108,6 @@ venv.bak/
 dmypy.json
 
 # data
-/Data/archive
 /data/raw/
 /data/preprocess/*.csv
 data.txt
