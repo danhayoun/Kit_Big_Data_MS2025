@@ -2,7 +2,10 @@ import numpy as np
 from pathlib import Path
 import pandas as pd
 import os
-import pickle
+#---------------------------------------------------------------
+# import classes from utils
+from ..utils import file_manager
+#from ..utils.data_processor import DataProcessor
 
 ABSOLUTE_PATH = os.path.abspath(__file__)
 
@@ -10,31 +13,6 @@ ABSOLUTE_PATH = os.path.abspath(__file__)
 ### Create class here just to organise ###
 # We should now use the static method for this
 #--------------------------
-class FileManager:
-    @staticmethod
-    def get_next_item(dict_data, index = 1):
-        iterator = iter(dict_data.items())
-        for i in range(1, index):
-            next(iterator)
-        return next(iterator)
-
-    @staticmethod
-    def read_file(file_path):
-        return pd.read_csv(file_path)
-
-    @staticmethod
-    def read_raw_files(csv_files, folder_path):
-        raw_files_data = {}
-        for file_name in csv_files:
-            if file_name.startswith('RAW'):
-                raw_files_data[file_name] = FileManager.read_file(folder_path / file_name)
-        return raw_files_data
-
-    @staticmethod
-    def save_file_as_pickle(file, path):
-        with open(path, "wb") as f:
-            pickle.dump(file, f)
-
 #--------------------------
 class SeasonHandler:
     @staticmethod
@@ -93,39 +71,7 @@ class SeasonHandler:
         return max_seasons[0]
     
 #--------------------------
-class DataProcessor:
-    @staticmethod
-    def transform_date(date):
-        return pd.to_datetime(date)
-
-    @staticmethod
-    def average_ratings_recipe(interaction, recipe):
-        average_ratings = (
-            interaction.groupby('id')['rating']
-            .mean()
-            .reset_index(name='rating')
-        )
-        return recipe.merge(average_ratings, on='id', how='left')
-    
-    @staticmethod
-    def scale_column_to_range(df, column_name, target_max=20):
-        if column_name not in df.columns:
-            raise ValueError(f"La colonne '{column_name}' n'existe pas dans le DataFrame.")
-        
-        col_max = df[column_name].max()
-        
-        # Évitez de diviser par 0
-        if col_max == 0:
-            raise ValueError(f"La colonne '{column_name}' contient uniquement des 0.")
-        
-        # Calculez le facteur d'échelle
-        scaling_factor = target_max / col_max
-        
-        # Appliquez la transformation
-        df[f"{column_name}"] = df[column_name] * scaling_factor
-        
-        return df
-    
+class DataProcess:
     @staticmethod
     def weigthed_ratings_recipe(interaction, recipe):
         # création of column weigth
@@ -149,9 +95,9 @@ class DataProcessor:
         ))
 
 #---------------------------------------------------------------
-### Pipeline ###
+### Pipeline of Preprocessing the Data ###
 #--------------------------
-class Pipeline:
+class PreprocessingData:
     def __init__(self, folder_path, output_path, k=5):
         self.folder_path = folder_path
         self.output_path = output_path
@@ -190,12 +136,12 @@ class Pipeline:
         id_season_dict = id_date_df.set_index('id')['submitted'].to_dict()
         
         # Assign max season
-        recipe['season'] = DataProcessor.calculate_weighted_rating(contigency_table, id_season_dict, recipe)
+        recipe['season'] = DataProcess.calculate_weighted_rating(contigency_table, id_season_dict, recipe)
         # Add average ratings
         recipe = DataProcessor.average_ratings_recipe(interaction, recipe)
         
         # Add weighted ratings
-        recipe = DataProcessor.weigthed_ratings_recipe(interaction, recipe)
+        recipe = DataProcess.weigthed_ratings_recipe(interaction, recipe)
         return recipe
     
     def save_processed_data(self, recipe):
@@ -215,6 +161,6 @@ if __name__ == "__main__":
     folder_path = Path(ABSOLUTE_PATH) / ".." / ".." / "data" / "raw"
     output_path = Path(ABSOLUTE_PATH) / ".." / ".." / "data" / "preprocess" / "recipe_filtered.pkl"
     print(folder_path, '\n', output_path)
-    pipeline = Pipeline(folder_path, output_path, k=5)
+    pipeline = PreprocessingData(folder_path, output_path, k=5)
     pipeline.run()
     
