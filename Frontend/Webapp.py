@@ -69,55 +69,25 @@ with open('../Backend/src/webapp_assets/cursor2.pkl', 'rb') as fichier :
     # Affichage dans Streamlit
     st.pyplot(fig)
 
-    saisons = ['Spring_%', 'Winter_%', 'Summer_%', 'Fall_%']
-    labels = ['Spring', 'Winter', 'Summer', 'Fall']
-# Curseur pour sélectionner le temps de cuisson
-    temps_cuisson = st.slider("Choisissez un temps de cuisson (en minutes)", min_value=1, max_value=int(df.index.max()), step=1)
-    st.write(f"Temps de cuisson sélectionné : {temps_cuisson} minutes")
-
-# Filtrer les données pour le temps de cuisson sélectionné
-if temps_cuisson in df.index:  # Vérifie que l'intervalle existe
-    data = df.loc[temps_cuisson]
-
-    # Extraire et nettoyer les pourcentages pour le camembert
-    valeurs = data[saisons].values.flatten()
-    valeurs = [0 if pd.isna(v) else v for v in valeurs]
-
-
-# Afficher le camembert
-fig, ax = plt.subplots()
-ax.pie(valeurs, labels=labels, autopct='%1.1f%%', startangle=90)
-ax.set_title(f"Répartition des recettes pour {temps_cuisson} minutes")
-st.pyplot(fig)
-
-
-
-################################### Code fonctionnel mais sans POO ####################
-#with open('../Backend/src/webapp_assets/cursor_significatif.pkl', 'rb') as fichier :
-#    df = pd.read_pickle(fichier)
-#    df = df.fillna(0)
-
-# Titre de l'application
-#st.title("Camemberts par intervalle de temps")
-
-# Création des camemberts pour chaque intervalle
-#for index, row in df.iterrows():
-#    intervalle = row['intervalle']  # Récupération du nom de l'intervalle
-#    data = row[['Printemps_%', 'Hiver_%', 'Ete_%', 'Automne_%']]  # Données des saisons
-#   labels = ['Printemps', 'Hiver', 'Été', 'Automne']
-#
-    # Création du graphique
-#    fig, ax = plt.subplots()
-#    ax.pie(data, labels=labels, autopct='%1.1f%%', startangle=90)
-#    ax.set_title(f"Distribution pour l'intervalle {intervalle}")
-
-    # Affichage du graphique dans Streamlit (distinct pour chaque camembert)
-#    st.pyplot(fig)
-
-
+################# Camembert interactif ################
 data_columns = ['Printemps_%', 'Hiver_%', 'Ete_%', 'Automne_%']
 label_names = ['Printemps', 'Hiver', 'Été', 'Automne']
+
+
+pickle = DatabaseDisplay('temps_de_cuisson','../Backend/src/webapp_assets/cursor2.pkl') 
+
+pickle.plot_interactive_pie_chart(
+    data_columns=['Spring_%', 'Winter_%', 'Summer_%', 'Fall_%'],
+    label_names=['Printemps', 'Hiver', 'Été', 'Automne'],
+    slider_label="Sélectionnez un intervalle",
+    title="Répartition des recettes par intervalle de temps"
+)
+
+
+
 
 pickle = DatabaseDisplay('temps_de_cuisson','../Backend/src/webapp_assets/cursor_significatif.pkl')
 
 pickle.plot_pie_charts_2(data_columns, label_names, title="Camemberts par intervalle de temps")
+
+pickle = DatabaseDisplay('temps_de_cuissons','')
