@@ -164,7 +164,7 @@ class PreprocessingData:
 
 if __name__ == "__main__":
     folder_path = Path(ABSOLUTE_PATH) / ".." / ".." / "data" / "raw"
-    output_path = Path(ABSOLUTE_PATH) / ".." / ".." / "data" / "preprocess" / "recipe_filtered.pkl"
+    output_path = Path(ABSOLUTE_PATH) / ".." / ".." / "data" / "preprocess" / "recipe_filtered2.pkl"
     print(folder_path, '\n', output_path)
     pipeline = PreprocessingData(folder_path, output_path, k=5)
     pipeline.run()

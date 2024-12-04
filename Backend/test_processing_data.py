@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 from pathlib import Path
-from processing_data import FileManager, SeasonHandler, DataProcessor, Pipeline
+from .processing_data import SeasonHandler, DataProcess#, PreprocessingData
 import os
 import numpy as np
 
@@ -64,7 +64,7 @@ def test_reassign_season(sample_data):
     # Index 4 : id_season_dict est vérifié, et n'est pas dedans, donc choix aléatoire dans max_seasons attendu entre Spring et Fall.
     expected_seasons = ['Spring', 'Spring', 'Fall', 'Spring', ['Spring', 'Fall']]
     
-    recipe['season'] = DataProcessor.calculate_weighted_rating(
+    recipe['season'] = DataProcess.calculate_weighted_rating(
             contigency_table,
             id_season_dict,
             recipe
