@@ -1,14 +1,13 @@
-import pandas as pd
-import numpy as np
 import ast
+import pandas as pd
 import pickle
-from typing import List
+from typing import List, Any
 import logging
 import spacy
+import streamlit as st
 
 # Configure logging
 logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
-
 # Configure df option
 pd.set_option('display.max_columns', None)
 
@@ -82,9 +81,19 @@ class DataLoader:
         Read a csv file into DataFrame
         """
         return pd.read_csv(filepath)
+    
+    @staticmethod
+    def load_pickle(filepath: str) -> pd.DataFrame:
+        try:
+            with open(filepath, "rb") as f:
+                df = pickle.load(f)
+            return df
+        except FileNotFoundError as e:
+            st.error(f"Erreur de chargement des données : {e}")
+            return None
 
     @staticmethod
-    def converting_list_column(df: pd.DataFrame,column_list_to_convert):
+    def converting_list_column(df: pd.DataFrame,column_list_to_convert) -> None:
         """
         Convert the csv's imported list which was transform wrongly to a string to a python list
         """
@@ -93,7 +102,7 @@ class DataLoader:
                 if isinstance(df[col][0], str) and df[col][0].startswith('['):
                     df[col] = df[col].apply(ast.literal_eval)
 
-    def load_data(self, csv_path: str,  column_list_to_convert = None, date = None) -> pd.DataFrame:
+    def load_clean_csv(self, csv_path: str,  column_list_to_convert = None, date = None) -> pd.DataFrame:
         """
         Load data from CSV files and convert necessary columns into python type
         """
@@ -114,12 +123,18 @@ class DataLoader:
 class TechniqueProcessor:
     """Class responsible for processing recipe techniques."""
     
-    def __init__(self, techniques_list: List[str]):
+    def __init__(self, techniques_list: List[str]) -> None:
         self.techniques_list = techniques_list
     
-    def binarize_step_to_technique(self, steps):
+    def binarize_step_to_technique(self, steps: Any) -> List[int]:
         """
-        transform into a binary list 
+        Transform steps into a binary list indicating the presence of techniques.
+        
+        Parameters:
+        steps (Any): The steps to analyze, typically a spaCy Doc object.
+        
+        Returns:
+        List[int]: A binary list indicating the presence of techniques.
         """
         techniques_in_step = [0] * len(self.techniques_list)
         for token in steps:
@@ -128,10 +143,16 @@ class TechniqueProcessor:
                 techniques_in_step[index] = 1
         return techniques_in_step
         
-    def get_binary_techniques_list(self,raw_recipes_df):
+    def get_binary_techniques_list(self, raw_recipes_df: pd.DataFrame) -> List[List[int]]:
         """
-        Analyze steps using spaCy to detect techniques
-        """    
+        Analyze steps using spaCy to detect techniques.
+        
+        Parameters:
+        raw_recipes_df (pd.DataFrame): The DataFrame containing the raw recipes data.
+        
+        Returns:
+        List[List[int]]: A list of binary lists indicating the presence of techniques for each recipe.
+        """      
         # Charge le modèle de langue anglaise de spaCy
         nlp = spacy.load("en_core_web_sm")
         
@@ -174,7 +195,7 @@ class TechniqueProcessor:
 class CorrelationAnalyzer:
     """Class responsible for analyzing correlations between techniques and seasons."""
     
-    def __init__(self, techniques_list: List[str]):
+    def __init__(self, techniques_list: List[str]) -> None:
         self.techniques_list = techniques_list
 
     def analyze_correlation(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -205,9 +226,9 @@ if __name__ == "__main__":
     correlation_analyzer = CorrelationAnalyzer(TECHNIQUES_LIST)
     
     # Load data
-    recipes = data_loader.load_data('../data/raw/RAW_recipes.csv',['steps'])
-    interactions = data_loader.load_data('../data/raw/RAW_interactions.csv', date = 'date')
-    filter_recipes = pd.read_pickle('../data/preprocess/recipe_filtered.pkl')
+    recipes = data_loader.load_clean_csv('data/raw/RAW_recipes.csv',['steps'])
+    interactions = data_loader.load_clean_csv('data/raw/RAW_interactions.csv', date = 'date')
+    filter_recipes = pd.read_pickle('data/preprocess/recipe_filtered.pkl')
 
     df_steps = pd.merge(recipes[['id','name','steps']], filter_recipes, on='id', how='right')
 
@@ -215,7 +236,7 @@ if __name__ == "__main__":
     techniques = technique_processor.create_technique_df(df_steps)
 
     # Save processed techniques
-    with open("../data/preprocess/techniques.pkl", "wb") as f:
+    with open("data/preprocess/techniques.pkl", "wb") as f:
         pickle.dump(techniques, f)
 
     # Merge data and analyze correlations
@@ -223,5 +244,5 @@ if __name__ == "__main__":
     season_correlations = correlation_analyzer.analyze_correlation(techniques)
 
     # Save correlation analysis results
-    with open("../data/preprocess/season_correlations.pkl", "wb") as f:
+    with open("data/preprocess/season_correlations.pkl", "wb") as f:
         pickle.dump(season_correlations, f)
