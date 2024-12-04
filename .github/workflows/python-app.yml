@@ -7,7 +7,7 @@ on:
   push:
     branches: [ "main", "Josephine" ]
   pull_request:
-    branches: [ "main", "Josephine" ]
+    branches: [ "main" ]
 
 permissions:
   contents: read
