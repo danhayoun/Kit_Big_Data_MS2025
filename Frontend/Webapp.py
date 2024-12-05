@@ -85,7 +85,7 @@ pickle.plot_interactive_pie_chart(
 
 
 
-
+ 
 pickle = DatabaseDisplay('temps_de_cuisson','../Backend/src/webapp_assets/cursor_significatif.pkl')
 
 pickle.plot_pie_charts_2(data_columns, label_names, title="Camemberts par intervalle de temps")
