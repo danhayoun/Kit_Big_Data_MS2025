@@ -1,0 +1,13 @@
+datetime
+streamlit
+pandas
+numpy == 1.23.5
+matplotlib == 3.9.2
+seaborn == 0.12.2
+scikit-learn
+requests
+pathlib
+pickle
+plotly
+spacy == 3.7.2
+sphinx
