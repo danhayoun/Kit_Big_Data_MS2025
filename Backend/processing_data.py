@@ -9,8 +9,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 #---------------------------------------------------------------
 # import classes from utils
-from utils.file_manager import FileManager
-from utils.data_processor import DataProcessor
+from Backend.utils.file_manager import FileManager
+from Backend.utils.data_processor import DataProcessor
 
 ABSOLUTE_PATH = os.path.abspath(__file__)
 

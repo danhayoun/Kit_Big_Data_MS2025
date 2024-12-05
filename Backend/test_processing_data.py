@@ -1,9 +1,10 @@
 import pytest
 import pandas as pd
 from pathlib import Path
-from .processing_data import SeasonHandler, DataProcess#, PreprocessingData
 import os
 import numpy as np
+import sys
+from Backend.processing_data import SeasonHandler, DataProcess#, PreprocessingData
 
 ABSOLUTE_PATH = os.path.abspath(__file__)
 
