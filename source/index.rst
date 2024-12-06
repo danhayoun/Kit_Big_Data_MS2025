@@ -3,12 +3,22 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-KIT_BIG_DATA_MS2025 documentation
-=================================
+KIT_BIG_DATA_MS 2025
+====================
 
-Introduction
-------------
-Bienvenue dans la documentation du projet KIT_BIG_DATA_MS2025. Ce projet est conçu pour ...
+Voir la section :ref:`Présentation du Projet <presentation>` pour plus de détails.
+
+Pour les instructions d'installation, consultez la section :ref:`Installation <installation>`.
+
+La documentation de l'API est disponible dans la section :ref:`API Documentation <API_doc>`.
+
+.. _presentation:
+
+Présentation du Projet
+----------------------
+Bienvenue dans la documentation du projet KIT_BIG_DATA_MS2025. Ce projet est conçu pour faire une analyse du jeu de données provenant de Kaggle pour un projet de Telecom Paris visant à produire une Web App avec Streamlit.
+
+.. _installation:
 
 Installation
 ------------
@@ -18,36 +28,25 @@ Pour installer ce projet, suivez les étapes ci-dessous :
 
    pip install -r requirements.txt
 
-Utilisation
------------
-Voici comment utiliser ce projet :
 
-.. code-block:: python
 
-   from technique import DataLoader
-
-   df = DataLoader()
-   df.load_data("path")
-
-API Documentation
------------------
-La documentation de l'API est disponible ci-dessous :
-
-.. automodule:: Backend.technique
-    :members: 
-
-.. automodule:: Frontend.techniques
-    :members:
-
-.. automodule:: Frontend.recettes
-    :members:
+.. Hidden TOCs
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Présentation 
 
-Indices and tables
-==================
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   self
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Documentation 
+
+   API_doc
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Index 
+
+   genindex
+   modindex
