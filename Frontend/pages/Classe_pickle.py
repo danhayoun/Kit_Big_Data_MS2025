@@ -8,7 +8,7 @@ import pickle
 import streamlit as st
 
 
-pages = ['temps_de_cuisson','correlation','techniques_cuisine']
+pages = ['temps_de_cuisson','fun_facts','techniques_cuisine'] # temps_de_cuisson = Dan, fu_facts = Joséphine, techniques_cuisine = Cécile 
 
 ##################CLASSE GENERIQUE POUR TOUS LES PICKLE ####################################
 
@@ -34,16 +34,20 @@ class Display : #Pour tous les .pkl, attributs : quel page, quel chemin
 
 ################## CLASSES POUR LES DIFFERENTS TYPES DE PICKLE UTILISES ############################
 
-class DatabaseDisplay(Display):
+class CamembertDisplay(Display): 
     def __init__(self, page, pkl_path):
         super().__init__(page, pkl_path)  # Appelle le constructeur de Display
         self.dataframe = self.load_dataframe()  # Charge le DataFrame spécifique
 
-    def load_dataframe(self):
+
+    def load_dataframe(self,enable_fillna = False): #Charge le dataframe, mettre enable_fillna à True si on veut remplacer les Nan par des 0 
         """Charge un DataFrame à partir du fichier .pkl."""
         try:
             df = pd.read_pickle(self.pkl_path)
-            return df.fillna(0)  # Remplace les valeurs NaN par 0
+            if(enable_fillna == True) :
+                return df.fillna(0)  # Remplace les valeurs NaN par 0
+            else : 
+                return df
         except Exception as e:
             raise ValueError(f"Erreur lors du chargement du fichier .pkl : {e}")
         
@@ -111,6 +115,9 @@ class DatabaseDisplay(Display):
             st.pyplot(fig)
         else:
             st.warning(f"Aucun intervalle correspondant à la valeur {intervalle} trouvé.")
+    
+
+
 
 
 

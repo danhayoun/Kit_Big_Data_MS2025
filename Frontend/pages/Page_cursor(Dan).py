@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import pickle 
-from Classe_pickle import Display, CamembertDisplay
+from pages.Classe_pickle import Display, CamembertDisplay
 
 # Titre de l'application
 st.title("Analyse des résultats - Mangetamain")
