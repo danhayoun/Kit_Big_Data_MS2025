@@ -10,7 +10,10 @@ ABSOLUTE_PATH = os.path.abspath(__file__)
 
 # TO NOTE: I am using here some make up data so that I can check the functions.
 @pytest.fixture # éviter répétitionquand utiliser dans plusieurs tests 
-def sample_data():
+def sample_data() -> None:
+    """
+    Provide fictive sample data for testing purposes.
+    """
     # Données factices pour les tests
     interaction_data = pd.DataFrame({
         'id': [1, 2, 3, 4, 5],
@@ -28,7 +31,10 @@ def sample_data():
     return interaction_data, recipe_data
   
 
-def test_assign_season_date():
+def test_assign_season_date() -> None:
+    """
+    Test the assignment of seasons based on dates.
+    """
     # Tester la détection des saisons
     date = pd.Timestamp("2023-06-15")
     season = SeasonHandler.assign_season_date(date)
@@ -38,7 +44,10 @@ def test_assign_season_date():
     season = SeasonHandler.assign_season_date(date)
     assert season == 'Fall'
 
-def test_reassign_season(sample_data):
+def test_reassign_season(sample_data: tuple[pd.DataFrame, pd.DataFrame]) -> None:
+    """
+    Test the assignment of seasons
+    """
     _, recipe = sample_data
      # Étape 1 : Créer un contigency_table factice
     contigency_table = pd.DataFrame({
