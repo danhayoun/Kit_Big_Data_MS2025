@@ -5,30 +5,49 @@ import os
 import numpy as np
 import sys
 from Backend.processing_data import SeasonHandler, DataProcess#, PreprocessingData
+from Backend.utils.data_processor import DataProcessor
+from Backend.utils.file_manager import FileManager
 
 ABSOLUTE_PATH = os.path.abspath(__file__)
 
 # TO NOTE: I am using here some make up data so that I can check the functions.
 @pytest.fixture # éviter répétitionquand utiliser dans plusieurs tests 
-def sample_data():
+def sample_data() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """
+    Provide fictive sample data for testing purposes.
+    """
     # Données factices pour les tests
     interaction_data = pd.DataFrame({
         'id': [1, 2, 3, 4, 5],
         'date': ['2023-03-15', '2023-06-15', '2023-09-15', '2023-12-15', '2023-02-15'],
-        'rating': [4, 5, 3, 4, 2],
-        'count': [5, 10, 3, 9, 8]
+        'counts': [5, 10, 3, 9, 8],
+        'rating': [4.0, 5.0, 3.0, 4.0, 2.0]
     })
 
     recipe_data = pd.DataFrame({
         'id': [1, 2, 3, 4, 5],
         'submitted': ['2023-03-10', '2023-06-10', '2023-09-10', '2023-12-10', '2023-02-10'],
-        'rating': [3.5, 4.5, 3, 3.8, 2.5]
+        'rating': [4.0, 5.0, 3.0, 4.0, 2.0]
     })
 
-    return interaction_data, recipe_data
+    contigency_table = pd.DataFrame({
+    'Spring': [10.0, 1.3, 0.3, 2.0, 1.8],
+    'Summer': [1.1, 1.3, 0.4, 0.2, 1.2],
+    'Fall':   [0.9, 0.8, 1.3, 1.0, 1.8],
+    'Winter': [1.2, 0.5, 0.8, 1.4, 0.6]
+}, index=[1, 2, 3, 4, 5])
+    
+    interaction = interaction_data.loc[
+        interaction_data.index.repeat(interaction_data['counts'])
+    ].reset_index(drop=True)
+
+    return interaction_data, recipe_data, contigency_table, interaction
   
 
-def test_assign_season_date():
+def test_assign_season_date() -> None:
+    """
+    Test the assignment of seasons based on dates.
+    """
     # Tester la détection des saisons
     date = pd.Timestamp("2023-06-15")
     season = SeasonHandler.assign_season_date(date)
@@ -37,17 +56,41 @@ def test_assign_season_date():
     date = pd.Timestamp("2023-12-15")
     season = SeasonHandler.assign_season_date(date)
     assert season == 'Fall'
+    
+def test_average_ratings_recipe(sample_data: tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]) -> None:
+    """
+    Verify that average ratings are correctly calculated and merged into the recipe DataFrame.
+    """
+    _, recipe, _, interaction_data = sample_data
+    
+    average_recipe = recipe['rating'].copy()
+    updated_recipe = DataProcessor.average_ratings_recipe(interaction_data, recipe.drop(columns=['rating']))
+    #le drop ici car sinon confusion avec deux colonnes rating dans recipe.
+    assert average_recipe.equals(updated_recipe['rating'])
 
-def test_reassign_season(sample_data):
-    _, recipe = sample_data
-     # Étape 1 : Créer un contigency_table factice
-    contigency_table = pd.DataFrame({
-    'Spring': [10.0, 1.3, 0.3, 2.0, 1.8],
-    'Summer': [1.1, 1.3, 0.4, 0.2, 1.2],
-    'Fall':   [0.9, 0.8, 1.3, 1.0, 1.8],
-    'Winter': [1.2, 0.5, 0.8, 1.4, 0.6]
-}, index=[1, 2, 3, 4, 5])   
 
+def test_filter_data(sample_data: tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]) -> None:
+    """
+    Verify that filtering works correctly based on interaction counts.
+    """
+    # On va tester pour supérieur strictement à 5. 
+    _, _, _, interaction_data = sample_data   
+
+    expected_filtered_ids = [2, 4, 5] ## la solution
+    
+    filtered_data = SeasonHandler.filter_data(interaction_data, "id", i=6, filter_count=True)
+    filtered_ids = filtered_data['id'].unique().tolist()
+
+    assert set(filtered_ids) == set(expected_filtered_ids), (
+        f"Expected IDs: {expected_filtered_ids}, but got: {filtered_ids}"
+    ) ## ici je veux une comparaison des id
+
+def test_reassign_season(sample_data: tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]) -> None:
+    """
+    Test the assignment of seasons
+    """
+    _, recipe, contigency_table, _= sample_data
+    
     # expect 0: sum or win; 1: spring, or sum; 2: 
     # Étape 2 : Créer un id_season_dict factice
     id_season_dict = {
@@ -65,7 +108,7 @@ def test_reassign_season(sample_data):
     # Index 4 : id_season_dict est vérifié, et n'est pas dedans, donc choix aléatoire dans max_seasons attendu entre Spring et Fall.
     expected_seasons = ['Spring', 'Spring', 'Fall', 'Spring', ['Spring', 'Fall']]
     
-    recipe['season'] = DataProcess.calculate_weighted_rating(
+    recipe['season'] = DataProcess.calculate_seasons(
             contigency_table,
             id_season_dict,
             recipe
@@ -78,3 +121,26 @@ def test_reassign_season(sample_data):
     assert index_4_season in ['Spring', 'Fall'], (
         f"Expected one of ['Spring', 'Fall'] for index 4, but got {index_4_season}"
     )
+    
+def test_specific_weighted_rating(sample_data: tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]) -> None:
+    """
+    Verify the weighted rating for a specific recipe ID.
+    We test 2 functions: weigthed_ratings_recipe and scale_column_to_range
+    """
+    target_max=5
+    specific_id = 2 # car c'est la max value pour weight * rating
+    interaction, recipe, _, interaction_data = sample_data
+    
+    #on calcule le weight
+    interaction['weight'] = np.log1p(interaction['counts'])
+    
+    # et on récupère les données pour tester manuellement pour le maximum value pour id = 2
+    rating = recipe.loc[recipe['id'] == specific_id, 'rating'].values[0]
+    weight = interaction.loc[interaction['id'] == specific_id, 'weight'].values[0]
+    manual_weighted_rating = (target_max / (rating * weight)) * rating * weight ## comme max value elle est forcément égale à 5. 
+
+    # calculation avec la fonction
+    updated_recipe = DataProcess.weigthed_ratings_recipe(interaction_data, recipe)
+    # Ne pas oublier qu'on rescale a la fin avec DataProcessor.scale_column_to_range(recipe, var, )
+    calculated_weighted_rating = updated_recipe.loc[updated_recipe['id'] == specific_id, 'weighted_rating'].values[0]
+    assert pytest.approx(manual_weighted_rating, rel=1e-6) == pytest.approx(calculated_weighted_rating, rel=1e-6)
