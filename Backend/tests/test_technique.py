@@ -1,6 +1,6 @@
 import pytest
 import pandas as pd
-from technique import CorrelationAnalyzer
+from Backend.technique import CorrelationAnalyzer
 
 @pytest.fixture
 def sample_data():
