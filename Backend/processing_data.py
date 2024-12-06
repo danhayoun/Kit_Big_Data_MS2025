@@ -121,7 +121,9 @@ class DataProcess:
             .size()
             .reset_index(name='count')
         )
+        
         interaction_counts['weight'] = np.log1p(interaction_counts['count'])
+        
         # Multiplier directement rating par weight lors du mappage
         var = 'weighted_rating'
         recipe[var] = recipe['rating'] * recipe['id'].map(interaction_counts.set_index('id')['weight'])
@@ -129,9 +131,9 @@ class DataProcess:
         return DataProcessor.scale_column_to_range(recipe, var, target_max=5)
     
     @staticmethod
-    def calculate_weighted_rating(contigency_table: pd.DataFrame, id_season_dict: dict[int, str], recipe: pd.DataFrame) -> pd.Series:
+    def calculate_seasons(contigency_table: pd.DataFrame, id_season_dict: dict[int, str], recipe: pd.DataFrame) -> pd.Series:
         """ 
-        Same as weigthed_ratings_recipe but for ratings, a.k.a the ratings mean value.
+        Assign the season for each id.
         """
         # Crée une colonne pondérée
         return recipe['id'].map(contigency_table.apply(
@@ -197,7 +199,7 @@ class PreprocessingData:
         id_season_dict = id_date_df.set_index('id')['submitted'].to_dict()
         
         # Assign max season
-        recipe['season'] = DataProcess.calculate_weighted_rating(contigency_table, id_season_dict, recipe)
+        recipe['season'] = DataProcess.calculate_seasons(contigency_table, id_season_dict, recipe)
         # Add average ratings
         recipe = DataProcessor.average_ratings_recipe(interaction, recipe)
         

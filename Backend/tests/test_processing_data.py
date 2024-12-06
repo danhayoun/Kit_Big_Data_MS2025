@@ -10,7 +10,7 @@ ABSOLUTE_PATH = os.path.abspath(__file__)
 
 # TO NOTE: I am using here some make up data so that I can check the functions.
 @pytest.fixture # éviter répétitionquand utiliser dans plusieurs tests 
-def sample_data() -> None:
+def sample_data() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """
     Provide fictive sample data for testing purposes.
     """
@@ -18,17 +18,23 @@ def sample_data() -> None:
     interaction_data = pd.DataFrame({
         'id': [1, 2, 3, 4, 5],
         'date': ['2023-03-15', '2023-06-15', '2023-09-15', '2023-12-15', '2023-02-15'],
-        'rating': [4, 5, 3, 4, 2],
-        'count': [5, 10, 3, 9, 8]
+        'counts': [5, 10, 3, 9, 8]
     })
 
     recipe_data = pd.DataFrame({
         'id': [1, 2, 3, 4, 5],
         'submitted': ['2023-03-10', '2023-06-10', '2023-09-10', '2023-12-10', '2023-02-10'],
-        'rating': [3.5, 4.5, 3, 3.8, 2.5]
+        'rating': [4, 5, 3, 4, 2]
     })
 
-    return interaction_data, recipe_data
+    contigency_table = pd.DataFrame({
+    'Spring': [10.0, 1.3, 0.3, 2.0, 1.8],
+    'Summer': [1.1, 1.3, 0.4, 0.2, 1.2],
+    'Fall':   [0.9, 0.8, 1.3, 1.0, 1.8],
+    'Winter': [1.2, 0.5, 0.8, 1.4, 0.6]
+}, index=[1, 2, 3, 4, 5])   
+
+    return interaction_data, recipe_data, contigency_table
   
 
 def test_assign_season_date() -> None:
@@ -44,19 +50,12 @@ def test_assign_season_date() -> None:
     season = SeasonHandler.assign_season_date(date)
     assert season == 'Fall'
 
-def test_reassign_season(sample_data: tuple[pd.DataFrame, pd.DataFrame]) -> None:
+def test_reassign_season(sample_data: tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]) -> None:
     """
     Test the assignment of seasons
     """
-    _, recipe = sample_data
-     # Étape 1 : Créer un contigency_table factice
-    contigency_table = pd.DataFrame({
-    'Spring': [10.0, 1.3, 0.3, 2.0, 1.8],
-    'Summer': [1.1, 1.3, 0.4, 0.2, 1.2],
-    'Fall':   [0.9, 0.8, 1.3, 1.0, 1.8],
-    'Winter': [1.2, 0.5, 0.8, 1.4, 0.6]
-}, index=[1, 2, 3, 4, 5])   
-
+    _, recipe, contigency_table = sample_data
+    
     # expect 0: sum or win; 1: spring, or sum; 2: 
     # Étape 2 : Créer un id_season_dict factice
     id_season_dict = {
@@ -74,7 +73,7 @@ def test_reassign_season(sample_data: tuple[pd.DataFrame, pd.DataFrame]) -> None
     # Index 4 : id_season_dict est vérifié, et n'est pas dedans, donc choix aléatoire dans max_seasons attendu entre Spring et Fall.
     expected_seasons = ['Spring', 'Spring', 'Fall', 'Spring', ['Spring', 'Fall']]
     
-    recipe['season'] = DataProcess.calculate_weighted_rating(
+    recipe['season'] = DataProcess.calculate_seasons(
             contigency_table,
             id_season_dict,
             recipe
@@ -87,3 +86,31 @@ def test_reassign_season(sample_data: tuple[pd.DataFrame, pd.DataFrame]) -> None
     assert index_4_season in ['Spring', 'Fall'], (
         f"Expected one of ['Spring', 'Fall'] for index 4, but got {index_4_season}"
     )
+    
+def test_specific_weighted_rating(sample_data: tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]) -> None:
+    """
+    Verify the weighted rating for a specific recipe ID.
+    We test 2 functions: weigthed_ratings_recipe and scale_column_to_range
+    """
+    target_max=5
+    specific_id = 2 # car c'est la max value pour weight * rating
+    interaction, recipe, _ = sample_data
+    
+    # pour tester avec fonction il faut changer les données # ce qu'on veut obtenir au final c'est le même 'counts': [5, 10, 3, 9, 8]
+    interaction_data = interaction.loc[
+        interaction.index.repeat(interaction['counts'])
+    ].reset_index(drop=True)
+    
+    #on calcule le weight
+    interaction['weight'] = np.log1p(interaction['counts'])
+    
+    # et on récupère les données pour tester manuellement pour le maximum value pour id = 2
+    rating = recipe.loc[recipe['id'] == specific_id, 'rating'].values[0]
+    weight = interaction.loc[interaction['id'] == specific_id, 'weight'].values[0]
+    manual_weighted_rating = (target_max / (rating * weight)) * rating * weight ## comme max value elle est forcément égale à 5. 
+
+    # calculation avec la fonction
+    updated_recipe = DataProcess.weigthed_ratings_recipe(interaction_data, recipe)
+    # Ne pas oublier qu'on rescale a la fin avec DataProcessor.scale_column_to_range(recipe, var, )
+    calculated_weighted_rating = updated_recipe.loc[updated_recipe['id'] == specific_id, 'weighted_rating'].values[0]
+    assert pytest.approx(manual_weighted_rating, rel=1e-6) == pytest.approx(calculated_weighted_rating, rel=1e-6)
