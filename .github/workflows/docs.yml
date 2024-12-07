@@ -1,13 +1,17 @@
 name: Build Documentation
 
-on:
+on: 
   push:
     branches:
       - main
 
 jobs:
   build-docs:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -17,9 +21,15 @@ jobs:
       with:
         python-version: 3.11.9
         
-    - name: Install Poetry
+    - name: Install Poetry on Max and Linux
+      if: runner.os != 'Windows'
       run: 
         curl -sSL https://install.python-poetry.org | python3 -
+
+    - name: Install Poetry on Windows
+      if: runner.os == 'Windows'
+      run: |
+        (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
 
     - name: Install dependencies
       run: |
@@ -27,7 +37,7 @@ jobs:
 
     - name: Build documentation
       run: |
-        sphinx-build -b html source/ build/
+        poetry run sphinx-build -b html source/ build/
     
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3

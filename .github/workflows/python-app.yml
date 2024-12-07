@@ -14,8 +14,10 @@ permissions:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
     - name: Checkout code
@@ -24,25 +26,34 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: 3.11.9
+
+    - name: Install Poetry on Max and Linux
+      if: runner.os != 'Windows'
+      run: 
+        curl -sSL https://install.python-poetry.org | python3 -
+
+    - name: Install Poetry on Windows
+      if: runner.os == 'Windows'
+      run: |
+        (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
+
     - name: Install dependencies
       run: |
-        pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+        poetry install
+
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        poetry run flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Open poetry shell
-      run: |
-        poetry shell
+        poetry run flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
     - name: Test with pytest
       run: |
-        pytest
+        poetry run pytest
+
     - name: Run tests with coverage
       run: |
-        coverage run -m pytest
-        coverage report
-        coverage html  
+        poetry run coverage run -m pytest
+        poetry run coverage report
+        poetry run coverage html
