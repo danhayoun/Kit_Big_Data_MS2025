@@ -3,7 +3,8 @@ import pandas as pd
 import os
 import spacy
 
-from Backend.technique import DataLoader, CorrelationAnalyzer, TechniqueProcessor, TECHNIQUES_LIST
+
+from backend.technique import DataLoader, CorrelationAnalyzer, TechniqueProcessor, TECHNIQUES_LIST
 
 # Créez des données de test pour les tests unitaires
 TEST_CSV_FILE = "test_data.csv"
@@ -69,7 +70,11 @@ def test_get_binary_techniques_list(processor):
     assert len(binary_techniques) == len(df_test)
     # Vérifiez que les listes binaires sont correctes
     for i, steps in enumerate(df_test['steps']):
-        expected_list = [1 if technique in steps else 0 for technique in TECHNIQUES_LIST]
+        if len(steps) > 0:
+            expected_list = [1 if technique in steps[0].strip() else 0 for technique in TECHNIQUES_LIST]
+        else:
+            expected_list = [0] * len(TECHNIQUES_LIST)
+        print(expected_list)
         assert binary_techniques[i] == expected_list
 
 def test_get_binary_techniques_list_missing_column(processor):

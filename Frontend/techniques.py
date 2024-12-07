@@ -5,13 +5,12 @@ import pandas as pd
 import plotly.graph_objects as go
 import os 
 
-
 # Ajouter le répertoire racine au chemin de recherche des modules
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 if project_root not in sys.path:
     sys.path.append(project_root)
 
-from Backend.technique import DataLoader
+from backend.technique import DataLoader
 class SeasonCorrelationAnalyzer:
     """Class for analyzing season correlations."""
     def __init__(self, season_correlations: pd.DataFrame) -> None:
