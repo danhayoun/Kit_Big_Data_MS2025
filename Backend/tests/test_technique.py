@@ -74,7 +74,6 @@ def test_get_binary_techniques_list(processor):
             expected_list = [1 if technique in steps[0].strip() else 0 for technique in TECHNIQUES_LIST]
         else:
             expected_list = [0] * len(TECHNIQUES_LIST)
-        print(expected_list)
         assert binary_techniques[i] == expected_list
 
 def test_get_binary_techniques_list_missing_column(processor):
