@@ -6,7 +6,11 @@ authors = ["Cécile <74317560+Cecile-L@users.noreply.github.com>"]
 readme = "README.md"
 packages = [
     { include = "Backend"},
-    { include = "Frontend"}
+    { include = "Frontend"},
+    { include = "source"}
+]
+include = [
+    { path = "data/preprocess/*.pkl" }   # Inclure tous les fichiers pickle du dossier data/preprocess
 ]
 
 [tool.poetry.dependencies]
