@@ -14,10 +14,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -27,15 +24,9 @@ jobs:
       with:
         python-version: 3.11.9
 
-    - name: Install Poetry on Max and Linux
-      if: runner.os != 'Windows'
+    - name: Install Poetry 
       run: 
         curl -sSL https://install.python-poetry.org | python3 -
-
-    - name: Install Poetry on Windows
-      if: runner.os == 'Windows'
-      run: |
-        (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
 
     - name: Install dependencies
       run: |
