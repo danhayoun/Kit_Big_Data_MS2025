@@ -2,7 +2,19 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import pickle 
-from pages.Classe_pickle import Display, CamembertDisplay
+
+import sys
+import os
+
+# Ajouter la racine du projet au PYTHONPATH
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
+
+
+from Backend.utils.Classe_pickle import Display, CamembertDisplay, DictionnaireDisplay
+
+
+
 
 # Titre de l'application
 st.title("Analyse des résultats - Mangetamain")
@@ -18,8 +30,10 @@ Modifiez les paramètres ci-dessous pour voir comment les résultats changent.
 
 
 # Charger le dictionnaire depuis le fichier pickle
+
+#ICI ON MANIPULE UN DICTIONNAIRE, PAS UN DF 
 try:
-    with open('../Backend/src/webapp_assets/recettes_par_saison.pkl', 'rb') as fichier:
+    with open('../../Backend/src/webapp_assets/recettes_par_saison.pkl', 'rb') as fichier:
         recettes_par_saison = pickle.load(fichier)
 
          # Tracer le diagramme camembert
@@ -34,7 +48,7 @@ try:
         # Afficher le graphique dans Streamlit
         st.pyplot(fig)
 
-    with open('../Backend/src/webapp_assets/dates_plus_postees.pkl', 'rb') as fichier_liste:
+    with open('../../Backend/src/webapp_assets/dates_plus_postees.pkl', 'rb') as fichier_liste:
         ma_liste = pickle.load(fichier_liste)
         st.write("Top des dates avec le plus de posts:")
         st.text(", ".join(map(str, ma_liste)))  # Afficher la liste en format texte avec les valeurs qui se suivent
@@ -54,7 +68,7 @@ except Exception as e:
 
 # Charger le fichier .pkl
 
-with open('../Backend/src/webapp_assets/cursor2.pkl', 'rb') as fichier :
+with open('../../Backend/src/webapp_assets/cursor2.pkl', 'rb') as fichier :
     df = pd.read_pickle(fichier)
     df = df.fillna(0)
 
@@ -62,23 +76,23 @@ with open('../Backend/src/webapp_assets/cursor2.pkl', 'rb') as fichier :
     st.title("Histogramme de nb_recettes_total par indice")
     fig, ax = plt.subplots()
     ax.bar(df.index, df['nb_recettes_total'], color='blue', alpha=0.7)
-    ax.set_title("Distribution de nb_recettes_total par indice")
-    ax.set_xlabel("Indice")
+    ax.set_title("Distribution de nb_recettes_total par temps de cuisson")
+    ax.set_xlabel("temps de cuisson en minutes")
     ax.set_ylabel("nb_recettes_total")
     
     # Affichage dans Streamlit
     st.pyplot(fig)
 
 ################# Camembert interactif ################
-data_columns = ['Printemps_%', 'Hiver_%', 'Ete_%', 'Automne_%']
-label_names = ['Printemps', 'Hiver', 'Été', 'Automne']
+data_columns = ['Spring_%', 'Winter_%', 'Summer_%', 'Fall_%']
+label_names = ['Spring', 'Winter', 'Summer', 'Fall']
 
 
-pickle = CamembertDisplay('temps_de_cuisson','../Backend/src/webapp_assets/cursor2.pkl') 
+pickle = CamembertDisplay('temps_de_cuisson','../../Backend/src/webapp_assets/cursor2.pkl') 
 
 pickle.plot_interactive_pie_chart(
     data_columns=['Spring_%', 'Winter_%', 'Summer_%', 'Fall_%'],
-    label_names=['Printemps', 'Hiver', 'Été', 'Automne'],
+    label_names=['Spring', 'Winter', 'Summer', 'Fall'],
     slider_label="Sélectionnez un intervalle",
     title="Répartition des recettes par intervalle de temps"
 )
@@ -86,8 +100,20 @@ pickle.plot_interactive_pie_chart(
 
 
  
-pickle = CamembertDisplay('temps_de_cuisson','../Backend/src/webapp_assets/cursor_significatif.pkl')
+pickle = CamembertDisplay('temps_de_cuisson','../../Backend/src/webapp_assets/cursor_significatif.pkl')
 
 pickle.plot_pie_charts_2(data_columns, label_names, title="Camemberts par intervalle de temps")
 
-pickle = CamembertDisplay('temps_de_cuissons','')
+dictionnaire = DictionnaireDisplay('temps_de_cuisson','../../Backend/src/webapp_assets/dictionnaire_tops_10.pkl')
+
+intervalle_mapping = {
+    '0-10 min': 10,
+    '10-30 min': 30,
+    '30-60 min': 60,
+    '1-2h': 120,
+    'plus de 2h': 121
+}
+option_choisie = st.selectbox("Choisissez un intervalle :", options=list(intervalle_mapping.keys()))
+intervalle_choisi = intervalle_mapping[option_choisie]
+
+dictionnaire.afficher_tops_par_intervalle(intervalle_choisi)

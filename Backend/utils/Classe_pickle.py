@@ -120,6 +120,61 @@ class CamembertDisplay(Display):
 
 
 
+class DictionnaireDisplay(Display): 
+    def __init__(self, page, pkl_path):
+        super().__init__(page, pkl_path)  # Appelle le constructeur de Display
+        self.dictionnaire = self.load_dictionnaire()  # Charge le DataFrame spécifique
+    def load_dictionnaire(self):
+        """
+        Charge le dictionnaire à partir du fichier pickle spécifié dans self.pkl_path.
+
+        :return: Le dictionnaire chargé.
+        """
+        try:
+            with open(self.pkl_path, 'rb') as f:
+                dictionnaire = pickle.load(f)
+            return dictionnaire
+        except FileNotFoundError:
+            raise FileNotFoundError(f"Le fichier pickle '{self.pkl_path}' est introuvable.")
+        except Exception as e:
+            raise ValueError(f"Erreur lors du chargement du dictionnaire : {e}")
+        
+    def afficher_tops_par_intervalle(self, intervalle_choisi):
+        """
+        Affiche les tops 10 recettes par saison pour un intervalle donné dans Streamlit.
+
+        :param intervalle_choisi: Intervalle pour lequel afficher les recettes (par exemple : 10, 30, 60, etc.)
+        """
+
+        # Vérifie que le dictionnaire est chargé
+        if not self.dictionnaire:
+            raise ValueError("Le dictionnaire est vide ou non chargé.")
+
+        # Vérifier que l'intervalle existe dans le dictionnaire
+        if intervalle_choisi not in [key[1] for key in self.dictionnaire.keys()]:
+            st.error(f"L'intervalle {intervalle_choisi} n'existe pas dans les données.")
+            return
+
+        # Initialiser une liste pour stocker les données tabulaires
+        tableaux = []
+
+        # Parcourir le dictionnaire pour l'intervalle donné
+        for (saison, intervalle), recettes in self.dictionnaire.items():
+            if intervalle == intervalle_choisi:
+                # Ajouter les recettes dans une structure tabulaire
+                tableaux.append(pd.DataFrame({
+                    'Saison': [saison] * len(recettes[:10]),
+                    'Recette': recettes[:10]  # Limiter à 10 recettes
+                }))
+
+        # Afficher les tops dans Streamlit
+        st.header(f"Tops 10 des recettes par saison ")
+
+        for tableau in tableaux:
+            saison = tableau['Saison'].iloc[0]
+            st.subheader(f"Saison : {saison}")
+            st.table(tableau[['Recette']])
+
 
 
 
