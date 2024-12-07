@@ -4,7 +4,7 @@ import os
 import spacy
 
 
-from backend.technique import DataLoader, CorrelationAnalyzer, TechniqueProcessor, TECHNIQUES_LIST
+from Backend.technique import DataLoader, CorrelationAnalyzer, TechniqueProcessor, TECHNIQUES_LIST
 
 # Créez des données de test pour les tests unitaires
 TEST_CSV_FILE = "test_data.csv"

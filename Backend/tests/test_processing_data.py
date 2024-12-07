@@ -5,9 +5,9 @@ import os
 import numpy as np
 import sys
 
-from backend.processing_data import SeasonHandler, DataProcess#, PreprocessingData
-from backend.utils.data_processor import DataProcessor
-from backend.utils.file_manager import FileManager
+from Backend.processing_data import SeasonHandler, DataProcess#, PreprocessingData
+from Backend.utils.data_processor import DataProcessor
+from Backend.utils.file_manager import FileManager
 
 ABSOLUTE_PATH = os.path.abspath(__file__)
 
