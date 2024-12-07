@@ -5,8 +5,8 @@ description = "Documentation pour le projet KIT_BIG_DATA_MS2025"
 authors = ["Cécile <74317560+Cecile-L@users.noreply.github.com>"]
 readme = "README.md"
 packages = [
-    { include = "backend"},
-    { include = "frontend"}
+    { include = "Backend"},
+    { include = "Frontend"}
 ]
 
 [tool.poetry.dependencies]
