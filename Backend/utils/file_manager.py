@@ -1,4 +1,5 @@
 import pandas as pd
+print("file manager", pd.__version__)
 import pickle
 import logging
 from typing import List, Any
@@ -109,5 +110,3 @@ class DataHandler:
         """
         with open(path, "wb") as f:
             pickle.dump(obj, f)
-    
-    
