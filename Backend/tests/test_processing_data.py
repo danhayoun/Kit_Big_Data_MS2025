@@ -55,7 +55,7 @@ def test_assign_season_date() -> None:
 
     date = pd.Timestamp("2023-12-15")
     season = SeasonHandler.assign_season_date(date)
-    assert season == 'Fall'
+    assert season == 'Fall' 
     
 def test_average_ratings_recipe(sample_data: tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]) -> None:
     """
@@ -84,6 +84,23 @@ def test_filter_data(sample_data: tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame
     assert set(filtered_ids) == set(expected_filtered_ids), (
         f"Expected IDs: {expected_filtered_ids}, but got: {filtered_ids}"
     ) ## ici je veux une comparaison des id
+
+def test_contingency_table() -> None:
+    
+    recipe_season_count = pd.DataFrame({
+        'id': [1, 1, 2, 2],
+        'season': ['Spring', 'Summer', 'Spring', 'Fall'],
+        'count': [3, 5, 2, 7]
+    })
+    expected = pd.DataFrame({
+        'Fall': [0.0, 7.0],
+        'Spring': [3.0, 2.0],
+        'Summer': [5.0, 0.0]
+    }, index=[1, 2])
+    expected.index.name = 'id'
+    expected.columns.name = 'season'
+    result = SeasonHandler.contingency_table(recipe_season_count)
+    pd.testing.assert_frame_equal(result, expected)
 
 def test_reassign_season(sample_data: tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]) -> None:
     """
@@ -121,6 +138,19 @@ def test_reassign_season(sample_data: tuple[pd.DataFrame, pd.DataFrame, pd.DataF
         f"Expected one of ['Spring', 'Fall'] for index 4, but got {index_4_season}"
     )
     
+def test_transform_date():
+    # Input: Series of strings representing dates
+    date_series = pd.Series(["2023-01-01", "2023-06-15", "2023-12-31"])
+
+    # Expected output: Series of datetime objects
+    expected_series = pd.Series(pd.to_datetime(["2023-01-01", "2023-06-15", "2023-12-31"]))
+
+    # Call the function
+    result = DataProcessor.transform_date(date_series)
+
+    # Assert equality
+    pd.testing.assert_series_equal(result, expected_series, check_dtype=True)
+
 def test_specific_weighted_rating(sample_data: tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]) -> None:
     """
     Verify the weighted rating for a specific recipe ID.
