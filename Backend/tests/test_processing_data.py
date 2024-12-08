@@ -7,7 +7,6 @@ import sys
 
 from src.processing_data import SeasonHandler, DataProcess#, PreprocessingData
 from utils.data_processor import DataProcessor
-from utils.file_manager import DataHandler
 
 ABSOLUTE_PATH = os.path.abspath(__file__)
 
@@ -144,3 +143,20 @@ def test_specific_weighted_rating(sample_data: tuple[pd.DataFrame, pd.DataFrame,
     # Ne pas oublier qu'on rescale a la fin avec DataProcessor.scale_column_to_range(recipe, var, )
     calculated_weighted_rating = updated_recipe.loc[updated_recipe['id'] == specific_id, 'weighted_rating'].values[0]
     assert pytest.approx(manual_weighted_rating, rel=1e-6) == pytest.approx(calculated_weighted_rating, rel=1e-6)
+    
+def test_filter_data_no_match(sample_data):
+    """
+    Test filter_data when no records match the threshold.
+    """
+    _, _, _, interaction_data = sample_data
+    filtered_data = DataProcessor.filter_data(interaction_data, "id", i=20, filter_count=True)
+    assert filtered_data.empty, "Expected no data to match the threshold, but found some records."
+
+def test_scale_column_to_range():
+    """
+    Test scaling a column to a specific range.
+    """
+    test_data = pd.DataFrame({'rating': [1, 2, 3, 4, 5]})
+    scaled_data = DataProcessor.scale_column_to_range(test_data, "rating", target_max=10)
+    expected_scaled_values = [2, 4, 6, 8, 10]
+    assert scaled_data['rating'].tolist() == expected_scaled_values, "Scaling did not produce expected results."

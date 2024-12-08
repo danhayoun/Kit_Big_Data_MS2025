@@ -104,3 +104,20 @@ def test_get_histogram_recipe(sample_data: pd.DataFrame):
     with pytest.raises(ValueError) as exc_info:
         page_review_info.get_histogram_recipe(test_data, recipe_name)
     assert str(exc_info.value) == f"Recipe '{recipe_name}' not found in the dataset."
+    
+def test_create_review_per_year_empty_df():
+    """
+    Test create_review_per_year with empty DataFrames.
+    """
+    empty_df_csv = pd.DataFrame(columns=['recipe_id', 'date', 'count'])
+    empty_df_pickle = pd.DataFrame(columns=['id', 'rating'])
+
+    result = page_review_info.create_review_per_year(empty_df_csv, empty_df_pickle)
+    assert result.empty, "Expected empty DataFrame, but got data."
+
+def test_extract_reviews_empty_dict():
+    """
+    Test extract_reviews with an empty dictionary.
+    """
+    result = page_review_info.extract_reviews({})
+    assert result == {}, "Expected an empty dictionary, but got data."
