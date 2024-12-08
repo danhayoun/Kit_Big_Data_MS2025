@@ -12,7 +12,7 @@ import pytest
 # Ajouter la racine du projet au PYTHONPATH
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-import Backend.src.temps_de_cuisson.cursor as cr 
+import Backend.src.temps_de_cuisson.temps_de_cuisson as cr 
 
 
 
