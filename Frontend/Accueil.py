@@ -96,7 +96,7 @@ st.markdown(
             <li>Et une dernière page, plus insolite, regroupant diverses observations remarquables que nous pouvons faire sur le jeu de données.</li>
         </ul>
         <p>✏️Vous retrouverez des explications sur la méthodologie employée lors de cette étude dans la page commentaires.</p>
-        <p>Nous avons commencé par un pré-traitement des données, expliqué à la page <strong>fun_facts</strong>.</p>
+        <p>Nous avons commencé par un pré-traitement des données, expliqué à la page <strong>reviews</strong>.</p>
     </div>
     """,
     unsafe_allow_html=True
