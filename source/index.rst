@@ -25,9 +25,22 @@ Installation
 Pour installer ce projet, suivez les étapes ci-dessous :
 
 .. code-block:: bash
-
+   curl -sSL https://install.python-poetry.org | python3 -
+   export PATH=\"$HOME/.local/bin:$PATH\"
    poetry install
 
+Utilisation
+------------
+Pour lancer l'application Streamlit :
+Avec poetry :
+
+.. code-block:: bash
+   poetry run streamlit run Frontend/Accueil.py
+
+Sinon :
+
+.. code-block:: bash
+   streamlit run Frontend/Accueil.py
 
 .. Hidden TOCs
 

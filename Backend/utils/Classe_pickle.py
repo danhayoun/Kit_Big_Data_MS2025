@@ -13,9 +13,7 @@ pages = ['temps_de_cuisson','fun_facts','techniques_cuisine'] #Les 3 pages de l'
 
 class Display : 
     """ Classe générique pour tous les .pkl
-        attributs : quel page, quel chemin 
-    
-    """
+        attributs : quel page, quel chemin """
     def __init__(self,page,pkl_path) :
         if page in pages :
             self.__page = page
@@ -38,9 +36,8 @@ class Display :
 ################## CLASSES POUR LES DIFFERENTS TYPES DE PICKLE UTILISES ############################
 
 class CamembertDisplay(Display): 
-    """ Classe pour les dataframes pour camemberts
-    
-    """
+    """ Classe pour les dataframes pour camemberts"""
+
     def __init__(self, page, pkl_path):
         super().__init__(page, pkl_path)  # Appelle le constructeur de Display
         self.dataframe = self.load_dataframe()  # Charge le DataFrame spécifique
@@ -105,12 +102,11 @@ class CamembertDisplay(Display):
         """
         Affiche un camembert interactif en fonction d'une valeur sélectionnée via un curseur.
         Args:
-       data_columns (list): Liste des colonnes contenant les données pour le camembert (ex. ['Spring_%', 'Winter_%', ...]).
+        data_columns (list): Liste des colonnes contenant les données pour le camembert (ex. ['Spring_%', 'Winter_%', ...]).
         label_names (list): Liste des labels correspondants (ex. ['Spring', 'Winter', ...]).
         slider_label (str): Texte affiché pour le curseur.
         title (str): Titre pour le camembert."""
 
-        
         if not isinstance(data_columns, list) or not isinstance(label_names, list):
             raise TypeError("Les arguments 'data_columns' et 'label_names' doivent être des listes.")
         if len(data_columns) != len(label_names):
@@ -151,6 +147,8 @@ class CamembertDisplay(Display):
 
 
 class DictionnaireDisplay(Display): 
+    """ Classe pour les dictionnaires pour tableaux"""
+    
     def __init__(self, page, pkl_path):
         super().__init__(page, pkl_path)  # Appelle le constructeur de Display
         self.dictionnaire = self.load_dictionnaire()  # Charge le DataFrame spécifique
@@ -204,7 +202,5 @@ class DictionnaireDisplay(Display):
             saison = tableau['Saison'].iloc[0]
             st.subheader(f"Saison : {saison}")
             st.table(tableau[['Recette']])
-
-
 
 

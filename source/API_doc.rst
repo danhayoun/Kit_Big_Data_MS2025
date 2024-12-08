@@ -23,7 +23,7 @@ processing_data
 
 cursor
 ~~~~~~~
-.. automodule:: src.cursor
+.. automodule:: src.temps_de_cuisson
     :members: 
 
 utils
@@ -39,6 +39,11 @@ data_processor
 .. automodule:: utils.data_processor
     :members:
 
+Classe_pickle
+~~~~~~~~~~~~~~
+.. automodule:: utils.Classe_pickle
+    :members:
+
 
 Frontend
 =========
@@ -48,14 +53,14 @@ Accueil
 .. automodule:: Frontend.Accueil
     :members:
 
-cursor
-----------------------
-.. automodule:: Frontend.pages.Page_cursor
+Page_techniques.py
+--------------------
+.. automodule:: Frontend.pages.Page_techniques
     :members:
 
-techniques
+Page_temps_de_cuisson.py
 --------------------------
-.. automodule:: Frontend.pages.Page_techniques
+.. automodule:: Frontend.pages.Page_temps_de_cuisson
     :members:
 
 fun_facts

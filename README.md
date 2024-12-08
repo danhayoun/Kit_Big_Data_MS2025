@@ -15,6 +15,7 @@ Ce projet est une application d'analyse de données développée en Python avec 
 2. **Télécharger poetry :**
     ```bash
     curl -sSL https://install.python-poetry.org | python3 -
+    export PATH=\"$HOME/.local/bin:$PATH\"
     ```
 
 3. **Installer les dépendances :**
@@ -34,9 +35,9 @@ Ce projet est une application d'analyse de données développée en Python avec 
 Pour lancer l'application Streamlit :
 Avec poetry :
 ```bash
-poetry run streamlit run app/main.py
+poetry run streamlit run Frontend/Accueil.py
 ```
 Sinon :
 ```bash
-streamlit run app/main.py
+streamlit run Frontend/Accueil.py
 ```
