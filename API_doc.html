@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Documentation &mdash; KIT_BIG_DATA_MS2025 v1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5cb08e4e"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="KIT_BIG_DATA_MS 2025" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            KIT_BIG_DATA_MS2025
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Présentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">KIT_BIG_DATA_MS 2025</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#backend">Backend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#script-pour-les-pages">Script pour les pages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#module-src.technique">technique</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-src.processing_data">processing_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-src.cursor">cursor</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#utils">utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#module-utils.file_manager">file_manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-utils.data_processor">data_processor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#frontend">Frontend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-Frontend.Accueil">Accueil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">cursor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Frontend.pages.Page_techniques">techniques</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Frontend.pages.Page_techniques.RecipeRecommender"><code class="docutils literal notranslate"><span class="pre">RecipeRecommender</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer"><code class="docutils literal notranslate"><span class="pre">SeasonCorrelationAnalyzer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Frontend.pages.Page_techniques.TechniquePage"><code class="docutils literal notranslate"><span class="pre">TechniquePage</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Frontend.pages.Page_fun_facts">fun_facts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="py-modindex.html">Module Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">KIT_BIG_DATA_MS2025</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/API_doc.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-documentation">
+<span id="api-doc"></span><h1>API Documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h1>
+<p>La documentation de l’API est disponible ci-dessous :</p>
+<section id="backend">
+<h2>Backend<a class="headerlink" href="#backend" title="Link to this heading"></a></h2>
+<section id="script-pour-les-pages">
+<h3>Script pour les pages<a class="headerlink" href="#script-pour-les-pages" title="Link to this heading"></a></h3>
+<section id="module-src.technique">
+<span id="technique"></span><h4>technique<a class="headerlink" href="#module-src.technique" title="Link to this heading"></a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.technique.TechniqueAnalyzer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.technique.</span></span><span class="sig-name descname"><span class="pre">TechniqueAnalyzer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">techniques_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/technique.html#TechniqueAnalyzer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.technique.TechniqueAnalyzer" title="Link to this definition"></a></dt>
+<dd><p>Main class to run the recipe analysis by techniques and season</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.technique.TechniqueAnalyzer.run_analysis">
+<span class="sig-name descname"><span class="pre">run_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/technique.html#TechniqueAnalyzer.run_analysis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.technique.TechniqueAnalyzer.run_analysis" title="Link to this definition"></a></dt>
+<dd><p>Run the main analysis process.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.technique.TechniqueProcessor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.technique.</span></span><span class="sig-name descname"><span class="pre">TechniqueProcessor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">techniques_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/technique.html#TechniqueProcessor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.technique.TechniqueProcessor" title="Link to this definition"></a></dt>
+<dd><p>Class responsible for processing recipe techniques.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.technique.TechniqueProcessor.analyze_correlation">
+<span class="sig-name descname"><span class="pre">analyze_correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/src/technique.html#TechniqueProcessor.analyze_correlation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.technique.TechniqueProcessor.analyze_correlation" title="Link to this definition"></a></dt>
+<dd><p>Analyze the correlation between techniques and seasons.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.technique.TechniqueProcessor.binarize_step_to_technique">
+<span class="sig-name descname"><span class="pre">binarize_step_to_technique</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/src/technique.html#TechniqueProcessor.binarize_step_to_technique"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.technique.TechniqueProcessor.binarize_step_to_technique" title="Link to this definition"></a></dt>
+<dd><p>Transform steps into a binary list indicating the presence of techniques</p>
+<p>Parameters:
+steps (spaCy Doc object): The steps to analyze</p>
+<p>Returns:
+List[int]: A binary list indicating the presence of techniques.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.technique.TechniqueProcessor.create_technique_df">
+<span class="sig-name descname"><span class="pre">create_technique_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/src/technique.html#TechniqueProcessor.create_technique_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.technique.TechniqueProcessor.create_technique_df" title="Link to this definition"></a></dt>
+<dd><p>Create a DataFrame with recipe IDs, the name and the count of techniques.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.technique.TechniqueProcessor.get_binary_techniques_list">
+<span class="sig-name descname"><span class="pre">get_binary_techniques_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_recipes_df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/src/technique.html#TechniqueProcessor.get_binary_techniques_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.technique.TechniqueProcessor.get_binary_techniques_list" title="Link to this definition"></a></dt>
+<dd><p>Analyze steps using spaCy to detect techniques</p>
+<p>Parameters:
+raw_recipes_df (pd.DataFrame): The DataFrame containing the raw recipes data.</p>
+<p>Returns:
+List[List[int]]: A list of binary lists indicating the presence of techniques for each recipe.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.technique.TechniqueProcessor.get_technique_name">
+<span class="sig-name descname"><span class="pre">get_technique_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">techniques_flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/src/technique.html#TechniqueProcessor.get_technique_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.technique.TechniqueProcessor.get_technique_name" title="Link to this definition"></a></dt>
+<dd><p>Retrieve from techniques_flags (TECHNIQUES_LIST in the usecase here) the name of the technique used in the recipe
+1 means the techniques is used
+0 otherwise</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.processing_data">
+<span id="processing-data"></span><h4>processing_data<a class="headerlink" href="#module-src.processing_data" title="Link to this heading"></a></h4>
+</section>
+<section id="module-src.cursor">
+<span id="cursor"></span><h4>cursor<a class="headerlink" href="#module-src.cursor" title="Link to this heading"></a></h4>
+</section>
+</section>
+<section id="utils">
+<h3>utils<a class="headerlink" href="#utils" title="Link to this heading"></a></h3>
+<section id="module-utils.file_manager">
+<span id="file-manager"></span><h4>file_manager<a class="headerlink" href="#module-utils.file_manager" title="Link to this heading"></a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="utils.file_manager.DataHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utils.file_manager.</span></span><span class="sig-name descname"><span class="pre">DataHandler</span></span><a class="reference internal" href="_modules/utils/file_manager.html#DataHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.file_manager.DataHandler" title="Link to this definition"></a></dt>
+<dd><p>Class responsible for handling data like loading,converting or storing</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utils.file_manager.DataHandler.converting_list_column">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">converting_list_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_list_to_convert</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/utils/file_manager.html#DataHandler.converting_list_column"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.file_manager.DataHandler.converting_list_column" title="Link to this definition"></a></dt>
+<dd><p>Convert the csv’s imported list which was transform wrongly to a string back to a python list</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utils.file_manager.DataHandler.get_next_item">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_next_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/utils/file_manager.html#DataHandler.get_next_item"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.file_manager.DataHandler.get_next_item" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the nth item from a dictionary.
+Raises ValueError.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utils.file_manager.DataHandler.load_clean_csv">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_clean_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_list_to_convert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/utils/file_manager.html#DataHandler.load_clean_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.file_manager.DataHandler.load_clean_csv" title="Link to this definition"></a></dt>
+<dd><p>Load data from CSV files and convert necessary columns into python type</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utils.file_manager.DataHandler.load_csv">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/utils/file_manager.html#DataHandler.load_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.file_manager.DataHandler.load_csv" title="Link to this definition"></a></dt>
+<dd><p>Read a csv file into DataFrame</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utils.file_manager.DataHandler.read_raw_files">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_raw_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">DataFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/utils/file_manager.html#DataHandler.read_raw_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.file_manager.DataHandler.read_raw_files" title="Link to this definition"></a></dt>
+<dd><p>Reads all raw CSV files from a given folder and stores their data in a dictionary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utils.file_manager.DataHandler.save_file_as_pickle">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_file_as_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/utils/file_manager.html#DataHandler.save_file_as_pickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.file_manager.DataHandler.save_file_as_pickle" title="Link to this definition"></a></dt>
+<dd><p>Saves Python object using the pickle format.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-utils.data_processor">
+<span id="data-processor"></span><h4>data_processor<a class="headerlink" href="#module-utils.data_processor" title="Link to this heading"></a></h4>
+</section>
+</section>
+</section>
+<section id="frontend">
+<h2>Frontend<a class="headerlink" href="#frontend" title="Link to this heading"></a></h2>
+<section id="module-Frontend.Accueil">
+<span id="accueil"></span><h3>Accueil<a class="headerlink" href="#module-Frontend.Accueil" title="Link to this heading"></a></h3>
+</section>
+<section id="id1">
+<h3>cursor<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+</section>
+<section id="module-Frontend.pages.Page_techniques">
+<span id="techniques"></span><span id="module-Frontend.pages.Page_cursor"></span><h3>techniques<a class="headerlink" href="#module-Frontend.pages.Page_techniques" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="Frontend.pages.Page_techniques.RecipeRecommender">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Frontend.pages.Page_techniques.</span></span><span class="sig-name descname"><span class="pre">RecipeRecommender</span></span><a class="reference internal" href="_modules/Frontend/pages/Page_techniques.html#RecipeRecommender"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Frontend.pages.Page_techniques.RecipeRecommender" title="Link to this definition"></a></dt>
+<dd><p>Class for recommending recipes</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Frontend.pages.Page_techniques.RecipeRecommender.get_top_recipes_by_season">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_top_recipes_by_season</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">techniques</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">technique</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/Frontend/pages/Page_techniques.html#RecipeRecommender.get_top_recipes_by_season"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Frontend.pages.Page_techniques.RecipeRecommender.get_top_recipes_by_season" title="Link to this definition"></a></dt>
+<dd><p>Return the TOP 10 recipes for the selected season for this technique by weighted rating
+Parameters:
+techniques (pd.DataFrame): The DataFrame containing the techniques and recipes data.
+technique (str): The technique to filter recipes by.
+season (str): The season to filter recipes by.
+top_n (int): The number of top recipes to return. Default is 10.</p>
+<p>Returns:
+pd.DataFrame: A DataFrame containing the top recipes for the selected season and technique.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Frontend.pages.Page_techniques.</span></span><span class="sig-name descname"><span class="pre">SeasonCorrelationAnalyzer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season_correlations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Frontend/pages/Page_techniques.html#SeasonCorrelationAnalyzer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer" title="Link to this definition"></a></dt>
+<dd><p>Class for analyzing season correlations.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer.get_season_for_technique">
+<span class="sig-name descname"><span class="pre">get_season_for_technique</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">technique</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/Frontend/pages/Page_techniques.html#SeasonCorrelationAnalyzer.get_season_for_technique"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer.get_season_for_technique" title="Link to this definition"></a></dt>
+<dd><p>Give the season correlated to the class with the value.
+If the difference for the maximum value and the minimum value for the technique are less than the given threshold (0.01 by default), we decide to say that the technique has no specific season.</p>
+<p>Parameters:
+technique (str): The technique to analyze.
+threshold (float): The threshold to determine if a technique has a specific season.</p>
+<p>Returns:
+Tuple[Optional[str], Optional[float]]: The season and the correlation value, or (None, None) if no specific season is found.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer.plot_heatmap">
+<span class="sig-name descname"><span class="pre">plot_heatmap</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/Frontend/pages/Page_techniques.html#SeasonCorrelationAnalyzer.plot_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer.plot_heatmap" title="Link to this definition"></a></dt>
+<dd><p>Plot an interactive heatmap of the season correlations.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Frontend.pages.Page_techniques.TechniquePage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Frontend.pages.Page_techniques.</span></span><span class="sig-name descname"><span class="pre">TechniquePage</span></span><a class="reference internal" href="_modules/Frontend/pages/Page_techniques.html#TechniquePage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Frontend.pages.Page_techniques.TechniquePage" title="Link to this definition"></a></dt>
+<dd><p>Main application class for Technique</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Frontend.pages.Page_techniques.TechniquePage.load_datas">
+<span class="sig-name descname"><span class="pre">load_datas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/Frontend/pages/Page_techniques.html#TechniquePage.load_datas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Frontend.pages.Page_techniques.TechniquePage.load_datas" title="Link to this definition"></a></dt>
+<dd><p>Load all the needed pickle for the technique page (season_correlations &amp; techniques)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Frontend.pages.Page_techniques.TechniquePage.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/Frontend/pages/Page_techniques.html#TechniquePage.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Frontend.pages.Page_techniques.TechniquePage.run" title="Link to this definition"></a></dt>
+<dd><p>Method to run the Streamlit Technique Page</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Frontend.pages.Page_fun_facts">
+<span id="fun-facts"></span><h3>fun_facts<a class="headerlink" href="#module-Frontend.pages.Page_fun_facts" title="Link to this heading"></a></h3>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="KIT_BIG_DATA_MS 2025" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Cecile LI, Josephine BERNARD, Dan HAYOUN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

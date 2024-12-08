@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.technique &mdash; KIT_BIG_DATA_MS2025 v1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5cb08e4e"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            KIT_BIG_DATA_MS2025
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Présentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">KIT_BIG_DATA_MS 2025</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API_doc.html">API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../API_doc.html#backend">Backend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#script-pour-les-pages">Script pour les pages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-src.technique">technique</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-src.processing_data">processing_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-src.cursor">cursor</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#utils">utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-utils.file_manager">file_manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-utils.data_processor">data_processor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../API_doc.html#frontend">Frontend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#module-Frontend.Accueil">Accueil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#id1">cursor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#module-Frontend.pages.Page_techniques">techniques</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_techniques.RecipeRecommender"><code class="docutils literal notranslate"><span class="pre">RecipeRecommender</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer"><code class="docutils literal notranslate"><span class="pre">SeasonCorrelationAnalyzer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_techniques.TechniquePage"><code class="docutils literal notranslate"><span class="pre">TechniquePage</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#module-Frontend.pages.Page_fun_facts">fun_facts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../py-modindex.html">Module Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">KIT_BIG_DATA_MS2025</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">src.technique</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for src.technique</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+
+<span class="kn">from</span> <span class="nn">utils.file_manager</span> <span class="kn">import</span> <span class="n">DataHandler</span>
+
+<span class="c1"># Configure logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="c1"># Configure df option</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+<span class="n">TECHNIQUES_LIST</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;bake&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;barbecue&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;blanch&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;blend&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;boil&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;braise&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;brine&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;broil&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;caramelize&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;combine&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;crock pot&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;crush&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;deglaze&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;devein&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dice&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;distill&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;drain&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;emulsify&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ferment&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;freez&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;fry&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;grate&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;griddle&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;grill&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;knead&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;leaven&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;marinate&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;mash&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;melt&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;microwave&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;parboil&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;pickle&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;poach&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;pour&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;pressure cook&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;puree&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;refrigerat&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;roast&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;saute&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;scald&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;scramble&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;shred&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;simmer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;skillet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;slow cook&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;smoke&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;smooth&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;soak&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;sous-vide&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;steam&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;stew&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;strain&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;tenderize&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;thicken&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;toast&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;toss&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;whip&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;whisk&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+    
+<div class="viewcode-block" id="TechniqueProcessor">
+<a class="viewcode-back" href="../../API_doc.html#src.technique.TechniqueProcessor">[docs]</a>
+<span class="k">class</span> <span class="nc">TechniqueProcessor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class responsible for processing recipe techniques.&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">techniques_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">techniques_list</span> <span class="o">=</span> <span class="n">techniques_list</span>
+    
+<div class="viewcode-block" id="TechniqueProcessor.binarize_step_to_technique">
+<a class="viewcode-back" href="../../API_doc.html#src.technique.TechniqueProcessor.binarize_step_to_technique">[docs]</a>
+    <span class="k">def</span> <span class="nf">binarize_step_to_technique</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Transform steps into a binary list indicating the presence of techniques</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters:</span>
+<span class="sd">        steps (spaCy Doc object): The steps to analyze</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">        List[int]: A binary list indicating the presence of techniques.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">techniques_in_step</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">techniques_list</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">steps</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">lemma_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">techniques_list</span><span class="p">:</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">techniques_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">lemma_</span><span class="p">)</span>
+                <span class="n">techniques_in_step</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">techniques_in_step</span></div>
+
+        
+<div class="viewcode-block" id="TechniqueProcessor.get_binary_techniques_list">
+<a class="viewcode-back" href="../../API_doc.html#src.technique.TechniqueProcessor.get_binary_techniques_list">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_binary_techniques_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw_recipes_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Analyze steps using spaCy to detect techniques</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters:</span>
+<span class="sd">        raw_recipes_df (pd.DataFrame): The DataFrame containing the raw recipes data.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">        List[List[int]]: A list of binary lists indicating the presence of techniques for each recipe.</span>
+<span class="sd">        &quot;&quot;&quot;</span>      
+        <span class="c1"># Charge le modèle de langue anglaise de spaCy</span>
+        <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Ensure &#39;steps&#39; column exists in the dataframe</span>
+        <span class="k">if</span> <span class="s1">&#39;steps&#39;</span> <span class="ow">in</span> <span class="n">raw_recipes_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="c1"># Concaténe les étapes pour chaque recette afin de pouvoir utiliser nlp.pipe</span>
+            <span class="n">steps_concat</span> <span class="o">=</span> <span class="n">raw_recipes_df</span><span class="p">[</span><span class="s1">&#39;steps&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">steps</span><span class="p">:</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">steps</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;&#39;steps&#39; column is missing in the dataframe given&quot;</span><span class="p">)</span>    
+            
+        <span class="c1"># Traiter les données en utilisant nlp.pipe</span>
+        <span class="n">lst_techniques</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">steps</span> <span class="ow">in</span> <span class="n">nlp</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">steps_concat</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+            <span class="n">lst_techniques</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">binarize_step_to_technique</span><span class="p">(</span><span class="n">steps</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">lst_techniques</span></div>
+
+
+<div class="viewcode-block" id="TechniqueProcessor.get_technique_name">
+<a class="viewcode-back" href="../../API_doc.html#src.technique.TechniqueProcessor.get_technique_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_technique_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">techniques_flags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve from techniques_flags (TECHNIQUES_LIST in the usecase here) the name of the technique used in the recipe</span>
+<span class="sd">        1 means the techniques is used </span>
+<span class="sd">        0 otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">techniques_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">flag</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">techniques_flags</span><span class="p">)</span> <span class="k">if</span> <span class="n">flag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="TechniqueProcessor.create_technique_df">
+<a class="viewcode-back" href="../../API_doc.html#src.technique.TechniqueProcessor.create_technique_df">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_technique_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a DataFrame with recipe IDs, the name and the count of techniques.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lst_techniques</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_binary_techniques_list</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">techniques_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="n">techniques_df</span><span class="p">[</span><span class="s2">&quot;recipe_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+        <span class="n">techniques_df</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> 
+        <span class="n">techniques_df</span><span class="p">[</span><span class="s1">&#39;techniques_binary&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst_techniques</span>
+        <span class="n">techniques_df</span><span class="p">[</span><span class="s2">&quot;techniques&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">techniques_df</span><span class="p">[</span><span class="s2">&quot;techniques_binary&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_technique_name</span><span class="p">)</span>
+        <span class="n">techniques_df</span><span class="p">[</span><span class="s2">&quot;nb_techniques&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">techniques_df</span><span class="p">[</span><span class="s2">&quot;techniques_binary&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+        <span class="n">techniques_df</span><span class="p">[</span><span class="s2">&quot;season&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;season&quot;</span><span class="p">]</span> 
+        <span class="n">techniques_df</span><span class="p">[</span><span class="s2">&quot;weighted_rating&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;weighted_rating&quot;</span><span class="p">]</span> 
+        <span class="k">return</span> <span class="n">techniques_df</span></div>
+
+
+<div class="viewcode-block" id="TechniqueProcessor.analyze_correlation">
+<a class="viewcode-back" href="../../API_doc.html#src.technique.TechniqueProcessor.analyze_correlation">[docs]</a>
+    <span class="k">def</span> <span class="nf">analyze_correlation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Analyze the correlation between techniques and seasons.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Fill NaN values in &#39;techniques&#39; column with empty lists</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;techniques&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;techniques&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[])</span>
+
+        <span class="c1"># Create dummy variables for techniques</span>
+        <span class="k">for</span> <span class="n">technique</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">techniques_list</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">technique</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;techniques&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">technique</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># Create dummy variables for seasons</span>
+        <span class="n">season_dummies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;season&quot;</span><span class="p">])</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;season&quot;</span><span class="p">]),</span> <span class="n">season_dummies</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Compute the correlation matrix</span>
+        <span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">techniques_list</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">season_dummies</span><span class="o">.</span><span class="n">columns</span><span class="p">)]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+        <span class="c1"># Extract correlations between techniques and seasons</span>
+        <span class="k">return</span> <span class="n">correlation_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">techniques_list</span><span class="p">,</span> <span class="n">season_dummies</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>  </div>
+</div>
+
+          
+<div class="viewcode-block" id="TechniqueAnalyzer">
+<a class="viewcode-back" href="../../API_doc.html#src.technique.TechniqueAnalyzer">[docs]</a>
+<span class="k">class</span> <span class="nc">TechniqueAnalyzer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main class to run the recipe analysis by techniques and season&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">techniques_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_loader</span> <span class="o">=</span> <span class="n">DataHandler</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">technique_processor</span> <span class="o">=</span> <span class="n">TechniqueProcessor</span><span class="p">(</span><span class="n">techniques_list</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="TechniqueAnalyzer.run_analysis">
+<a class="viewcode-back" href="../../API_doc.html#src.technique.TechniqueAnalyzer.run_analysis">[docs]</a>
+    <span class="k">def</span> <span class="nf">run_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the main analysis process.&quot;&quot;&quot;</span>
+        <span class="n">recipes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_loader</span><span class="o">.</span><span class="n">load_clean_csv</span><span class="p">(</span><span class="s1">&#39;data/raw/RAW_recipes.csv&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;steps&#39;</span><span class="p">])</span>
+        <span class="n">interactions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_loader</span><span class="o">.</span><span class="n">load_clean_csv</span><span class="p">(</span><span class="s1">&#39;data/raw/RAW_interactions.csv&#39;</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
+        <span class="n">filter_recipes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;data/preprocess/recipe_filtered.pkl&#39;</span><span class="p">)</span>
+
+        <span class="n">df_steps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">recipes</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;steps&#39;</span><span class="p">]],</span> <span class="n">filter_recipes</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+
+        <span class="n">techniques</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">technique_processor</span><span class="o">.</span><span class="n">create_technique_df</span><span class="p">(</span><span class="n">df_steps</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data/preprocess/techniques.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">techniques</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+        <span class="n">season_correlations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">technique_processor</span><span class="o">.</span><span class="n">analyze_correlation</span><span class="p">(</span><span class="n">techniques</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data/preprocess/season_correlations.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">season_correlations</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span></div>
+</div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">analyzer</span> <span class="o">=</span> <span class="n">TechniqueAnalyzer</span><span class="p">(</span><span class="n">TECHNIQUES_LIST</span><span class="p">)</span>
+    <span class="n">analyzer</span><span class="o">.</span><span class="n">run_analysis</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Cecile LI, Josephine BERNARD, Dan HAYOUN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
