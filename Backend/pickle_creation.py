@@ -1,8 +1,31 @@
 import pandas as pd
+print("pickle creation", pd.__version__)
 from pathlib import Path
-#from Backend.utils.data_processor import DataProcessor
-from utils.data_processor import DataProcessor
+#import matplotlib.pyplot as plt
+from Backend.utils.data_processor import DataProcessor
+#from utils.data_processor import DataProcessor
 
+def get_recipes_by_review_count(data: pd.DataFrame, max_count: int) -> pd.Series:
+    """
+    Returns a list of recipe names whose total review count is less than or equal to max_count.
+    """
+    filtered_recipes = data[
+        data['count_for_year'].apply(lambda x: sum(x.values()) if isinstance(x, dict) else 0) <= max_count
+    ]
+    intermediary = filtered_recipes[['name', 'weighted_rating']].reset_index(drop=True).sort_values(by='weighted_rating', ascending=False)
+    return intermediary['name']
+
+def get_histogram_recipe(data: pd.DataFrame, recipe_name: str) -> pd.DataFrame:
+    """
+    For a specific recipe showing the number of reviews by year.
+    """
+    recipe_data = data[data['name'].str.replace(" ", "").str.lower() == recipe_name.replace(" ", "").lower()]
+    
+    if recipe_data.empty:
+        raise ValueError(f"Recipe '{recipe_name}' not found in the dataset.")
+        
+    return recipe_data.iloc[0]['count_for_year']
+    
 def create_review_per_year(df_csv: pd.DataFrame, df_pickle: pd.DataFrame) -> pd.DataFrame:
     """
     Add a column with a dictionnary of the number of review per date.

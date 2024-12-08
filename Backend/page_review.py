@@ -1,36 +1,35 @@
 import pandas as pd
+print(pd.__version__)
 import matplotlib.pyplot as plt
 import streamlit as st
 import pandas as pd
 from pathlib import Path
-from wordcloud import WordCloud
-import seaborn as sns
+#from wordcloud import WordCloud
+#import seaborn as sns
 import time
 from technique import DataLoader
-from pickle_creation import extract_reviews_for_year, extract_reviews
+from pickle_creation import extract_reviews_for_year, extract_reviews, get_histogram_recipe, get_recipes_by_review_count
 
 import os
 ABSOLUTE_PATH = os.path.abspath(__file__)
 
 def calculate_season_percentage(data: pd.DataFrame, year: int) -> pd.Series:
     """
-    Calcula the pourcentage for every season for a specific year
+    Calculate the seasons' pourcentage for a specific year.
     """
-    data['count_for_year'] = data['review_per_year'].apply(lambda x: extract_reviews_for_year(x, year))
-    
-    # Calculer la somme totale des reviews pour l'année
-    total_count = data['count_for_year'].sum()
-    
-    if total_count == 0:
-        return pd.Series(dtype='float64')  # Retourne une série vide si aucune donnée
-    
-    # Calculer les pourcentages des saisons
-    season_percentage = (
-        data.groupby('season')['count_for_year']
-        .sum()
-        .div(total_count)
-        .mul(100)
+    data['count'] = df['count_for_year'].apply(
+        lambda x: extract_reviews_for_year(x, 2005)
     )
+    # enlever ceux qui ne sont pas pris en compte
+    filtered_data = data[data['count'] > 0]
+    season_recipe_count = filtered_data['season'].value_counts()
+    total_recipes = season_recipe_count.sum()
+    
+    if total_recipes == 0:
+        raise ValueError(f"Il n'y a aucune recette pour l'année {year}")
+    
+    season_percentage = (season_recipe_count / total_recipes) * 100
+    season_percentage.name = "Percentage"
     
     return season_percentage
 
@@ -44,40 +43,54 @@ class page_streamlit:
         """
         Load the image on the page
         """
-        st.image(path, caption=caption, use_column_width=True)
+        st.image(path, caption=caption, use_container_width=True)
 #-------------------------------------------------------------
+def plot_season_percentage_pie(data: pd.DataFrame, year: int) -> None:
+    """
+    Calculates and displays a pie chart of season percentages for a specific year.
+    """
+    try:
+        season_percentage = calculate_season_percentage(data, year)
+    except ValueError as ve:
+        st.warning(ve)
+        return
+    fig, ax = plt.subplots(figsize=(3, 3))
+    wedges, texts, autotexts = ax.pie(
+        season_percentage.values,
+        labels=season_percentage.index,
+        autopct=lambda p: f'{p:.1f}%' if p > 0 else '',
+        startangle=90,
+        colors=plt.cm.Paired.colors[:len(season_percentage)],
+        wedgeprops=dict(width=0.3)  # Make it a donut chart
+    )
+    plt.setp(texts, fontsize=8)
+    plt.setp(autotexts, fontsize=7, weight="bold")
+    ax.set_title(f"Season Percentage for {year}", fontsize=10, weight="bold")
+    st.pyplot(plt)
 
-def filter_and_plot_by_count(data: pd.DataFrame, max_count: int) -> None:
+                
+def plot_histogram_for_recipe(data: pd.DataFrame, recipe_name: str) -> None:
     """
-    Filters the DataFrame based on the maximum count of reviews per year
-    and simulates an animation by displaying histograms dynamically in Streamlit.
+    Plots a histogram for a specific recipe showing the number of reviews by year.
     """
-    # Step 1: Filter recipes with count_for_year <= max_count
-    filtered_data = data[data['count_for_year'].apply(lambda x: max(x.values()) if isinstance(x, dict) else 0) <= max_count]
+    try:
+        count_for_year = get_histogram_recipe(data, recipe_name)
+    except ValueError as ve:
+        st.warning(ve)
+        return    
+    if not isinstance(count_for_year, dict) or not count_for_year:
+        st.warning(f"No review data available for recipe: {recipe_name}")
+        return
+   
+    plt.figure(figsize=(8, 5))
+    plt.bar(count_for_year.keys(), count_for_year.values(), color='lightcoral', edgecolor='black')
+    plt.title(f"Review Count Distribution for Recipe: {recipe_name}")
+    plt.xlabel("Year")
+    plt.ylabel("Number of Reviews")
+    plt.xticks(rotation=45)
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    st.pyplot(plt)
     
-    # Step 2: Simulate animation by iterating through filtered data
-    for _, row in filtered_data.iterrows():
-        if isinstance(row['count_for_year'], dict):
-            id_year_counts = row['count_for_year']
-            
-            # Create the plot
-            plt.figure(figsize=(8, 5))
-            plt.bar(id_year_counts.keys(), id_year_counts.values(), color='lightcoral', edgecolor='black')
-            plt.title(f"Review Count Distribution for Recipe ID {row['id']}")
-            plt.xlabel("Year")
-            plt.ylabel("Number of Reviews")
-            plt.xticks(rotation=45)
-            plt.grid(axis='y', linestyle='--', alpha=0.7)
-            
-            # Display the plot in Streamlit
-            st.pyplot(plt)
-            
-            # Pause for animation effect
-            time.sleep(0.5)
-            
-            # Clear the current plot (important for animations)
-            plt.close()
-            
 class page_review:
     def __init__(self, dataframe: pd.DataFrame, folder_path: Path) -> None:
         """
@@ -89,48 +102,40 @@ class page_review:
     def run(self) -> None:
         # pour chaque id => nombre par an de review. 
         self.df['count_for_year'] = self.df['review_per_year'].apply(lambda x: extract_reviews(x))
+        st.title("Analyse des Recettes - Dashboard sur l'analyse des commentaires")
         
-        st.set_page_config(layout="wide", page_title="Analyse des Recettes - Dashboard Interactif")
-
-        # Section 1 : Image statique et animation
-        st.header("1. Analyse temporelle des interactions par recette")
-        col1, col2 = st.columns([1.5, 2])
+        st.write("Nous avons construit notre dataset en considérant que les commentaires sont des indicateurs de:\n" +
+                 "- à quelle saison la recette peut être associée. Par exemple: un pot-au-feux, recette hivernale, risque plus facilement d'être utilisée -et donc d'avoir un commentaire sur un site de cuisine- en hiver qu'en été.\n" +
+                 "- de son nombre d'utilisation.\n" +
+                 "- dans une moindre mesure, de la popularité de la recette.")
         
-        with col1:
-            # A voir avec les autres.
-            page_streamlit.load_image(str(self.data_path / "image" / "image_reviews_per_year.png"),"Répartition des recettes")
+
+        # Section 1: Image des interactions
+        st.header("1. Analyse temporelle des commentaires")
+        page_streamlit.load_image(str(self.data_path / "image" / "image_reviews_per_year.png"), "")
+        st.write("Au dessus, un histogramme qui montre le nombre de commentaires par an." + "\nFun fact: Il est intéressant de constater que la plus part des commentaires se font sur des années spécifiques - entre 2006 et 2010.")
         
+        # Section 2: 
+        st.header("2. Analyse temporelle de l'utilisation des recettes")
+        st.write("Nous voulons voir maintenant comment une recette est utilisée dans notre étude. Comme nous considérons que le nombre de commentaires est une bonne représentation, nous regardons la répartition du nombre de commentaire par années.\n"+
+                 "\nNotice d'utilisation:\n- Selectionne le nombre maximal de commentaires que peut avoir une recette avec le slider.\n"+
+                 "- Puis selectionne la recette que tu souhaites afficher. Les recettes sont données dans l'ordre décroissant de leur popularité.\n"
+                 "\nA savoir: Nous avons decider de selectionner dans notre dataset uniquement les recettes avec plus de 5 commentaires (puisque nous avons 4 saisons), et la recette avec le plus de commentaire est 'best banana bread', qui a 1613 commentaires")
+        max_count = st.slider("Selectionne le nombre maximal de commentaires que peut avoir une recette.", min_value=5, max_value=1613, step=1, value=5)
+        filtered_recipes = get_recipes_by_review_count(self.df, max_count)
+        if not filtered_recipes.empty:
+            recipe_names = filtered_recipes.tolist()
+            selected_recipe = st.selectbox("Selectionne une recette", recipe_names)
+        if selected_recipe:
+            plot_histogram_for_recipe(self.df, selected_recipe)
+        else:
+            st.write("Aucune recette trouvée avec un nombre de commentaires inférieur ou égal à la valeur sélectionnée.")
         
-        with col2:
-            st.title("Simulated Animation of Review Counts by Recipe")
-            max_count = st.slider("Select Maximum Review Count", min_value=1, max_value=10, step=1, value=5)
-            filter_and_plot_by_count(self.df, max_count)
-            # Exemple de graphique dynamique pour une année
-            #yearly_data = df.copy()
-            #yearly_data["interaction_count"] = yearly_data["review_per_year"].apply(lambda x: extract_reviews_for_year(x, year))
-            #plot_yearly_interactions(yearly_data)
-
-        '''
-        # Section 2 : Répartition des saisons
-        st.header("2. Répartition des saisons")
-        date_slide = st.slider("Choisir une année pour les pourcentages de saisons", min_value=2001, max_value=2018, step=1, value=2010)
-        season_data = calculate_season_percentage(self.df, date_slide)
-        plot_season_pie(season_data)
-
-        # Section 3 : Comparaison multi-dimensionnelle
-        st.header("3. Analyse multi-dimensionnelle des variables")
-        selected_columns = st.multiselect(
-            "Choisissez les colonnes à inclure dans le pairplot (ex. rating, season, etc.)",
-            options=["rating", "weighted_rating", "season", "review_per_year"],
-            default=["rating", "weighted_rating"]
-        )
-        if selected_columns:
-            plot_pairplot(self.df[selected_columns])
-
-        # Section 4 : Nuage de mots
-        st.header("4. Recettes les plus populaires")
-        generate_wordcloud(self.df, "weighted_rating")
-        '''
+        # Section 3
+        st.header("3. Répartition des saisons en fontion de l'année")
+        st.write("Pour interpréter au mieux ce schéma, il faut garder en tête la répartition des commentaires en fonction des années, illustrée au dessus.")
+        selected_year = st.selectbox("Selectionne une année", list(range(2001, 2019)), index=0)
+        plot_season_percentage_pie(df, selected_year)
 
 # Point d'entrée
 if __name__ == "__main__":

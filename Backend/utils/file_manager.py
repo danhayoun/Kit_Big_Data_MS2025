@@ -1,4 +1,5 @@
 import pandas as pd
+print("file manager", pd.__version__)
 import pickle
 
 class FileManager:
@@ -41,3 +42,6 @@ class FileManager:
         """
         with open(path, "wb") as f:
             pickle.dump(file, f)
+
+if __name__ == "__main__":
+    print("Dani")

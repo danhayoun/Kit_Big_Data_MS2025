@@ -1,9 +1,10 @@
 import ast
 import pandas as pd
+print("technique", pd.__version__)
 import pickle
 from typing import List, Any
 import logging
-import spacy
+#import spacy
 import streamlit as st
 
 # Configure logging
