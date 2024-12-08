@@ -102,11 +102,13 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+image_path_1 = "./data/images/image_accueil_1.jpg"
+image_path_2 = "./data/images/image_accueil_2.jpg"
 # Ajout d'images décoratives (exemple : des images alignées à gauche et à droite)
 col1, col2 = st.columns(2)
 with col1:
-    st.image("https://via.placeholder.com/200", caption="Image illustrative gauche", use_column_width=True)
+    st.image(image_path_1)
 with col2:
-    st.image("https://via.placeholder.com/200", caption="Image illustrative droite", use_column_width=True)
+    st.image(image_path_2)
 
 # Fin du conteneur principal
