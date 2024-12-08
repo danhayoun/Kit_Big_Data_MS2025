@@ -14,12 +14,12 @@ import bisect
 class Page_temps_de_cuisson :
 
     @staticmethod
-    def generate_accurate_df(df) :
+    def generate_accurate_df(df,path="data/raw/RAW_recipes.csv") :
         """ Fonction qui rajoute les colonnes 'minutes' et 'name' au df
             en entrée : - un dataframe pandas
 
         """
-        recipes = pd.read_csv("data/raw/RAW_recipes.csv")
+        recipes = pd.read_csv(path) #ICI
         df = pd.merge(recipes[['id','name','minutes']], df, on='id', how='right') 
 
         return df 

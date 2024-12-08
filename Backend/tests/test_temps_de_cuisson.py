@@ -19,12 +19,12 @@ def test_generate_accurate_df() :
     df = pd.read_pickle("./data/preprocess/recipe_filtered.pkl")
     assert 'minutes' not in df.columns
     assert 'name' not in df.columns
-    df = cr.Page_temps_de_cuisson.generate_accurate_df(df)
+    df = cr.Page_temps_de_cuisson.generate_accurate_df(df,"./data/raw/RAW_recipes.csv")
     assert 'minutes','name' in df
 
 def test_add_intervalle() :
     df = pd.read_pickle("./data/preprocess/recipe_filtered.pkl")
-    df = cr.Page_temps_de_cuisson.generate_accurate_df(df)
+    df = cr.Page_temps_de_cuisson.generate_accurate_df(df,"./data/raw/RAW_recipes.csv")
     assert 'intervalle' not in df.columns
     df = cr.Page_temps_de_cuisson.add_intervalle(df)
     assert 'intervalle' in df.columns
