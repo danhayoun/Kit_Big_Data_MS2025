@@ -107,7 +107,7 @@ class page_review:
 
         # Section 1: Image des interactions
         st.header("1. Analyse temporelle des commentaires")
-        page_streamlit.load_image(str(self.data_path / "image" / "image_reviews_per_year.png"), "")
+        page_streamlit.load_image(str(self.data_path / "images" / "image_reviews_per_year.png"), "")
         st.write("Au dessus, un histogramme qui montre le nombre de commentaires par an." + "\nFun fact: Il est intéressant de constater que la plus part des commentaires se font sur des années spécifiques - entre 2006 et 2010.")
         
         # Section 2: 
