@@ -8,11 +8,14 @@ import pickle
 import streamlit as st
 
 
-pages = ['temps_de_cuisson','fun_facts','techniques_cuisine'] # temps_de_cuisson = Dan, fu_facts = Joséphine, techniques_cuisine = Cécile 
+pages = ['temps_de_cuisson','fun_facts','techniques_cuisine'] #Les 3 pages de l'application 
 
-##################CLASSE GENERIQUE POUR TOUS LES PICKLE ####################################
 
-class Display : #Pour tous les .pkl, attributs : quel page, quel chemin 
+class Display : 
+    """ Classe générique pour tous les .pkl
+        attributs : quel page, quel chemin 
+    
+    """
     def __init__(self,page,pkl_path) :
         if page in pages :
             self.__page = page
@@ -35,6 +38,9 @@ class Display : #Pour tous les .pkl, attributs : quel page, quel chemin
 ################## CLASSES POUR LES DIFFERENTS TYPES DE PICKLE UTILISES ############################
 
 class CamembertDisplay(Display): 
+    """ Classe pour les dataframes pour camemberts
+    
+    """
     def __init__(self, page, pkl_path):
         super().__init__(page, pkl_path)  # Appelle le constructeur de Display
         self.dataframe = self.load_dataframe()  # Charge le DataFrame spécifique
@@ -54,11 +60,19 @@ class CamembertDisplay(Display):
 
             
     def plot_pie_charts_2(self, data_columns, label_names, title):
-         #"""Trace des camemberts pour chaque ligne du DataFrame.
-         #Args:
-        #- data_columns (list): Liste des colonnes à utiliser pour les données (ex: ['Printemps_%', 'Hiver_%', 'Ete_%', 'Automne_%']).
-        #- label_names (list): Liste des labels correspondants (ex: ['Printemps', 'Hiver', 'Été', 'Automne']).
-        #- title (str): Titre global pour la section Streamlit.
+            """Trace des camemberts pour chaque ligne du DataFrame.
+            Args:
+            - data_columns (list): Liste des colonnes à utiliser pour les données (ex: ['Printemps_%', 'Hiver_%', 'Ete_%', 'Automne_%']).
+            - label_names (list): Liste des labels correspondants (ex: ['Printemps', 'Hiver', 'Été', 'Automne']).
+            - title (str): Titre global pour la section Streamlit."""
+         
+            intervalle_mapping = {
+            '10': "Distribution pour l'intervalle 0-10 min",
+            '30': "Distribution pour l'intervalle 10-30 min",
+            '1h': "Distribution pour l'intervalle 30-60 min",
+            '2h': "Distribution pour l'intervalle 1-2h",
+            '+': "Distribution pour + de 2h"
+            } 
 
             if not isinstance(data_columns, list) or not isinstance(label_names, list):
                 raise TypeError("Les arguments 'data_columns' et 'label_names' doivent être des listes.")
@@ -66,28 +80,37 @@ class CamembertDisplay(Display):
                 raise ValueError("Les listes 'data_columns' et 'label_names' doivent avoir la même longueur.")
 
             st.title(title)
+            cols = st.columns(2)  # Divise la ligne en 2 colonnes
+            index_col = 0  # Index de la colonne courante
 
             for index, row in self.dataframe.iterrows():
-                intervalle = row['intervalle']  # Nom de l'intervalle
-                data = row[data_columns]  # Récupération des données à tracer
-                labels = label_names  # Récupération des labels
+                # Utiliser le mapping pour obtenir la description
+                intervalle_description = intervalle_mapping.get(row['intervalle'], "Intervalle inconnu")
+
+                # Récupérer les données et les labels pour le camembert
+                data = row[data_columns]  # Données à tracer
+                labels = label_names  # Labels pour le graphique
 
                 # Création du graphique
                 fig, ax = plt.subplots()
                 ax.pie(data, labels=labels, autopct='%1.1f%%', startangle=90)
-                ax.set_title(f"Distribution pour l'intervalle {intervalle}")
+                ax.set_title(intervalle_description)  # Utiliser directement la description
 
-                # Affichage du graphique dans Streamlit
-                st.pyplot(fig)
+                # Affichage dans Streamlit
+                cols[index_col].pyplot(fig)
+                # Alterner entre colonne 0 et 1
+                index_col = (index_col + 1) % 2
 
-    def plot_interactive_pie_chart(self, data_columns, label_names, slider_label="Choisissez un intervalle", title="Camembert interactif par intervalle"):
-    #"""
-    #Affiche un camembert interactif en fonction d'une valeur sélectionnée via un curseur.
-    #rgs:
-    #    data_columns (list): Liste des colonnes contenant les données pour le camembert (ex. ['Spring_%', 'Winter_%', ...]).
-    #    label_names (list): Liste des labels correspondants (ex. ['Spring', 'Winter', ...]).
-    #    slider_label (str): Texte affiché pour le curseur.
-    #    title (str): Titre pour le camembert.
+    def plot_interactive_pie_chart(self, data_columns, label_names, slider_label="Sélectionner un temps de cuisson (en min)", title="Camembert interactif par intervalle"):
+        """
+        Affiche un camembert interactif en fonction d'une valeur sélectionnée via un curseur.
+        Args:
+       data_columns (list): Liste des colonnes contenant les données pour le camembert (ex. ['Spring_%', 'Winter_%', ...]).
+        label_names (list): Liste des labels correspondants (ex. ['Spring', 'Winter', ...]).
+        slider_label (str): Texte affiché pour le curseur.
+        title (str): Titre pour le camembert."""
+
+        
         if not isinstance(data_columns, list) or not isinstance(label_names, list):
             raise TypeError("Les arguments 'data_columns' et 'label_names' doivent être des listes.")
         if len(data_columns) != len(label_names):
@@ -95,8 +118,10 @@ class CamembertDisplay(Display):
 
         # Curseur pour sélectionner l'intervalle
         intervalle_max = int(self.dataframe['intervalle'].max())
+        intervalle_mapping = {i: str(i)+" min" for i in range(1, intervalle_max)}
+        intervalle_mapping[181] = '+180 min'
         intervalle = st.slider(slider_label, min_value=1, max_value=intervalle_max, step=1)
-        st.write(f"Intervalle sélectionné : {intervalle}")
+        intervalle_label = intervalle_mapping.get(intervalle, intervalle)
 
         # Filtrer les données pour l'intervalle sélectionné
         if intervalle in self.dataframe['intervalle'].values:
@@ -104,12 +129,17 @@ class CamembertDisplay(Display):
 
             # Extraire les données pour le camembert
             data = row[data_columns].values.flatten()
-            data = [0 if pd.isna(v) else v for v in data]  # Remplacer NaN par 0
+            data = [0 if pd.isna(v) else v for v in data]  
+
+            # Vérifier si toutes les valeurs sont 0
+            if all(v == 0 for v in data):
+                st.warning(f"Aucune donnée significative pour l'intervalle {intervalle_label}.")
+                return
 
             # Créer le graphique du camembert
             fig, ax = plt.subplots()
             ax.pie(data, labels=label_names, autopct='%1.1f%%', startangle=90)
-            ax.set_title(f"{title} ({intervalle})")
+            ax.set_title(f"{title} ({intervalle_label})")
 
             # Afficher dans Streamlit
             st.pyplot(fig)

@@ -1,4 +1,4 @@
-#Ce fichier définit les fonctions utilisées pour créer la page des curseurs 
+#Ce fichier définit les fonctions utilisées pour créer la page temps de cuisson  
 
 
 import numpy as np 
@@ -10,25 +10,33 @@ import matplotlib.dates as mdates
 import pickle
 import bisect
 
-###################Fonction qui rajoute les colonnes 'minutes' et 'name' au df #################
 
 def generate_accurate_df(df) :
+    """ Fonction qui rajoute les colonnes 'minutes' et 'name' au df
+        en entrée : - un dataframe pandas
+
+    """
     recipes = pd.read_csv("../../../data/raw/RAW_recipes.csv")
     df = pd.merge(recipes[['id','name','minutes']], df, on='id', how='right') 
 
     return df 
 
-######################## Fonction qui rajoute la colonne 'intervalle' au df ##########
+
+
 #Je veux que cette fonction rajoute une colonne "intervalle" sur chaque recette désormais. Ainsi, je pourrais rechercher facilement, dans l'intervalle 10-30min par exemple, les 10 recettes les mieux notées 
 
 def add_intervalle(df) :
+    """ Fonction qui rajoute la colonne 'intervalle' au df
+        en entrée : - un dataframe pandas
+
+    """
 
     liste_cook_times = [10,30,60,120,121] #Un peu mal dit mais bon  
 
     df['intervalle'] = 0 #Rajoute la colonne intervalle
 
     for i in range(len(df)) :
-        minutes = df.at[i,"minutes"] #manière de remplacer une valeur dans une ligne du df !!!!!! 
+        minutes = df.at[i,"minutes"] #manière de remplacer une valeur dans une ligne du df 
         #df.at car on a un fonctionnement ligne par ligne 
         position = bisect.bisect_left(liste_cook_times,minutes)
         if(position <len(liste_cook_times)) :
@@ -42,9 +50,14 @@ def add_intervalle(df) :
     return df 
 
 
-#################### Fonction qui extrait le csv et renvoie les 2 vecteurs ids et temps de cuisson (vector = vecteur temps de cuisson, vector_id = vecteur des ids)  ######################
-
 def get_vectors(df) :
+    """  Fonction qui extrait le dataframe pandas et renvoie les 2 vecteurs ids 
+        et temps de cuisson (vector = vecteur temps de cuisson, vector_id = vecteur des ids)
+
+        en entrée : - un dataframe pandas
+
+    """
+    
     times = df['minutes']
     ids = df['id']
     vector_id = ids.to_numpy()
@@ -53,33 +66,40 @@ def get_vectors(df) :
 
 
 
-############### Fonction qui créé le dictionnaire_minutes #######################################
 def dictionnaire_minutes(vector,vector_id) :
+    """  Fonction qui créé le dictionnaire_minutes
+        en entrée : - un vecteur des temps de cuisson
+                    - un vecteur des ids correspondants
+
+    """
     #dictionnaire_minutes = {} #clé = id, valeur = temps de cuisson
     dictionnaire_minutes =  {}
 
     j=0
     for i in vector_id :
-        #dictionnaire_minutes[i] = df[df['id'] == i ]['minutes'].iloc[0]
         dictionnaire_minutes[i] = vector[j]
         j+=1
     return dictionnaire_minutes
 
 
-############### Fonction qui créé le top des ids par temps de cuisson  #######################################
 
-def top_liste(dictionnaire) : #Prend en entrée un dictionnaire_minutes, et renvoie la liste des ids triée, le temps de cuisson le plus élevé à son id en première position 
+def top_liste(dictionnaire) : 
+    """ Fonction qui créé le top des ids par temps de cuisson
 
+        Prend en entrée un dictionnaire_minutes, et renvoie la liste des ids triée, le temps de cuisson le plus élevé à son id en première position 
+    """
     top = sorted(dictionnaire.items(),key =lambda x : x[1], reverse = True) #Liste des mots les plus utilisés
     return top 
 
 
 
 
-############### Fonction qui trace le boxplot des temps de cuisson #######################################
 
-def boxplot(dictionnaire_minutes) : #Reçoit le dictionaire {id : temps de cuisson} et plot le boxplot répartition des temps de cuisson 
-
+def boxplot(dictionnaire_minutes) : 
+    """ Fonction qui trace le boxplot des temps de cuisson
+    
+    Reçoit le dictionaire {id : temps de cuisson} et plot le boxplot répartition des temps de cuisson 
+    """
     occurrences_values = list(dictionnaire_minutes.values())
     mots = list(dictionnaire_minutes.keys())
 
@@ -105,8 +125,11 @@ def boxplot(dictionnaire_minutes) : #Reçoit le dictionaire {id : temps de cuiss
 
 
 
-############### Fonction qui filtre le dictionnaire pour enlever les valeurs extrêmes #######################################
 def filtre_minutes(dictionnaire_minutes) :
+    """ Fonction qui filtre le dictionnaire pour enlever les valeurs extrêmes
+        reçoit en entrée : - un dictionnaire dictionnaire_minutes
+    
+    """
     #On enlève au dessus de  1000 min on garde toutes les recettes de moins de 24h (mijotage) et = à 0 min 
     l = [] #liste des ids à enlever 
     for i in dictionnaire_minutes.keys() :
@@ -121,18 +144,20 @@ def filtre_minutes(dictionnaire_minutes) :
     return dictionnaire_minutes
 
 
-################## Fonction pour créer le camembert interactif, avec le curseur ####################################################
 def generate_cursor_dataframe(df) :
+    """ Fonction pour créer le camembert interactif, avec le curseur
+        reçoit en entrée : un dataframe pandas
+    """
     df_pivot = pd.DataFrame({
         'intervalle': [i for i in range(182)],
         'Spring': [0 for i in range(182)],
         'Winter': [0 for i in range(182)],
         'Summer': [0 for i in range(182)],
         'Fall': [0 for i in range(182)],
-    }) #On initialise avec des valeurs aléatoires 
+    }) #On initialise avec des valeurs à 0  
 
     Liste_saisons = ['Spring','Winter','Summer','Fall']
-    liste_cook_times = [i for i in range(1,182)] #Un peu mal dit mais bon 
+    liste_cook_times = [i for i in range(1,182)] 
 
     #Maintenant l'étape difficile
 
@@ -165,17 +190,27 @@ def generate_cursor_dataframe(df) :
 
 
 
-#################### Fonction pour envoyer le dataframe réduit, utilisé pour le camembert interactif, vers un .pkl ################################
+
 def df_to_pickle(df_pivot,path_pickle) :
+    """ Fonction pour envoyer le dataframe réduit, utilisé pour le camembert interactif, vers un .pkl
+        reçoit en entrée : - un dataframe
+                           - un chemin vers le pickle où sauvegarder le df 
+    
+    """
     df_pivot = df_pivot.fillna(0)
     df_pivot.to_pickle(path_pickle)
     return 1 
 
 
 
-################### Fonction pour les camemberts significatifs #######################################
 
-def generate_camemberts_significatifs(df,path) : #Mettre le df et le path de sortie du .pkl
+
+def generate_camemberts_significatifs(df,path) : 
+    """ Fonction pour générer les 5 camemberts significatifs
+        reçoit en entrée : - un dataframe
+                           - un chemin vers la sortie .pkl
+    
+    """
     df_significatif = pd.DataFrame({
         'intervalle': [10,30,60,120,121],
         'Spring': [0 for i in range(5)],
@@ -185,7 +220,7 @@ def generate_camemberts_significatifs(df,path) : #Mettre le df et le path de sor
     }) #On initialise 
 
     Liste_saisons = ['Winter','Summer','Fall','Spring']
-    liste_cook_times = [10,30,60,120,121] #Un peu mal dit mais bon 
+    liste_cook_times = [10,30,60,120,121] 
 
     #Maintenant l'étape difficile
 
@@ -203,7 +238,7 @@ def generate_camemberts_significatifs(df,path) : #Mettre le df et le path de sor
 
 
 
-    #print(df_significatif)
+
 
     #Pourcentages 
 
@@ -213,7 +248,7 @@ def generate_camemberts_significatifs(df,path) : #Mettre le df et le path de sor
         df_significatif[f'{saison}_%'] = (df_significatif[saison] / df_significatif[['Spring', 'Winter', 'Summer', 'Fall']].sum(axis=1)) * 100
 
     # Affiche le résultat
-    #print(df_significatif)
+
 
     intervalle_mapping = {
         10: "10",
@@ -225,9 +260,6 @@ def generate_camemberts_significatifs(df,path) : #Mettre le df et le path de sor
 
     df_significatif['intervalle'] = df_significatif['intervalle'].replace(intervalle_mapping)
 
-    # Affichage du DataFrame
-    #print(df_significatif)
-
     df_significatif = df_significatif.fillna(0)
 
     df_significatif.to_pickle(path)
@@ -235,9 +267,11 @@ def generate_camemberts_significatifs(df,path) : #Mettre le df et le path de sor
     return df_significatif
 
 
-########################## Fonction qui créé un dictionnaire, regroupant les top 10 des recettes par saison et par intervalle
 def top_by_interval_season(df) :
-    #df = add_intervalle(df) l'intervalle est déjà présent donc on a plus besoin de faire ça 
+    """ Fonction qui créé un dictionnaire, regroupant les top 10 des recettes par saison et par intervalle
+        reçoit en entrée : - un dataframe
+    
+    """
     Liste_saisons = ['Winter','Summer','Fall','Spring']
     liste_cook_times = [10,30,60,120,121] 
 
@@ -254,9 +288,13 @@ def top_by_interval_season(df) :
 
 
 
-############### Fonction qui prend en entrée la liste des ids des recettes et renvoit la liste des recettes #########
 
 def ids_to_name(l,df) : 
+    """ Fonction qui prend en entrée la liste des ids des recettes et renvoit la liste des recettes
+        reçoit en entrée : - une liste
+                           - un dataframe
+    
+    """
     l_names = []
 
     for i in l :    
@@ -265,8 +303,46 @@ def ids_to_name(l,df) :
     return l_names
 
 
-################ Fonction qui prend en entrant notre dictionnaire conçu à top_by_interval_season, et qui renvoie le dictionnaire avec comme values les noms des recettes
 def get_name_top_by_interval_season(dictionnaire,df) :
+    """ Fonction qui prend en entrée notre dictionnaire conçu à top_by_interval_season, 
+    et qui renvoie le dictionnaire avec comme values les noms des recettes
+    
+    reçoit en entrée : - un dictionnaire
+                       - un dataframe 
+    """
     for i in dictionnaire.keys() :
         dictionnaire[i] = ids_to_name(dictionnaire[i],df)
     return dictionnaire
+
+def generate_pickles_temps_de_cuisson() :
+    df = pd.read_pickle("../../../data/raw/recipe_filtered.pkl")
+
+    df = generate_accurate_df(df)
+
+    df = add_intervalle(df) #ajout colonne intervalle
+
+    vector,vector_id = get_vectors(df)
+
+    dictionnaire_minutes = dictionnaire_minutes(vector,vector_id)
+
+    dictionnaire_minutes = filtre_minutes(dictionnaire_minutes)
+
+    df_pivot = generate_cursor_dataframe(df)
+
+    df_to_pickle(df_pivot,"../../../data/preprocess/cursor2.pkl")
+
+    generate_camemberts_significatifs(df,"../../../data/preprocess/cursor_significatif.pkl") 
+
+
+    dictionnaire_tops_10 = top_by_interval_season(df)
+    dictionnaire_final = get_name_top_by_interval_season(dictionnaire_tops_10,df)
+
+    #print(dictionnaire_final)
+
+    with open("../../../data/preprocess/dictionnaire_tops_10.pkl", "wb") as fichier:
+        pickle.dump(dictionnaire_final, fichier) #Etape OK 
+
+
+#Lancement du script 
+if __name__ == "__main__": 
+    generate_pickles_temps_de_cuisson()
