@@ -12,6 +12,11 @@ import os
 ABSOLUTE_PATH = os.path.abspath(__file__)
 
 class pickle_creation:
+    """
+    This class is responsible for processing and enriching recipe data with additional features, 
+    such as the number of reviews per year and associating recipe names with their IDs. 
+    It handles the creation of a modified DataFrame and saves it as a pickle file for further use.
+    """
     def __init__(self, folder_path: Path, path_data_csv: Path, path_data_csv_recipe: Path) -> None:
         """
         Init the pickle_creation class.
@@ -19,7 +24,7 @@ class pickle_creation:
         self.data_path = folder_path
         self.data_path_csv = path_data_csv
         self.path_data_csv_recipe = path_data_csv_recipe
-        
+    
     def extract_reviews(self, review_dict):
         """
         Extracts a dictionary containing the total number of reviews per year 
@@ -65,52 +70,59 @@ class pickle_creation:
         df_pickle_modif = df_pickle_modif.drop(['review_per_year'], axis=1)
         FileManager.save_file_as_pickle(df_pickle_modif, self.data_path / ".." / "recipe_with_years.pkl")
 
-def get_recipes_by_review_count(data: pd.DataFrame, max_count: int) -> pd.Series:
-    """
-    Returns a list of recipe names whose total review count is less than or equal to max_count.
-    """
-    filtered_recipes = data[
-        data['count_for_year'].apply(lambda x: sum(x.values()) if isinstance(x, dict) else 0) <= max_count
-    ]
-    intermediary = filtered_recipes[['name', 'weighted_rating']].reset_index(drop=True).sort_values(by='weighted_rating', ascending=False)
-    return intermediary['name']
-
-def get_histogram_recipe(data: pd.DataFrame, recipe_name: str) -> pd.DataFrame:
-    """
-    For a specific recipe showing the number of reviews by year.
-    """
-    recipe_data = data[data['name'].str.replace(" ", "").str.lower() == recipe_name.replace(" ", "").lower()]
+class file:
+    def extract_reviews_for_year(review_dict, year):
+        """
+        Extrait le nombre total de reviews pour une année donnée depuis un dictionnaire de dates.
+        """
+        return sum(value for key, value in review_dict.items() if key == year)
     
-    if recipe_data.empty:
-        raise ValueError(f"Recipe '{recipe_name}' not found in the dataset.")
+class page_review_info:
+    """
+    Class page_review_info is just to handle the fonctions for the page_review class
+    """
+    @staticmethod
+    def get_recipes_by_review_count(data: pd.DataFrame, max_count: int) -> pd.Series:
+        """
+        Returns a list of recipe names whose total review count is less than or equal to max_count.
+        """
+        filtered_recipes = data[
+            data['count_for_year'].apply(lambda x: sum(x.values()) if isinstance(x, dict) else 0) <= max_count
+        ]
+        intermediary = filtered_recipes[['name', 'weighted_rating']].reset_index(drop=True).sort_values(by='weighted_rating', ascending=False)
+        return intermediary['name']
+    @staticmethod
+    def get_histogram_recipe(data: pd.DataFrame, recipe_name: str) -> pd.DataFrame:
+        """
+        For a specific recipe showing the number of reviews by year.
+        """
+        recipe_data = data[data['name'].str.replace(" ", "").str.lower() == recipe_name.replace(" ", "").lower()]
         
-    return recipe_data.iloc[0]['count_for_year']
-
-def extract_reviews_for_year(review_dict, year):
-    """
-    Extrait le nombre total de reviews pour une année donnée depuis un dictionnaire de dates.
-    """
-    return sum(value for key, value in review_dict.items() if key == year)
-
-def calculate_season_percentage(data: pd.DataFrame, year: int) -> pd.Series:
-    """
-    Calculate the seasons' pourcentage for a specific year.
-    """
-    data['count'] = data['count_for_year'].apply(
-        lambda x: extract_reviews_for_year(x, year)
-    )
-    # enlever ceux qui ne sont pas pris en compte
-    filtered_data = data[data['count'] > 0]
-    season_recipe_count = filtered_data['season'].value_counts()
-    total_recipes = season_recipe_count.sum()
+        if recipe_data.empty:
+            raise ValueError(f"Recipe '{recipe_name}' not found in the dataset.")
+            
+        return recipe_data.iloc[0]['count_for_year']
     
-    if total_recipes == 0:
-        raise ValueError(f"Il n'y a aucune recette pour l'année {year}")
-    
-    season_percentage = (season_recipe_count / total_recipes) * 100
-    season_percentage.name = "Percentage"
-    
-    return season_percentage
+    @staticmethod
+    def calculate_season_percentage(data: pd.DataFrame, year: int) -> pd.Series:
+        """
+        Calculate the seasons' pourcentage for a specific year.
+        """
+        data['count'] = data['count_for_year'].apply(
+            lambda x: file.extract_reviews_for_year(x, year)
+        )
+        # enlever ceux qui ne sont pas pris en compte
+        filtered_data = data[data['count'] > 0]
+        season_recipe_count = filtered_data['season'].value_counts()
+        total_recipes = season_recipe_count.sum()
+        
+        if total_recipes == 0:
+            raise ValueError(f"Il n'y a aucune recette pour l'année {year}")
+        
+        season_percentage = (season_recipe_count / total_recipes) * 100
+        season_percentage.name = "Percentage"
+        
+        return season_percentage
 
 """
 if __name__ == "__main__":

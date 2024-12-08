@@ -4,7 +4,7 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 from technique import DataLoader
-from pickle_creation import get_histogram_recipe, get_recipes_by_review_count, calculate_season_percentage
+from pickle_creation import page_review_info
 
 import os
 ABSOLUTE_PATH = os.path.abspath(__file__)
@@ -31,7 +31,7 @@ class page_plot:
         Calculates and displays a pie chart of season percentages for a specific year.
         """
         try:
-            season_percentage = calculate_season_percentage(data, year)
+            season_percentage = page_review_info.calculate_season_percentage(data, year)
         except ValueError as ve:
             st.warning(ve)
             return
@@ -55,7 +55,7 @@ class page_plot:
         Plots a histogram for a specific recipe showing the number of reviews by year.
         """
         try:
-            count_for_year = get_histogram_recipe(data, recipe_name)
+            count_for_year = page_review_info.get_histogram_recipe(data, recipe_name)
         except ValueError as ve:
             st.warning(ve)
             return    
@@ -117,7 +117,7 @@ class page_review:
                  "- Puis selectionne la recette que tu souhaites afficher. Les recettes sont données dans l'ordre décroissant de leur popularité.\n"
                  "\nA savoir: Nous avons decider de selectionner dans notre dataset uniquement les recettes avec plus de 5 commentaires (puisque nous avons 4 saisons), et la recette avec le plus de commentaire est 'best banana bread', qui a 1613 commentaires")
         max_count = st.slider("Selectionne le nombre maximal de commentaires que peut avoir une recette.", min_value=5, max_value=1613, step=1, value=5)
-        filtered_recipes = get_recipes_by_review_count(self.df, max_count)
+        filtered_recipes = page_review_info.get_recipes_by_review_count(self.df, max_count)
         if not filtered_recipes.empty:
             recipe_names = filtered_recipes.tolist()
             selected_recipe = st.selectbox("Selectionne une recette", recipe_names)
