@@ -2,6 +2,7 @@ import pytest
 import pandas as pd
 import spacy
 
+
 from src.technique import TechniqueProcessor, TECHNIQUES_LIST
 
 # Créez des données de test pour les tests unitaires
