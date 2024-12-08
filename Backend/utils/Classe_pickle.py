@@ -110,7 +110,7 @@ class CamembertDisplay(Display):
         slider_label (str): Texte affiché pour le curseur.
         title (str): Titre pour le camembert."""
 
-        
+
         if not isinstance(data_columns, list) or not isinstance(label_names, list):
             raise TypeError("Les arguments 'data_columns' et 'label_names' doivent être des listes.")
         if len(data_columns) != len(label_names):
@@ -207,4 +207,37 @@ class DictionnaireDisplay(Display):
 
 
 
+class HistogramDisplay(Display) :
+    def __init__(self, page, pkl_path):
+        super().__init__(page, pkl_path)  # Appelle le constructeur de Display
 
+    def load_dataframe(self,enable_fillna = False): #Charge le dataframe, mettre enable_fillna à True si on veut remplacer les Nan par des 0 
+        """Charge un DataFrame à partir du fichier .pkl."""
+        try:
+            df = pd.read_pickle(self.pkl_path)
+            if(enable_fillna == True) :
+                return df.fillna(0)  # Remplace les valeurs NaN par 0
+            else : 
+                return df
+        except Exception as e:
+            raise ValueError(f"Erreur lors du chargement du fichier .pkl : {e}")
+
+    def afficher_histogram(self) :
+        with open(self.pkl_path, 'rb') as fichier :
+            df = pd.read_pickle(fichier)
+            df = df.fillna(0)
+
+            # Création de l'histogramme
+            st.title("Histogramme du nombre de recettes par temps de cuisson")
+            fig, ax = plt.subplots()
+            xticks = list(range(0, 179, 10)) + [181]  # Ajouter des ticks tous les 10 et inclure 181
+            xtick_labels = [str(x) if x < 181 else '180+' for x in xticks] 
+            ax.bar(df.index, df['nb_recettes_total'], color='blue', alpha=0.7)
+            ax.set_title("Distribution de nb_recettes par temps de cuisson")
+            ax.set_xlabel("temps de cuisson en minutes")
+            ax.set_ylabel("nb_recettes")
+            ax.set_xticks(xticks)
+            ax.set_xticklabels(xtick_labels, rotation=45, ha="right")  # Rotation pour lisibilité
+    
+            # Affichage dans Streamlit
+            st.pyplot(fig)
