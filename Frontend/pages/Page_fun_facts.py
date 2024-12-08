@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import pandas as pd
 from pathlib import Path
+import logging
 from utils.file_manager import DataHandler
 from src.pickle_creation import page_review_info
 
@@ -19,7 +20,10 @@ class page_streamlit:
         """
         Load the image on the page
         """
-        st.image(path, caption=caption, use_container_width=True)
+        try:
+            st.image(path, caption=caption, use_container_width=True)
+        except Exception as e:
+            logging.error(f"Failed to load image from {path}: {e}")
 #-------------------------------------------------------------
 class page_plot:
     """
@@ -34,6 +38,7 @@ class page_plot:
             season_percentage = page_review_info.calculate_season_percentage(data, year)
         except ValueError as ve:
             st.warning(ve)
+            logging.warning(f"No data available for year {year}: {ve}")
             return
         fig, ax = plt.subplots(figsize=(3, 3))
         wedges, texts, autotexts = ax.pie(
@@ -58,9 +63,11 @@ class page_plot:
             count_for_year = page_review_info.get_histogram_recipe(data, recipe_name)
         except ValueError as ve:
             st.warning(ve)
+            logging.warning(f"No data found for recipe: {recipe_name} - {ve}")
             return    
         if not isinstance(count_for_year, dict) or not count_for_year:
             st.warning(f"No review data available for recipe: {recipe_name}")
+            logging.warning(f"No review data available for recipe: {recipe_name}")
             return
     
         plt.figure(figsize=(8, 5))
