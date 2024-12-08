@@ -9,6 +9,4 @@ requests
 pathlib
 plotly
 spacy == 3.7.2
-sphinx
-coverage
 ## on enlève pickle qui n'est pas disponible en tant que package à installer.
