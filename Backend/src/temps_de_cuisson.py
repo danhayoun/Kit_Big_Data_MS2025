@@ -142,7 +142,113 @@ class Page_temps_de_cuisson:
         """
         df_pivot = df_pivot.fillna(0)
         df_pivot.to_pickle(path_pickle)
-        return 1
+
+##########A PARTIR DE LA IL A PAS FAIT SON JOB  ################
+
+    @staticmethod
+    def generate_camemberts_significatifs(df : pd.DataFrame, path : str) -> pd.DataFrame: 
+        """ Fonction pour générer les 5 camemberts significatifs
+            reçoit en entrée : - un dataframe
+                            - un chemin vers la sortie .pkl
+        
+        """
+        df_significatif = pd.DataFrame({
+            'intervalle': [10,30,60,120,121],
+            'Spring': [0 for i in range(5)],
+            'Winter': [0 for i in range(5)],
+            'Summer': [0 for i in range(5)],
+            'Fall': [0 for i in range(5)],
+        }) #On initialise 
+
+        Liste_saisons = ['Winter','Summer','Fall','Spring']
+        liste_cook_times = [10,30,60,120,121] 
+
+        #Maintenant l'étape difficile
+
+        for i in Liste_saisons :
+            for j in range(5) :
+                if(j==0) :
+                    count = df[(df['season'] == i) & (df['minutes'] <= 10)]
+                elif j < 4:
+                    count = df[(df['season'] == i) & (liste_cook_times[j-1] < df['minutes'] ) & (df['minutes'] <= liste_cook_times[j])]
+                else : 
+                    count = df[(df['season'] == i) & (df['minutes'] > liste_cook_times[-1] )]
+                    #print(f"[DEBUG] season: {i}, Intervalle: >= {liste_cook_times[-1]}, Lignes trouvées: {count.shape[0]}")
+
+                df_significatif.loc[df_significatif['intervalle'] == liste_cook_times[j], i] = count.shape[0]
+        #Pourcentages 
+        # Pour chaque saison, calcule le pourcentage des recettes dans chaque intervalle
+        for saison in ['Spring', 'Winter', 'Summer', 'Fall']:
+            # Ajoute une nouvelle colonne pour les pourcentages
+            df_significatif[f'{saison}_%'] = (df_significatif[saison] / df_significatif[['Spring', 'Winter', 'Summer', 'Fall']].sum(axis=1)) * 100
+
+        # Affiche le résultat
+        intervalle_mapping = {
+            10: "10",
+            30: "30",
+            60: "1h",
+            120: "2h",
+            121: "+"
+        }
+
+        df_significatif['intervalle'] = df_significatif['intervalle'].replace(intervalle_mapping)
+
+        df_significatif = df_significatif.fillna(0)
+
+        df_significatif.to_pickle(path)
+
+        return df_significatif
+
+    @staticmethod
+    def top_by_interval_season(df: pd.DataFrame) -> Dict[Tuple[str, int], List[int]] :
+        """ Fonction qui créé un dictionnaire, regroupant les top 10 des recettes par saison et par intervalle
+            reçoit en entrée : - un dataframe
+        
+        """
+        Liste_saisons = ['Winter','Summer','Fall','Spring']
+        liste_cook_times = [10,30,60,120,121] 
+
+        dictionnaire = {(saison, intervalle): 0 for saison in Liste_saisons for intervalle in liste_cook_times}
+
+        for i in Liste_saisons :
+            for j in liste_cook_times :
+                index_value = df.loc[(df['season'] == i) & (df['intervalle'] == j),'weighted_rating'].nlargest(10).index
+                value = df.loc[index_value,'id']
+                value = value.to_list()
+                dictionnaire[(i,j)] = value 
+        
+        return dictionnaire
+
+
+
+    @staticmethod
+    def ids_to_name(l: List[int],df: pd.DataFrame) -> List[str] : 
+        """ Fonction qui prend en entrée la liste des ids des recettes et renvoit la liste des recettes
+            reçoit en entrée : - une liste
+                            - un dataframe
+        
+        """
+        l_names = []
+
+        for i in l :    
+            value =  df.loc[df['id']==i,'name'].iloc[0]
+            l_names.append(value)
+        return l_names
+
+    @staticmethod
+    def get_name_top_by_interval_season(dictionnaire: Dict[Tuple[str, int], List[int]],df: pd.DataFrame) -> Dict[Tuple[str, int], List[str]] :
+        """ Fonction qui prend en entrée notre dictionnaire conçu à top_by_interval_season, 
+        et qui renvoie le dictionnaire avec comme values les noms des recettes
+        
+        reçoit en entrée : - un dictionnaire
+                        - un dataframe 
+        """
+        for i in dictionnaire.keys() :
+            dictionnaire[i] = Page_temps_de_cuisson.ids_to_name(dictionnaire[i],df)
+        return dictionnaire
+    
+
+
 
     @staticmethod
     def generate_pickles_temps_de_cuisson() -> None:
@@ -152,3 +258,13 @@ class Page_temps_de_cuisson:
         dictionnaire_minutes = Page_temps_de_cuisson.filtre_minutes(dictionnaire_minutes)
         df_pivot = Page_temps_de_cuisson.generate_cursor_dataframe(df)
         Page_temps_de_cuisson.df_to_pickle(df_pivot, "./data/preprocess/cursor2.pkl")
+        Page_temps_de_cuisson.generate_camemberts_significatifs(df,"./data/preprocess/cursor_significatif.pkl") 
+        dictionnaire_tops_10 = Page_temps_de_cuisson.top_by_interval_season(df)
+        dictionnaire_final = Page_temps_de_cuisson.get_name_top_by_interval_season(dictionnaire_tops_10,df)
+        with open("./data/preprocess/dictionnaire_tops_10.pkl", "wb") as fichier:
+            pickle.dump(dictionnaire_final, fichier) #Etape OK 
+
+
+    #Lancement du script 
+if __name__ == "__main__": 
+    Page_temps_de_cuisson.generate_pickles_temps_de_cuisson()
