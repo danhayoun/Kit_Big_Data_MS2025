@@ -10,13 +10,11 @@ from utils.Classe_pickle import Display, CamembertDisplay, DictionnaireDisplay
 
 
 # Titre de l'application
-st.title("Analyse des résultats - Mangetamain")
+st.title("Page - Temps de cuisson")
 
 # Introduction
 st.write("""
-### Bienvenue sur l'application interactive d'analyse des résultats.
-Cette application vous permet d'explorer les résultats de notre étude. 
-Modifiez les paramètres ci-dessous pour voir comment les résultats changent.
+### Bienvenue sur la page interactive du temps de cuisson. Ici, nous étudions les liens entre temps de cuisson et saisons. 
 """)
 
 
@@ -61,6 +59,13 @@ Modifiez les paramètres ci-dessous pour voir comment les résultats changent.
 
 # Charger le fichier .pkl
 
+
+st.write("Dans un premier temps, nous avons voulu tracer la répartition des saisons des recettes, pour des valeurs de temps de cuisson fixées. ")
+st.write("Point méthode : nous ne comptons pas le nombre de recettes déposées seulement, nous les pondérons par leur nombre de commentaires. Ainsi, plus une recette possède de commentaires, plus elle aura du poids dans le graphique. ")
+
+st.write("\n")
+st.write("Il nous a paru important de montrer l'histogramme des recettes par temps de cuisson, car pour certaines valeurs de temps de cuisson choisis, il y a très peu de recettes et les valeurs sont donc moins significatves.")
+st.write("Par exemple, pour un temps de 179 minutes, il n'ya même pas de recette associée dans notre jeu de données.")
 with open('./data/preprocess/cursor2.pkl', 'rb') as fichier :
     df = pd.read_pickle(fichier)
     df = df.fillna(0)
@@ -68,10 +73,14 @@ with open('./data/preprocess/cursor2.pkl', 'rb') as fichier :
     # Création de l'histogramme
     st.title("Histogramme du nombre de recettes par temps de cuisson")
     fig, ax = plt.subplots()
+    xticks = list(range(0, 179, 10)) + [181]  # Ajouter des ticks tous les 10 et inclure 181
+    xtick_labels = [str(x) if x < 181 else '180+' for x in xticks] 
     ax.bar(df.index, df['nb_recettes_total'], color='blue', alpha=0.7)
     ax.set_title("Distribution de nb_recettes par temps de cuisson")
     ax.set_xlabel("temps de cuisson en minutes")
     ax.set_ylabel("nb_recettes")
+    ax.set_xticks(xticks)
+    ax.set_xticklabels(xtick_labels, rotation=45, ha="right")  # Rotation pour lisibilité
     
     # Affichage dans Streamlit
     st.pyplot(fig)
@@ -86,18 +95,29 @@ pickle = CamembertDisplay('temps_de_cuisson','./data/preprocess/cursor2.pkl')
 pickle.plot_interactive_pie_chart(
     data_columns=['Spring_%', 'Winter_%', 'Summer_%', 'Fall_%'],
     label_names=['Spring', 'Winter', 'Summer', 'Fall'],
-    slider_label="Sélectionnez un intervalle",
-    title="Répartition des recettes par intervalle de temps"
+    slider_label="Sélectionner un temps de cuisson (en min)",
+    title="Répartition des recettes pour un temps de cuisson de"
 )
 
 
+st.write("nous avons ensuite trouvé que ces graphes n'étaient pas suffisament représentatifs pour tirer des conclusions, par rapport au temps des recettes en fonction des saisons.")
+
+st.write("nous avons donc choisi de regarder 5 autres diagrammes, que nous considérons plus significatifs :")
 
  
 pickle = CamembertDisplay('temps_de_cuisson','./data/preprocess/cursor_significatif.pkl')
 
 pickle.plot_pie_charts_2(data_columns, label_names, title="Camemberts par intervalle de temps")
 
+st.write("""
+### Nous remarquons que l'hiver est plus propice à des recettes à long temps de cuisson (entre 30 min et 1h) tandis que le printemps est plus propice aux recettes rapides. 
+
+Nous remarquons aussi que l'automne est bien plus présents pour des temps de cuisson supérieurs à 1h. Il semble ainsi que les saisons les plus froids soient celles où on réalise les recette les plus longues tandis que les saisons chaudes (printemps, été) sont celles où les recette sont les plus courtes.
+""")
+
+st.write("nous vous laissons maintenant avec un top 10, pour chaque saison et chaque intervalle considéré plus haut, afin de vous laisser choisir la recette qui convient le mieux à votre saison ainsi qu'au temps que vous avez devant vous 🙂 ")
 dictionnaire = DictionnaireDisplay('temps_de_cuisson','./data/preprocess/dictionnaire_tops_10.pkl')
+
 
 intervalle_mapping = {
     '0-10 min': 10,
