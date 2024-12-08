@@ -52,26 +52,31 @@
 <li class="toctree-l3"><a class="reference internal" href="#script-pour-les-pages">Script pour les pages</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#module-src.technique">technique</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-src.processing_data">processing_data</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cursor">cursor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-src.temps_de_cuisson">temps_de_cuisson</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#utils">utils</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#module-utils.file_manager">file_manager</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-utils.data_processor">data_processor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-utils.Classe_pickle">Classe_pickle</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#frontend">Frontend</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#module-Frontend.Accueil">Accueil</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">cursor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-Frontend.pages.Page_techniques">techniques</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-Frontend.pages.Page_techniques">Page_techniques.py</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#Frontend.pages.Page_techniques.RecipeRecommender"><code class="docutils literal notranslate"><span class="pre">RecipeRecommender</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer"><code class="docutils literal notranslate"><span class="pre">SeasonCorrelationAnalyzer</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Frontend.pages.Page_techniques.TechniquePage"><code class="docutils literal notranslate"><span class="pre">TechniquePage</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#fun-facts">fun_facts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Frontend.pages.Page_reviews">Page_reviews</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Frontend.pages.Page_reviews.page_plot"><code class="docutils literal notranslate"><span class="pre">page_plot</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Frontend.pages.Page_reviews.page_review"><code class="docutils literal notranslate"><span class="pre">page_review</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Frontend.pages.Page_reviews.page_streamlit"><code class="docutils literal notranslate"><span class="pre">page_streamlit</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -177,9 +182,238 @@ List[List[int]]: A list of binary lists indicating the presence of techniques fo
 </section>
 <section id="module-src.processing_data">
 <span id="processing-data"></span><h4>processing_data<a class="headerlink" href="#module-src.processing_data" title="Link to this heading"></a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.processing_data.DataProcess">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.processing_data.</span></span><span class="sig-name descname"><span class="pre">DataProcess</span></span><a class="reference internal" href="_modules/src/processing_data.html#DataProcess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.processing_data.DataProcess" title="Link to this definition"></a></dt>
+<dd><p>Class pour data process</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.processing_data.DataProcess.calculate_seasons">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate_seasons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contigency_table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_season_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Series</span></span></span><a class="reference internal" href="_modules/src/processing_data.html#DataProcess.calculate_seasons"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.processing_data.DataProcess.calculate_seasons" title="Link to this definition"></a></dt>
+<dd><p>Assign the season for each id.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.processing_data.DataProcess.weigthed_ratings_recipe">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weigthed_ratings_recipe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/src/processing_data.html#DataProcess.weigthed_ratings_recipe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.processing_data.DataProcess.weigthed_ratings_recipe" title="Link to this definition"></a></dt>
+<dd><p>Calculate weighted ratings for recipes based on the log(number of comments for a recipe).
+:returns: Recipe data with weighted ratings added.
+:rtype: pd.DataFrame</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.processing_data.PreprocessingData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.processing_data.</span></span><span class="sig-name descname"><span class="pre">PreprocessingData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/processing_data.html#PreprocessingData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.processing_data.PreprocessingData" title="Link to this definition"></a></dt>
+<dd><p>Class pour clean la data</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.processing_data.PreprocessingData.load_data">
+<span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">DataFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/src/processing_data.html#PreprocessingData.load_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.processing_data.PreprocessingData.load_data" title="Link to this definition"></a></dt>
+<dd><p>Loads interaction and recipe data from raw CSV files.
+:returns: tuple[pd.DataFrame, pd.DataFrame]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.processing_data.PreprocessingData.preprocess_data">
+<span class="sig-name descname"><span class="pre">preprocess_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/src/processing_data.html#PreprocessingData.preprocess_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.processing_data.PreprocessingData.preprocess_data" title="Link to this definition"></a></dt>
+<dd><p>Processes the interaction and recipe data:
+- Transforms dates.
+- Filters and assigns seasons.
+- Calculates ratings and weighted ratings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Processed recipe DataFrame with additional columns.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.processing_data.PreprocessingData.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/processing_data.html#PreprocessingData.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.processing_data.PreprocessingData.run" title="Link to this definition"></a></dt>
+<dd><p>Executes the pipeline:
+- Loads data.
+- Processes the data.
+- Saves only the added colonnes of the processed data as a pickle.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.processing_data.PreprocessingData.save_processed_data">
+<span class="sig-name descname"><span class="pre">save_processed_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recipe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/processing_data.html#PreprocessingData.save_processed_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.processing_data.PreprocessingData.save_processed_data" title="Link to this definition"></a></dt>
+<dd><p>Saves the processed recipe data to the specified output path as a pickle file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.processing_data.SeasonHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.processing_data.</span></span><span class="sig-name descname"><span class="pre">SeasonHandler</span></span><a class="reference internal" href="_modules/src/processing_data.html#SeasonHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.processing_data.SeasonHandler" title="Link to this definition"></a></dt>
+<dd><p>Class pour déterminer la saison</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.processing_data.SeasonHandler.assign_season_date">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">assign_season_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Timestamp</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/src/processing_data.html#SeasonHandler.assign_season_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.processing_data.SeasonHandler.assign_season_date" title="Link to this definition"></a></dt>
+<dd><p>Assign a season to a specific date.
+:returns: The season corresponding to the date.
+:rtype: str</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.processing_data.SeasonHandler.contingency_table">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">contingency_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recipe_season_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/src/processing_data.html#SeasonHandler.contingency_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.processing_data.SeasonHandler.contingency_table" title="Link to this definition"></a></dt>
+<dd><p>Create a contingency table from recipe season counts.
+:returns: Contingency table.
+:rtype: pd.DataFrame</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.processing_data.SeasonHandler.create_season">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_season</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Timestamp</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Timestamp</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Timestamp</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Timestamp</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/src/processing_data.html#SeasonHandler.create_season"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.processing_data.SeasonHandler.create_season" title="Link to this definition"></a></dt>
+<dd><p>Create seasonal boundaries based on the year.
+:returns: A tuple containing the start dates of Spring, Summer, Fall, and Winter.
+:rtype: tuple</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.processing_data.SeasonHandler.determine_max_season">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">determine_max_season</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_season_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/src/processing_data.html#SeasonHandler.determine_max_season"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.processing_data.SeasonHandler.determine_max_season" title="Link to this definition"></a></dt>
+<dd><p>Determine the most likely season for a row based on maximum value,
+and if their are multiple maximum values take the season corresponding to submitted recipe.
+:returns: The determined season.
+:rtype: str</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.processing_data.SeasonHandler.modified_frequency">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">modified_frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contingency_table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/src/processing_data.html#SeasonHandler.modified_frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.processing_data.SeasonHandler.modified_frequency" title="Link to this definition"></a></dt>
+<dd><p>Modify the frequency table by squaring values and normalizing them.
+:returns: Modified contingency table with normalized values.
+:rtype: pd.DataFrame</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="cursor">
-<h4>cursor<a class="headerlink" href="#cursor" title="Link to this heading"></a></h4>
+<section id="module-src.temps_de_cuisson">
+<span id="temps-de-cuisson"></span><h4>temps_de_cuisson<a class="headerlink" href="#module-src.temps_de_cuisson" title="Link to this heading"></a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.temps_de_cuisson.Page_temps_de_cuisson">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.temps_de_cuisson.</span></span><span class="sig-name descname"><span class="pre">Page_temps_de_cuisson</span></span><a class="reference internal" href="_modules/src/temps_de_cuisson.html#Page_temps_de_cuisson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.temps_de_cuisson.Page_temps_de_cuisson" title="Link to this definition"></a></dt>
+<dd><p>Classe pour définir la page temps de cuisson
+pas d’attributs</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.temps_de_cuisson.Page_temps_de_cuisson.boxplot">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">boxplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionnaire_minutes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/temps_de_cuisson.html#Page_temps_de_cuisson.boxplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.temps_de_cuisson.Page_temps_de_cuisson.boxplot" title="Link to this definition"></a></dt>
+<dd><p>Fonction qui trace le boxplot des temps de cuisson</p>
+<p>Reçoit le dictionnaire {id : temps de cuisson} et plot le boxplot répartition des temps de cuisson</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.temps_de_cuisson.Page_temps_de_cuisson.df_to_pickle">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">df_to_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_pivot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_pickle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/src/temps_de_cuisson.html#Page_temps_de_cuisson.df_to_pickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.temps_de_cuisson.Page_temps_de_cuisson.df_to_pickle" title="Link to this definition"></a></dt>
+<dd><p>Fonction pour envoyer le dataframe réduit, utilisé pour le camembert interactif, vers un .pkl
+reçoit en entrée : un dataframe et un chemin vers le pickle où sauvegarder le df</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.temps_de_cuisson.Page_temps_de_cuisson.dictionnaire_minutes">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dictionnaire_minutes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/src/temps_de_cuisson.html#Page_temps_de_cuisson.dictionnaire_minutes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.temps_de_cuisson.Page_temps_de_cuisson.dictionnaire_minutes" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Fonction qui créé le dictionnaire_minutes</dt><dd><dl class="simple">
+<dt>en entrée<span class="classifier">- un vecteur des temps de cuisson</span></dt><dd><ul class="simple">
+<li><p>un vecteur des ids correspondants</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.temps_de_cuisson.Page_temps_de_cuisson.filtre_minutes">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filtre_minutes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionnaire_minutes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/src/temps_de_cuisson.html#Page_temps_de_cuisson.filtre_minutes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.temps_de_cuisson.Page_temps_de_cuisson.filtre_minutes" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Fonction qui filtre le dictionnaire pour enlever les valeurs extrêmes</dt><dd><p>reçoit en entrée : - un dictionnaire dictionnaire_minutes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.temps_de_cuisson.Page_temps_de_cuisson.generate_camemberts_significatifs">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_camemberts_significatifs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/src/temps_de_cuisson.html#Page_temps_de_cuisson.generate_camemberts_significatifs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.temps_de_cuisson.Page_temps_de_cuisson.generate_camemberts_significatifs" title="Link to this definition"></a></dt>
+<dd><p>Fonction pour générer les 5 camemberts significatifs
+reçoit en entrée : un dataframe et un chemin vers la sortie .pkl</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.temps_de_cuisson.Page_temps_de_cuisson.generate_cursor_dataframe">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_cursor_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/src/temps_de_cuisson.html#Page_temps_de_cuisson.generate_cursor_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.temps_de_cuisson.Page_temps_de_cuisson.generate_cursor_dataframe" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Fonction pour créer le camembert interactif, avec le curseur</dt><dd><p>reçoit en entrée : un dataframe pandas</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.temps_de_cuisson.Page_temps_de_cuisson.generate_pickles_temps_de_cuisson">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_pickles_temps_de_cuisson</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/temps_de_cuisson.html#Page_temps_de_cuisson.generate_pickles_temps_de_cuisson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.temps_de_cuisson.Page_temps_de_cuisson.generate_pickles_temps_de_cuisson" title="Link to this definition"></a></dt>
+<dd><p>Génère les pickles de temps de cuisson</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.temps_de_cuisson.Page_temps_de_cuisson.get_name_top_by_interval_season">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_name_top_by_interval_season</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionnaire</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/src/temps_de_cuisson.html#Page_temps_de_cuisson.get_name_top_by_interval_season"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.temps_de_cuisson.Page_temps_de_cuisson.get_name_top_by_interval_season" title="Link to this definition"></a></dt>
+<dd><p>Fonction qui prend en entrée notre dictionnaire conçu à top_by_interval_season,
+et qui renvoie le dictionnaire avec comme values les noms des recettes</p>
+<dl class="simple">
+<dt>reçoit en entrée<span class="classifier">- un dictionnaire</span></dt><dd><ul class="simple">
+<li><p>un dataframe</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.temps_de_cuisson.Page_temps_de_cuisson.get_vectors">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_vectors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/src/temps_de_cuisson.html#Page_temps_de_cuisson.get_vectors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.temps_de_cuisson.Page_temps_de_cuisson.get_vectors" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Fonction qui extrait le dataframe pandas et renvoie les 2 vecteurs ids et temps de cuisson (vector = vecteur temps de cuisson, vector_id = vecteur des ids)</dt><dd><p>en entrée : - un dataframe pandas</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.temps_de_cuisson.Page_temps_de_cuisson.ids_to_name">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ids_to_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/src/temps_de_cuisson.html#Page_temps_de_cuisson.ids_to_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.temps_de_cuisson.Page_temps_de_cuisson.ids_to_name" title="Link to this definition"></a></dt>
+<dd><p>Fonction qui prend en entrée la liste des ids des recettes et renvoit la liste des recettes
+reçoit en entrée : une liste et un dataframe</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.temps_de_cuisson.Page_temps_de_cuisson.top_by_interval_season">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">top_by_interval_season</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/src/temps_de_cuisson.html#Page_temps_de_cuisson.top_by_interval_season"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.temps_de_cuisson.Page_temps_de_cuisson.top_by_interval_season" title="Link to this definition"></a></dt>
+<dd><p>Fonction qui créé un dictionnaire, regroupant les top 10 des recettes par saison et par intervalle
+reçoit en entrée : - un dataframe</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.temps_de_cuisson.Page_temps_de_cuisson.top_liste">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">top_liste</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionnaire</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/src/temps_de_cuisson.html#Page_temps_de_cuisson.top_liste"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.temps_de_cuisson.Page_temps_de_cuisson.top_liste" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Fonction qui créé le top des ids par temps de cuisson</dt><dd><p>Prend en entrée un dictionnaire_minutes, et renvoie la liste des ids triée, le temps de cuisson le plus élevé à son id en première position</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.temps_de_cuisson.generate_accurate_df">
+<span class="sig-prename descclassname"><span class="pre">src.temps_de_cuisson.</span></span><span class="sig-name descname"><span class="pre">generate_accurate_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'data/raw/RAW_recipes.csv'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/src/temps_de_cuisson.html#generate_accurate_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.temps_de_cuisson.generate_accurate_df" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Fonction qui rajoute les colonnes ‘minutes’, ‘name’ et ‘intervalle au df</dt><dd><p>en entrée : - un dataframe pandas</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 </section>
 <section id="utils">
@@ -274,6 +508,88 @@ To note: we could modify to dt.date since the hours, minutes and secondes is not
 </dd></dl>
 
 </section>
+<section id="module-utils.Classe_pickle">
+<span id="classe-pickle"></span><h4>Classe_pickle<a class="headerlink" href="#module-utils.Classe_pickle" title="Link to this heading"></a></h4>
+<dl class="py class">
+<dt class="sig sig-object py" id="utils.Classe_pickle.CamembertDisplay">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utils.Classe_pickle.</span></span><span class="sig-name descname"><span class="pre">CamembertDisplay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pkl_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/Classe_pickle.html#CamembertDisplay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Classe_pickle.CamembertDisplay" title="Link to this definition"></a></dt>
+<dd><p>Classe pour les dataframes pour camemberts</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utils.Classe_pickle.CamembertDisplay.load_dataframe">
+<span class="sig-name descname"><span class="pre">load_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enable_fillna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/Classe_pickle.html#CamembertDisplay.load_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Classe_pickle.CamembertDisplay.load_dataframe" title="Link to this definition"></a></dt>
+<dd><p>Charge un DataFrame à partir du fichier .pkl.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utils.Classe_pickle.CamembertDisplay.plot_interactive_pie_chart">
+<span class="sig-name descname"><span class="pre">plot_interactive_pie_chart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slider_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Sélectionner</span> <span class="pre">un</span> <span class="pre">temps</span> <span class="pre">de</span> <span class="pre">cuisson</span> <span class="pre">(en</span> <span class="pre">min)'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Camembert</span> <span class="pre">interactif</span> <span class="pre">par</span> <span class="pre">intervalle'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/Classe_pickle.html#CamembertDisplay.plot_interactive_pie_chart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Classe_pickle.CamembertDisplay.plot_interactive_pie_chart" title="Link to this definition"></a></dt>
+<dd><p>Affiche un camembert interactif en fonction d’une valeur sélectionnée via un curseur.
+Args:
+data_columns (list): Liste des colonnes contenant les données pour le camembert (ex. [‘Spring_%’, ‘Winter_%’, …]).
+label_names (list): Liste des labels correspondants (ex. [‘Spring’, ‘Winter’, …]).
+slider_label (str): Texte affiché pour le curseur.
+title (str): Titre pour le camembert.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utils.Classe_pickle.CamembertDisplay.plot_pie_charts_2">
+<span class="sig-name descname"><span class="pre">plot_pie_charts_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/Classe_pickle.html#CamembertDisplay.plot_pie_charts_2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Classe_pickle.CamembertDisplay.plot_pie_charts_2" title="Link to this definition"></a></dt>
+<dd><p>Trace des camemberts pour chaque ligne du DataFrame.
+Args:
+- data_columns (list): Liste des colonnes à utiliser pour les données (ex: [‘Printemps_%’, ‘Hiver_%’, ‘Ete_%’, ‘Automne_%’]).
+- label_names (list): Liste des labels correspondants (ex: [‘Printemps’, ‘Hiver’, ‘Été’, ‘Automne’]).
+- title (str): Titre global pour la section Streamlit.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="utils.Classe_pickle.DictionnaireDisplay">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utils.Classe_pickle.</span></span><span class="sig-name descname"><span class="pre">DictionnaireDisplay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pkl_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/Classe_pickle.html#DictionnaireDisplay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Classe_pickle.DictionnaireDisplay" title="Link to this definition"></a></dt>
+<dd><p>Classe pour les dictionnaires pour tableaux</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="utils.Classe_pickle.DictionnaireDisplay.afficher_tops_par_intervalle">
+<span class="sig-name descname"><span class="pre">afficher_tops_par_intervalle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">intervalle_choisi</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/Classe_pickle.html#DictionnaireDisplay.afficher_tops_par_intervalle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Classe_pickle.DictionnaireDisplay.afficher_tops_par_intervalle" title="Link to this definition"></a></dt>
+<dd><p>Affiche les tops 10 recettes par saison pour un intervalle donné dans Streamlit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>intervalle_choisi</strong> – Intervalle pour lequel afficher les recettes (par exemple : 10, 30, 60, etc.)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="utils.Classe_pickle.DictionnaireDisplay.load_dictionnaire">
+<span class="sig-name descname"><span class="pre">load_dictionnaire</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/Classe_pickle.html#DictionnaireDisplay.load_dictionnaire"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Classe_pickle.DictionnaireDisplay.load_dictionnaire" title="Link to this definition"></a></dt>
+<dd><p>Charge le dictionnaire à partir du fichier pickle spécifié dans self.pkl_path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Le dictionnaire chargé.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="utils.Classe_pickle.Display">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utils.Classe_pickle.</span></span><span class="sig-name descname"><span class="pre">Display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pkl_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/Classe_pickle.html#Display"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Classe_pickle.Display" title="Link to this definition"></a></dt>
+<dd><p>Classe générique pour tous les .pkl
+attributs : quel page, quel chemin</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="utils.Classe_pickle.HistogramDisplay">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">utils.Classe_pickle.</span></span><span class="sig-name descname"><span class="pre">HistogramDisplay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pkl_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/Classe_pickle.html#HistogramDisplay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Classe_pickle.HistogramDisplay" title="Link to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="utils.Classe_pickle.HistogramDisplay.load_dataframe">
+<span class="sig-name descname"><span class="pre">load_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enable_fillna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/Classe_pickle.html#HistogramDisplay.load_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Classe_pickle.HistogramDisplay.load_dataframe" title="Link to this definition"></a></dt>
+<dd><p>Charge un DataFrame à partir du fichier .pkl.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 </section>
 </section>
 <section id="frontend">
@@ -281,11 +597,8 @@ To note: we could modify to dt.date since the hours, minutes and secondes is not
 <section id="module-Frontend.Accueil">
 <span id="accueil"></span><h3>Accueil<a class="headerlink" href="#module-Frontend.Accueil" title="Link to this heading"></a></h3>
 </section>
-<section id="id1">
-<h3>cursor<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
-</section>
 <section id="module-Frontend.pages.Page_techniques">
-<span id="techniques"></span><h3>techniques<a class="headerlink" href="#module-Frontend.pages.Page_techniques" title="Link to this heading"></a></h3>
+<span id="page-techniques-py"></span><h3>Page_techniques.py<a class="headerlink" href="#module-Frontend.pages.Page_techniques" title="Link to this heading"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="Frontend.pages.Page_techniques.RecipeRecommender">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Frontend.pages.Page_techniques.</span></span><span class="sig-name descname"><span class="pre">RecipeRecommender</span></span><a class="reference internal" href="_modules/Frontend/pages/Page_techniques.html#RecipeRecommender"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Frontend.pages.Page_techniques.RecipeRecommender" title="Link to this definition"></a></dt>
@@ -348,8 +661,58 @@ Tuple[Optional[str], Optional[float]]: The season and the correlation value, or 
 </dd></dl>
 
 </section>
-<section id="fun-facts">
-<h3>fun_facts<a class="headerlink" href="#fun-facts" title="Link to this heading"></a></h3>
+<section id="module-Frontend.pages.Page_reviews">
+<span id="page-reviews"></span><h3>Page_reviews<a class="headerlink" href="#module-Frontend.pages.Page_reviews" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="Frontend.pages.Page_reviews.page_plot">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Frontend.pages.Page_reviews.</span></span><span class="sig-name descname"><span class="pre">page_plot</span></span><a class="reference internal" href="_modules/Frontend/pages/Page_reviews.html#page_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Frontend.pages.Page_reviews.page_plot" title="Link to this definition"></a></dt>
+<dd><p>Class page_plot to call when one want to plot schema directly on the streamlit page.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Frontend.pages.Page_reviews.page_plot.plot_histogram_for_recipe">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plot_histogram_for_recipe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipe_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/Frontend/pages/Page_reviews.html#page_plot.plot_histogram_for_recipe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Frontend.pages.Page_reviews.page_plot.plot_histogram_for_recipe" title="Link to this definition"></a></dt>
+<dd><p>Plots a histogram for a specific recipe showing the number of reviews by year.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Frontend.pages.Page_reviews.page_plot.plot_season_percentage_pie">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plot_season_percentage_pie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/Frontend/pages/Page_reviews.html#page_plot.plot_season_percentage_pie"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Frontend.pages.Page_reviews.page_plot.plot_season_percentage_pie" title="Link to this definition"></a></dt>
+<dd><p>Calculates and displays a pie chart of season percentages for a specific year.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Frontend.pages.Page_reviews.page_review">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Frontend.pages.Page_reviews.</span></span><span class="sig-name descname"><span class="pre">page_review</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Frontend/pages/Page_reviews.html#page_review"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Frontend.pages.Page_reviews.page_review" title="Link to this definition"></a></dt>
+<dd><p>The class page_review manages the Streamlit page for analyzing recipe reviews.</p>
+<p>This class facilitates an interactive dashboard that enables users to explore:
+- The temporal distribution of comments (reviews) for recipes.
+- The relationship between the number of comments and recipe usage across years.
+- Seasonal associations of recipes based on the timing of their reviews.</p>
+<p>It leverages Streamlit functionalities to provide visualizations such as:
+- An annual histogram of reviews.
+- Pie charts showing seasonal distributions.
+- Interactive filters for recipes based on review counts and popularity.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Frontend.pages.Page_reviews.page_review.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/Frontend/pages/Page_reviews.html#page_review.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Frontend.pages.Page_reviews.page_review.run" title="Link to this definition"></a></dt>
+<dd><p>Runs the fonctions of the page_review class.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Frontend.pages.Page_reviews.page_streamlit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Frontend.pages.Page_reviews.</span></span><span class="sig-name descname"><span class="pre">page_streamlit</span></span><a class="reference internal" href="_modules/Frontend/pages/Page_reviews.html#page_streamlit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Frontend.pages.Page_reviews.page_streamlit" title="Link to this definition"></a></dt>
+<dd><p>Class page_streamlit to take care of all the methods related to modifying information on the streamlit page.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Frontend.pages.Page_reviews.page_streamlit.load_image">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">caption</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Frontend/pages/Page_reviews.html#page_streamlit.load_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Frontend.pages.Page_reviews.page_streamlit.load_image" title="Link to this definition"></a></dt>
+<dd><p>Load the image on the page</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 </section>
 </section>

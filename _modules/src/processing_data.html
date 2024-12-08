@@ -1,0 +1,411 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.processing_data &mdash; KIT_BIG_DATA_MS2025 v1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5cb08e4e"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            KIT_BIG_DATA_MS2025
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Présentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">KIT_BIG_DATA_MS 2025</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API_doc.html">API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../API_doc.html#backend">Backend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#script-pour-les-pages">Script pour les pages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-src.technique">technique</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-src.processing_data">processing_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-src.temps_de_cuisson">temps_de_cuisson</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#utils">utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-utils.file_manager">file_manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-utils.data_processor">data_processor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-utils.Classe_pickle">Classe_pickle</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../API_doc.html#frontend">Frontend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#module-Frontend.Accueil">Accueil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#module-Frontend.pages.Page_techniques">Page_techniques.py</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_techniques.RecipeRecommender"><code class="docutils literal notranslate"><span class="pre">RecipeRecommender</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer"><code class="docutils literal notranslate"><span class="pre">SeasonCorrelationAnalyzer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_techniques.TechniquePage"><code class="docutils literal notranslate"><span class="pre">TechniquePage</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#module-Frontend.pages.Page_reviews">Page_reviews</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_reviews.page_plot"><code class="docutils literal notranslate"><span class="pre">page_plot</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_reviews.page_review"><code class="docutils literal notranslate"><span class="pre">page_review</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_reviews.page_streamlit"><code class="docutils literal notranslate"><span class="pre">page_streamlit</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../py-modindex.html">Module Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">KIT_BIG_DATA_MS2025</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">src.processing_data</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for src.processing_data</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1">#---------------------------------------------------------------</span>
+
+<span class="c1"># import classes from utils</span>
+<span class="kn">from</span> <span class="nn">utils.file_manager</span> <span class="kn">import</span> <span class="n">DataHandler</span>
+<span class="kn">from</span> <span class="nn">utils.data_processor</span> <span class="kn">import</span> <span class="n">DataProcessor</span>
+
+<span class="n">ABSOLUTE_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+
+<span class="c1">#---------------------------------------------------------------</span>
+<span class="c1">### Create class here just to organise ###</span>
+<span class="c1"># We should now use the static method for this</span>
+<span class="c1">#--------------------------</span>
+<span class="c1">#--------------------------</span>
+<div class="viewcode-block" id="SeasonHandler">
+<a class="viewcode-back" href="../../API_doc.html#src.processing_data.SeasonHandler">[docs]</a>
+<span class="k">class</span> <span class="nc">SeasonHandler</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class pour déterminer la saison&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="SeasonHandler.create_season">
+<a class="viewcode-back" href="../../API_doc.html#src.processing_data.SeasonHandler.create_season">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create_season</span><span class="p">(</span><span class="n">year</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create seasonal boundaries based on the year.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: A tuple containing the start dates of Spring, Summer, Fall, and Winter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">spring</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
+        <span class="n">summer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
+        <span class="n">fall</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
+        <span class="n">winter</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">spring</span><span class="p">,</span> <span class="n">summer</span><span class="p">,</span> <span class="n">fall</span><span class="p">,</span> <span class="n">winter</span></div>
+
+
+<div class="viewcode-block" id="SeasonHandler.assign_season_date">
+<a class="viewcode-back" href="../../API_doc.html#src.processing_data.SeasonHandler.assign_season_date">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">assign_season_date</span><span class="p">(</span><span class="n">date</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assign a season to a specific date.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The season corresponding to the date.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">spring</span><span class="p">,</span> <span class="n">summer</span><span class="p">,</span> <span class="n">fall</span><span class="p">,</span> <span class="n">winter</span> <span class="o">=</span> <span class="n">SeasonHandler</span><span class="o">.</span><span class="n">create_season</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">spring</span> <span class="o">&lt;=</span> <span class="n">date</span> <span class="o">&lt;</span> <span class="n">summer</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Spring&#39;</span>
+        <span class="k">elif</span> <span class="n">summer</span> <span class="o">&lt;=</span> <span class="n">date</span> <span class="o">&lt;</span> <span class="n">fall</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Summer&#39;</span>
+        <span class="k">elif</span> <span class="n">fall</span> <span class="o">&lt;=</span> <span class="n">date</span> <span class="o">&lt;</span> <span class="n">winter</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Fall&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Winter&#39;</span></div>
+
+
+<div class="viewcode-block" id="SeasonHandler.modified_frequency">
+<a class="viewcode-back" href="../../API_doc.html#src.processing_data.SeasonHandler.modified_frequency">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">modified_frequency</span><span class="p">(</span><span class="n">contingency_table</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Modify the frequency table by squaring values and normalizing them.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            pd.DataFrame: Modified contingency table with normalized values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">number_total_recipe_id</span> <span class="o">=</span> <span class="n">contingency_table</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">contingency_table</span> <span class="o">=</span> <span class="n">contingency_table</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">contingency_table</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">number_total_recipe_id</span><span class="p">)</span>
+        <span class="n">freq_contingency_table</span> <span class="o">=</span> <span class="n">contingency_table</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">contingency_table</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">freq_contingency_table</span></div>
+
+
+<div class="viewcode-block" id="SeasonHandler.contingency_table">
+<a class="viewcode-back" href="../../API_doc.html#src.processing_data.SeasonHandler.contingency_table">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">contingency_table</span><span class="p">(</span><span class="n">recipe_season_count</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a contingency table from recipe season counts.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            pd.DataFrame: Contingency table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">recipe_season_count</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">recipe_season_count</span><span class="p">[</span><span class="s1">&#39;season&#39;</span><span class="p">],</span> 
+                           <span class="n">values</span><span class="o">=</span><span class="n">recipe_season_count</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="SeasonHandler.determine_max_season">
+<a class="viewcode-back" href="../../API_doc.html#src.processing_data.SeasonHandler.determine_max_season">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">determine_max_season</span><span class="p">(</span><span class="n">row</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">id_season_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">id_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Determine the most likely season for a row based on maximum value,</span>
+<span class="sd">        and if their are multiple maximum values take the season corresponding to submitted recipe.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The determined season.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">max_value</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">is_close</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">max_value</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">tolerance</span><span class="p">)</span>
+        <span class="n">max_seasons</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">is_close</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">max_seasons</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> 
+            <span class="c1"># get id season</span>
+            <span class="n">id_season</span> <span class="o">=</span> <span class="n">id_season_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">id_value</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="c1"># Compare with weither in max_season. If not random.</span>
+            <span class="k">if</span> <span class="n">id_season</span> <span class="ow">in</span> <span class="n">max_seasons</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">id_season</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">max_seasons</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">max_seasons</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+</div>
+
+    
+<span class="c1">#--------------------------</span>
+<div class="viewcode-block" id="DataProcess">
+<a class="viewcode-back" href="../../API_doc.html#src.processing_data.DataProcess">[docs]</a>
+<span class="k">class</span> <span class="nc">DataProcess</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class pour data process&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="DataProcess.weigthed_ratings_recipe">
+<a class="viewcode-back" href="../../API_doc.html#src.processing_data.DataProcess.weigthed_ratings_recipe">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">weigthed_ratings_recipe</span><span class="p">(</span><span class="n">interaction</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">recipe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate weighted ratings for recipes based on the log(number of comments for a recipe).</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            pd.DataFrame: Recipe data with weighted ratings added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># création of column weigth</span>
+        <span class="n">interaction_counts</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">interaction</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">size</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+        
+        <span class="n">interaction_counts</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">interaction_counts</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">])</span>
+        
+        <span class="c1"># Multiplier directement rating par weight lors du mappage</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="s1">&#39;weighted_rating&#39;</span>
+        <span class="n">recipe</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">recipe</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">recipe</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">interaction_counts</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)[</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
+        <span class="c1"># Remmetre ça sur 5 pour que ce soit des notations que l&#39;on connaisse.</span>
+        <span class="k">return</span> <span class="n">DataProcessor</span><span class="o">.</span><span class="n">scale_column_to_range</span><span class="p">(</span><span class="n">recipe</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">target_max</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="DataProcess.calculate_seasons">
+<a class="viewcode-back" href="../../API_doc.html#src.processing_data.DataProcess.calculate_seasons">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">calculate_seasons</span><span class="p">(</span><span class="n">contigency_table</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">id_season_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">recipe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Assign the season for each id.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Crée une colonne pondérée</span>
+        <span class="k">return</span> <span class="n">recipe</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">contigency_table</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">SeasonHandler</span><span class="o">.</span><span class="n">determine_max_season</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">id_season_dict</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">))</span></div>
+</div>
+
+
+<span class="c1">#---------------------------------------------------------------</span>
+<span class="c1">### Pipeline of Preprocessing the Data ###</span>
+<span class="c1">#--------------------------</span>
+<div class="viewcode-block" id="PreprocessingData">
+<a class="viewcode-back" href="../../API_doc.html#src.processing_data.PreprocessingData">[docs]</a>
+<span class="k">class</span> <span class="nc">PreprocessingData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class pour clean la data&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the PreprocessingData class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">=</span> <span class="n">folder_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_path</span> <span class="o">=</span> <span class="n">output_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
+
+<div class="viewcode-block" id="PreprocessingData.load_data">
+<a class="viewcode-back" href="../../API_doc.html#src.processing_data.PreprocessingData.load_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loads interaction and recipe data from raw CSV files.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple[pd.DataFrame, pd.DataFrame]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">csv_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">file</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*.csv&#39;</span><span class="p">)]</span>
+        <span class="n">raw_data</span> <span class="o">=</span> <span class="n">DataHandler</span><span class="o">.</span><span class="n">read_raw_files</span><span class="p">(</span><span class="n">csv_files</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">interaction</span> <span class="o">=</span> <span class="n">DataHandler</span><span class="o">.</span><span class="n">get_next_item</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">recipe</span> <span class="o">=</span> <span class="n">DataHandler</span><span class="o">.</span><span class="n">get_next_item</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">interaction</span><span class="p">,</span> <span class="n">recipe</span></div>
+
+
+<div class="viewcode-block" id="PreprocessingData.preprocess_data">
+<a class="viewcode-back" href="../../API_doc.html#src.processing_data.PreprocessingData.preprocess_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">preprocess_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interaction</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">recipe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Processes the interaction and recipe data:</span>
+<span class="sd">        - Transforms dates.</span>
+<span class="sd">        - Filters and assigns seasons.</span>
+<span class="sd">        - Calculates ratings and weighted ratings.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Processed recipe DataFrame with additional columns.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Transform dates</span>
+        <span class="n">interaction</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataProcessor</span><span class="o">.</span><span class="n">transform_date</span><span class="p">(</span><span class="n">interaction</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+        <span class="n">recipe</span><span class="p">[</span><span class="s1">&#39;submitted&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataProcessor</span><span class="o">.</span><span class="n">transform_date</span><span class="p">(</span><span class="n">recipe</span><span class="p">[</span><span class="s1">&#39;submitted&#39;</span><span class="p">])</span>
+
+        <span class="c1"># Rename interaction column</span>
+        <span class="n">interaction</span> <span class="o">=</span> <span class="n">interaction</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;recipe_id&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">})</span>
+
+        <span class="c1"># Assign seasons and Filter data</span>
+        <span class="n">interaction</span><span class="p">[</span><span class="s1">&#39;season&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">interaction</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">SeasonHandler</span><span class="o">.</span><span class="n">assign_season_date</span><span class="p">)</span>
+        <span class="n">recipe_count</span> <span class="o">=</span> <span class="n">DataProcessor</span><span class="o">.</span><span class="n">filter_data</span><span class="p">(</span><span class="n">interaction</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">,</span> <span class="n">filter_count</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        
+        <span class="c1"># refactor for recipe and interaction of origin</span>
+        <span class="n">recipe</span> <span class="o">=</span> <span class="n">recipe</span><span class="p">[</span><span class="n">recipe</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">recipe_count</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])]</span>
+        <span class="n">interaction</span> <span class="o">=</span> <span class="n">interaction</span><span class="p">[</span><span class="n">interaction</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">recipe_count</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])]</span>
+    
+        <span class="n">recipe_season_count</span> <span class="o">=</span> <span class="n">DataProcessor</span><span class="o">.</span><span class="n">filter_data</span><span class="p">(</span><span class="n">interaction</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;season&#39;</span><span class="p">])</span>
+        <span class="n">contigency_table</span> <span class="o">=</span> <span class="n">SeasonHandler</span><span class="o">.</span><span class="n">contingency_table</span><span class="p">(</span><span class="n">recipe_season_count</span><span class="p">)</span>
+        <span class="n">contigency_table</span> <span class="o">=</span> <span class="n">SeasonHandler</span><span class="o">.</span><span class="n">modified_frequency</span><span class="p">(</span><span class="n">contigency_table</span><span class="p">)</span>
+
+        <span class="c1"># To keep track of publication date</span>
+        <span class="n">id_date_df</span> <span class="o">=</span> <span class="n">recipe</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;submitted&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">id_date_df</span><span class="p">[</span><span class="s1">&#39;submitted&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">id_date_df</span><span class="p">[</span><span class="s1">&#39;submitted&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">SeasonHandler</span><span class="o">.</span><span class="n">assign_season_date</span><span class="p">)</span>
+        <span class="n">id_season_dict</span> <span class="o">=</span> <span class="n">id_date_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)[</span><span class="s1">&#39;submitted&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+        
+        <span class="c1"># Assign max season</span>
+        <span class="n">recipe</span><span class="p">[</span><span class="s1">&#39;season&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataProcess</span><span class="o">.</span><span class="n">calculate_seasons</span><span class="p">(</span><span class="n">contigency_table</span><span class="p">,</span> <span class="n">id_season_dict</span><span class="p">,</span> <span class="n">recipe</span><span class="p">)</span>
+        <span class="c1"># Add average ratings</span>
+        <span class="n">recipe</span> <span class="o">=</span> <span class="n">DataProcessor</span><span class="o">.</span><span class="n">average_ratings_recipe</span><span class="p">(</span><span class="n">interaction</span><span class="p">,</span> <span class="n">recipe</span><span class="p">)</span>
+        
+        <span class="c1"># Add weighted ratings</span>
+        <span class="n">recipe</span> <span class="o">=</span> <span class="n">DataProcess</span><span class="o">.</span><span class="n">weigthed_ratings_recipe</span><span class="p">(</span><span class="n">interaction</span><span class="p">,</span> <span class="n">recipe</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">recipe</span></div>
+
+    
+<div class="viewcode-block" id="PreprocessingData.save_processed_data">
+<a class="viewcode-back" href="../../API_doc.html#src.processing_data.PreprocessingData.save_processed_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">save_processed_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recipe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves the processed recipe data to the specified output path as a pickle file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">DataHandler</span><span class="o">.</span><span class="n">save_file_as_pickle</span><span class="p">(</span><span class="n">recipe</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_path</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processed data saved to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">output_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PreprocessingData.run">
+<a class="viewcode-back" href="../../API_doc.html#src.processing_data.PreprocessingData.run">[docs]</a>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Executes the pipeline:</span>
+<span class="sd">        - Loads data.</span>
+<span class="sd">        - Processes the data.</span>
+<span class="sd">        - Saves only the added colonnes of the processed data as a pickle.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">interaction</span><span class="p">,</span> <span class="n">recipe</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">interaction</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">recipe</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Interaction or recipe data is missing.&quot;</span><span class="p">)</span>
+        
+        <span class="n">processed_recipe</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="p">(</span><span class="n">interaction</span><span class="p">,</span> <span class="n">recipe</span><span class="p">)</span>
+        <span class="n">processed_recipe</span> <span class="o">=</span> <span class="n">processed_recipe</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;season&#39;</span><span class="p">,</span> <span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;weighted_rating&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_processed_data</span><span class="p">(</span><span class="n">processed_recipe</span><span class="p">)</span></div>
+</div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">folder_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">ABSOLUTE_PATH</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;..&quot;</span> <span class="o">/</span> <span class="s2">&quot;..&quot;</span> <span class="o">/</span> <span class="s2">&quot;data&quot;</span> <span class="o">/</span> <span class="s2">&quot;raw&quot;</span>
+    <span class="n">output_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">ABSOLUTE_PATH</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;..&quot;</span> <span class="o">/</span> <span class="s2">&quot;..&quot;</span> <span class="o">/</span> <span class="s2">&quot;data&quot;</span> <span class="o">/</span> <span class="s2">&quot;preprocess&quot;</span> <span class="o">/</span> <span class="s2">&quot;recipe_filtered.pkl&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">folder_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">output_path</span><span class="p">)</span>
+    <span class="n">pipeline</span> <span class="o">=</span> <span class="n">PreprocessingData</span><span class="p">(</span><span class="n">folder_path</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Cecile LI, Josephine BERNARD, Dan HAYOUN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

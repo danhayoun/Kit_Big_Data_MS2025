@@ -52,26 +52,31 @@
 <li class="toctree-l3"><a class="reference internal" href="API_doc.html#script-pour-les-pages">Script pour les pages</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="API_doc.html#module-src.technique">technique</a></li>
 <li class="toctree-l4"><a class="reference internal" href="API_doc.html#module-src.processing_data">processing_data</a></li>
-<li class="toctree-l4"><a class="reference internal" href="API_doc.html#cursor">cursor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_doc.html#module-src.temps_de_cuisson">temps_de_cuisson</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="API_doc.html#utils">utils</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="API_doc.html#module-utils.file_manager">file_manager</a></li>
 <li class="toctree-l4"><a class="reference internal" href="API_doc.html#module-utils.data_processor">data_processor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_doc.html#module-utils.Classe_pickle">Classe_pickle</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="API_doc.html#frontend">Frontend</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="API_doc.html#module-Frontend.Accueil">Accueil</a></li>
-<li class="toctree-l3"><a class="reference internal" href="API_doc.html#id1">cursor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="API_doc.html#module-Frontend.pages.Page_techniques">techniques</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API_doc.html#module-Frontend.pages.Page_techniques">Page_techniques.py</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="API_doc.html#Frontend.pages.Page_techniques.RecipeRecommender"><code class="docutils literal notranslate"><span class="pre">RecipeRecommender</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="API_doc.html#Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer"><code class="docutils literal notranslate"><span class="pre">SeasonCorrelationAnalyzer</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="API_doc.html#Frontend.pages.Page_techniques.TechniquePage"><code class="docutils literal notranslate"><span class="pre">TechniquePage</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="API_doc.html#fun-facts">fun_facts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API_doc.html#module-Frontend.pages.Page_reviews">Page_reviews</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="API_doc.html#Frontend.pages.Page_reviews.page_plot"><code class="docutils literal notranslate"><span class="pre">page_plot</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_doc.html#Frontend.pages.Page_reviews.page_review"><code class="docutils literal notranslate"><span class="pre">page_review</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_doc.html#Frontend.pages.Page_reviews.page_streamlit"><code class="docutils literal notranslate"><span class="pre">page_streamlit</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -119,7 +124,21 @@
 <section id="installation">
 <span id="id1"></span><h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
 <p>Pour installer ce projet, suivez les étapes ci-dessous :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>poetry<span class="w"> </span>install
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-sSL<span class="w"> </span>https://install.python-poetry.org<span class="w"> </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="se">\&quot;</span><span class="nv">$HOME</span>/.local/bin:<span class="nv">$PATH</span><span class="se">\&quot;</span>
+poetry<span class="w"> </span>install
+</pre></div>
+</div>
+</section>
+<section id="utilisation">
+<h2>Utilisation<a class="headerlink" href="#utilisation" title="Link to this heading"></a></h2>
+<p>Pour lancer l’application Streamlit :</p>
+<p>Avec poetry :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>poetry<span class="w"> </span>run<span class="w"> </span>streamlit<span class="w"> </span>run<span class="w"> </span>Frontend/Accueil.py
+</pre></div>
+</div>
+<p>Sinon :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>streamlit<span class="w"> </span>run<span class="w"> </span>Frontend/Accueil.py
 </pre></div>
 </div>
 <div class="toctree-wrapper compound">

@@ -1,0 +1,457 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.temps_de_cuisson &mdash; KIT_BIG_DATA_MS2025 v1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5cb08e4e"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            KIT_BIG_DATA_MS2025
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Présentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">KIT_BIG_DATA_MS 2025</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API_doc.html">API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../API_doc.html#backend">Backend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#script-pour-les-pages">Script pour les pages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-src.technique">technique</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-src.processing_data">processing_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-src.temps_de_cuisson">temps_de_cuisson</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#utils">utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-utils.file_manager">file_manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-utils.data_processor">data_processor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-utils.Classe_pickle">Classe_pickle</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../API_doc.html#frontend">Frontend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#module-Frontend.Accueil">Accueil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#module-Frontend.pages.Page_techniques">Page_techniques.py</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_techniques.RecipeRecommender"><code class="docutils literal notranslate"><span class="pre">RecipeRecommender</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer"><code class="docutils literal notranslate"><span class="pre">SeasonCorrelationAnalyzer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_techniques.TechniquePage"><code class="docutils literal notranslate"><span class="pre">TechniquePage</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#module-Frontend.pages.Page_reviews">Page_reviews</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_reviews.page_plot"><code class="docutils literal notranslate"><span class="pre">page_plot</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_reviews.page_review"><code class="docutils literal notranslate"><span class="pre">page_review</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_reviews.page_streamlit"><code class="docutils literal notranslate"><span class="pre">page_streamlit</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../py-modindex.html">Module Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">KIT_BIG_DATA_MS2025</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">src.temps_de_cuisson</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for src.temps_de_cuisson</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">date</span>
+<span class="kn">import</span> <span class="nn">matplotlib.dates</span> <span class="k">as</span> <span class="nn">mdates</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">bisect</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span>
+
+
+<div class="viewcode-block" id="generate_accurate_df">
+<a class="viewcode-back" href="../../API_doc.html#src.temps_de_cuisson.generate_accurate_df">[docs]</a>
+<span class="k">def</span> <span class="nf">generate_accurate_df</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;data/raw/RAW_recipes.csv&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Fonction qui rajoute les colonnes &#39;minutes&#39;, &#39;name&#39; et &#39;intervalle au df</span>
+<span class="sd">        en entrée : - un dataframe pandas</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">recipes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>  <span class="c1"># ICI</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">recipes</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;minutes&#39;</span><span class="p">]],</span> <span class="n">df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+    <span class="n">liste_cook_times</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">121</span><span class="p">]</span>  <span class="c1"># Un peu mal dit mais bon</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;intervalle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Rajoute la colonne intervalle</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)):</span>
+        <span class="n">minutes</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;minutes&quot;</span><span class="p">]</span>  <span class="c1"># manière de remplacer une valeur dans une ligne du df</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="n">bisect</span><span class="o">.</span><span class="n">bisect_left</span><span class="p">(</span><span class="n">liste_cook_times</span><span class="p">,</span> <span class="n">minutes</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">position</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">liste_cook_times</span><span class="p">):</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;intervalle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">liste_cook_times</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;intervalle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">121</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<div class="viewcode-block" id="Page_temps_de_cuisson">
+<a class="viewcode-back" href="../../API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson">[docs]</a>
+<span class="k">class</span> <span class="nc">Page_temps_de_cuisson</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Classe pour définir la page temps de cuisson</span>
+<span class="sd">        pas d&#39;attributs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Page_temps_de_cuisson.get_vectors">
+<a class="viewcode-back" href="../../API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.get_vectors">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_vectors</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;  </span>
+<span class="sd">        Fonction qui extrait le dataframe pandas et renvoie les 2 vecteurs ids et temps de cuisson (vector = vecteur temps de cuisson, vector_id = vecteur des ids)</span>
+<span class="sd">            en entrée : - un dataframe pandas</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">times</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;minutes&#39;</span><span class="p">]</span>
+        <span class="n">ids</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+        <span class="n">vector_id</span> <span class="o">=</span> <span class="n">ids</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">vector</span> <span class="o">=</span> <span class="n">times</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">vector</span><span class="p">,</span> <span class="n">vector_id</span></div>
+
+
+<div class="viewcode-block" id="Page_temps_de_cuisson.dictionnaire_minutes">
+<a class="viewcode-back" href="../../API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.dictionnaire_minutes">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">dictionnaire_minutes</span><span class="p">(</span><span class="n">vector</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">vector_id</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Fonction qui créé le dictionnaire_minutes</span>
+<span class="sd">            en entrée : - un vecteur des temps de cuisson</span>
+<span class="sd">                        - un vecteur des ids correspondants</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dictionnaire_minutes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">vector_id</span><span class="p">:</span>
+            <span class="n">dictionnaire_minutes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">vector</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">dictionnaire_minutes</span></div>
+
+
+<div class="viewcode-block" id="Page_temps_de_cuisson.top_liste">
+<a class="viewcode-back" href="../../API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.top_liste">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">top_liste</span><span class="p">(</span><span class="n">dictionnaire</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Fonction qui créé le top des ids par temps de cuisson</span>
+<span class="sd">            Prend en entrée un dictionnaire_minutes, et renvoie la liste des ids triée, le temps de cuisson le plus élevé à son id en première position </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">top</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dictionnaire</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Liste des mots les plus utilisés</span>
+        <span class="k">return</span> <span class="n">top</span></div>
+
+
+<div class="viewcode-block" id="Page_temps_de_cuisson.boxplot">
+<a class="viewcode-back" href="../../API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.boxplot">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">boxplot</span><span class="p">(</span><span class="n">dictionnaire_minutes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Fonction qui trace le boxplot des temps de cuisson</span>
+
+<span class="sd">        Reçoit le dictionnaire {id : temps de cuisson} et plot le boxplot répartition des temps de cuisson </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">occurrences_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dictionnaire_minutes</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="n">mots</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dictionnaire_minutes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">occurrences_values</span><span class="p">)</span>
+        <span class="n">outliers</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">get_ydata</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">outlier</span> <span class="ow">in</span> <span class="n">outliers</span><span class="p">:</span>
+            <span class="n">mot_associe</span> <span class="o">=</span> <span class="p">[</span><span class="n">mot</span> <span class="k">for</span> <span class="n">mot</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">dictionnaire_minutes</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="n">outlier</span><span class="p">]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Diagramme moustache des occurrences des temps de cuisson&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Nombre d</span><span class="se">\&#39;</span><span class="s1">occurrences&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Page_temps_de_cuisson.filtre_minutes">
+<a class="viewcode-back" href="../../API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.filtre_minutes">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">filtre_minutes</span><span class="p">(</span><span class="n">dictionnaire_minutes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Fonction qui filtre le dictionnaire pour enlever les valeurs extrêmes</span>
+<span class="sd">            reçoit en entrée : - un dictionnaire dictionnaire_minutes</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># liste des ids à enlever</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dictionnaire_minutes</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">dictionnaire_minutes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
+                <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">dictionnaire_minutes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># On supprime aussi les valeurs à 0 min</span>
+                <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">dictionnaire_minutes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">dictionnaire_minutes</span></div>
+
+
+<div class="viewcode-block" id="Page_temps_de_cuisson.generate_cursor_dataframe">
+<a class="viewcode-back" href="../../API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.generate_cursor_dataframe">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">generate_cursor_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Fonction pour créer le camembert interactif, avec le curseur</span>
+<span class="sd">            reçoit en entrée : un dataframe pandas</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">df_pivot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+            <span class="s1">&#39;intervalle&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">182</span><span class="p">)],</span>
+            <span class="s1">&#39;Spring&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">182</span><span class="p">)],</span>
+            <span class="s1">&#39;Winter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">182</span><span class="p">)],</span>
+            <span class="s1">&#39;Summer&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">182</span><span class="p">)],</span>
+            <span class="s1">&#39;Fall&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">182</span><span class="p">)],</span>
+        <span class="p">})</span>  <span class="c1"># On initialise avec des valeurs à 0</span>
+        <span class="n">Liste_saisons</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span> <span class="s1">&#39;Winter&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;Fall&#39;</span><span class="p">]</span>
+        <span class="n">liste_cook_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">182</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Liste_saisons</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">liste_cook_times</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">count</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;season&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;minutes&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">liste_cook_times</span><span class="p">[</span><span class="n">j</span><span class="p">])]</span>
+                <span class="k">elif</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">liste_cook_times</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">count</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;season&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">liste_cook_times</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;minutes&#39;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;minutes&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">liste_cook_times</span><span class="p">[</span><span class="n">j</span><span class="p">])]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">count</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;season&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;minutes&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">liste_cook_times</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])]</span>
+                <span class="n">df_pivot</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_pivot</span><span class="p">[</span><span class="s1">&#39;intervalle&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">liste_cook_times</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">saison</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span> <span class="s1">&#39;Winter&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;Fall&#39;</span><span class="p">]:</span>
+            <span class="n">df_pivot</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">saison</span><span class="si">}</span><span class="s1">_%&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_pivot</span><span class="p">[</span><span class="n">saison</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_pivot</span><span class="p">[[</span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span> <span class="s1">&#39;Winter&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;Fall&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="n">df_pivot</span><span class="p">[</span><span class="s1">&#39;nb_recettes_total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_pivot</span><span class="p">[</span><span class="s1">&#39;Summer&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df_pivot</span><span class="p">[</span><span class="s1">&#39;Winter&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df_pivot</span><span class="p">[</span><span class="s1">&#39;Spring&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df_pivot</span><span class="p">[</span><span class="s1">&#39;Fall&#39;</span><span class="p">])</span>
+        <span class="n">df_pivot</span> <span class="o">=</span> <span class="n">df_pivot</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">df_pivot</span></div>
+
+
+<div class="viewcode-block" id="Page_temps_de_cuisson.df_to_pickle">
+<a class="viewcode-back" href="../../API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.df_to_pickle">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">df_to_pickle</span><span class="p">(</span><span class="n">df_pivot</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">path_pickle</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fonction pour envoyer le dataframe réduit, utilisé pour le camembert interactif, vers un .pkl </span>
+<span class="sd">        reçoit en entrée : un dataframe et un chemin vers le pickle où sauvegarder le df</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">df_pivot</span> <span class="o">=</span> <span class="n">df_pivot</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">df_pivot</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">path_pickle</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Page_temps_de_cuisson.generate_camemberts_significatifs">
+<a class="viewcode-back" href="../../API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.generate_camemberts_significatifs">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">generate_camemberts_significatifs</span><span class="p">(</span><span class="n">df</span> <span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">path</span> <span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span> 
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Fonction pour générer les 5 camemberts significatifs</span>
+<span class="sd">        reçoit en entrée : un dataframe et un chemin vers la sortie .pkl</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">df_significatif</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+            <span class="s1">&#39;intervalle&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">121</span><span class="p">],</span>
+            <span class="s1">&#39;Spring&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)],</span>
+            <span class="s1">&#39;Winter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)],</span>
+            <span class="s1">&#39;Summer&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)],</span>
+            <span class="s1">&#39;Fall&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)],</span>
+        <span class="p">})</span> <span class="c1">#On initialise </span>
+
+        <span class="n">Liste_saisons</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Winter&#39;</span><span class="p">,</span><span class="s1">&#39;Summer&#39;</span><span class="p">,</span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="s1">&#39;Spring&#39;</span><span class="p">]</span>
+        <span class="n">liste_cook_times</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">121</span><span class="p">]</span> 
+
+        <span class="c1">#Maintenant l&#39;étape difficile</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Liste_saisons</span> <span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="p">:</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">:</span>
+                    <span class="n">count</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;season&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;minutes&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)]</span>
+                <span class="k">elif</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+                    <span class="n">count</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;season&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">liste_cook_times</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;minutes&#39;</span><span class="p">]</span> <span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;minutes&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">liste_cook_times</span><span class="p">[</span><span class="n">j</span><span class="p">])]</span>
+                <span class="k">else</span> <span class="p">:</span> 
+                    <span class="n">count</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;season&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;minutes&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">liste_cook_times</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">)]</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[DEBUG] season: </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">, Intervalle: &gt;= </span><span class="si">{</span><span class="n">liste_cook_times</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">, Lignes trouvées: </span><span class="si">{</span><span class="n">count</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="n">df_significatif</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_significatif</span><span class="p">[</span><span class="s1">&#39;intervalle&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">liste_cook_times</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1">#Pourcentages </span>
+        <span class="c1"># Pour chaque saison, calcule le pourcentage des recettes dans chaque intervalle</span>
+        <span class="k">for</span> <span class="n">saison</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span> <span class="s1">&#39;Winter&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;Fall&#39;</span><span class="p">]:</span>
+            <span class="c1"># Ajoute une nouvelle colonne pour les pourcentages</span>
+            <span class="n">df_significatif</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">saison</span><span class="si">}</span><span class="s1">_%&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_significatif</span><span class="p">[</span><span class="n">saison</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_significatif</span><span class="p">[[</span><span class="s1">&#39;Spring&#39;</span><span class="p">,</span> <span class="s1">&#39;Winter&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;Fall&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+
+        <span class="c1"># Affiche le résultat</span>
+        <span class="n">intervalle_mapping</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">10</span><span class="p">:</span> <span class="s2">&quot;10&quot;</span><span class="p">,</span>
+            <span class="mi">30</span><span class="p">:</span> <span class="s2">&quot;30&quot;</span><span class="p">,</span>
+            <span class="mi">60</span><span class="p">:</span> <span class="s2">&quot;1h&quot;</span><span class="p">,</span>
+            <span class="mi">120</span><span class="p">:</span> <span class="s2">&quot;2h&quot;</span><span class="p">,</span>
+            <span class="mi">121</span><span class="p">:</span> <span class="s2">&quot;+&quot;</span>
+        <span class="p">}</span>
+
+        <span class="n">df_significatif</span><span class="p">[</span><span class="s1">&#39;intervalle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_significatif</span><span class="p">[</span><span class="s1">&#39;intervalle&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">intervalle_mapping</span><span class="p">)</span>
+
+        <span class="n">df_significatif</span> <span class="o">=</span> <span class="n">df_significatif</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">df_significatif</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">df_significatif</span></div>
+
+
+<div class="viewcode-block" id="Page_temps_de_cuisson.top_by_interval_season">
+<a class="viewcode-back" href="../../API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.top_by_interval_season">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">top_by_interval_season</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Fonction qui créé un dictionnaire, regroupant les top 10 des recettes par saison et par intervalle</span>
+<span class="sd">        reçoit en entrée : - un dataframe</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Liste_saisons</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Winter&#39;</span><span class="p">,</span><span class="s1">&#39;Summer&#39;</span><span class="p">,</span><span class="s1">&#39;Fall&#39;</span><span class="p">,</span><span class="s1">&#39;Spring&#39;</span><span class="p">]</span>
+        <span class="n">liste_cook_times</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">121</span><span class="p">]</span> 
+
+        <span class="n">dictionnaire</span> <span class="o">=</span> <span class="p">{(</span><span class="n">saison</span><span class="p">,</span> <span class="n">intervalle</span><span class="p">):</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">saison</span> <span class="ow">in</span> <span class="n">Liste_saisons</span> <span class="k">for</span> <span class="n">intervalle</span> <span class="ow">in</span> <span class="n">liste_cook_times</span><span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Liste_saisons</span> <span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">liste_cook_times</span> <span class="p">:</span>
+                <span class="n">index_value</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;season&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;intervalle&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">j</span><span class="p">),</span><span class="s1">&#39;weighted_rating&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index_value</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+                <span class="n">dictionnaire</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="n">value</span> 
+        
+        <span class="k">return</span> <span class="n">dictionnaire</span></div>
+
+
+
+
+<div class="viewcode-block" id="Page_temps_de_cuisson.ids_to_name">
+<a class="viewcode-back" href="../../API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.ids_to_name">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">ids_to_name</span><span class="p">(</span><span class="n">l</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="p">:</span> 
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Fonction qui prend en entrée la liste des ids des recettes et renvoit la liste des recettes</span>
+<span class="sd">        reçoit en entrée : une liste et un dataframe</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">l_names</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l</span> <span class="p">:</span>    
+            <span class="n">value</span> <span class="o">=</span>  <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">l_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">l_names</span></div>
+
+
+<div class="viewcode-block" id="Page_temps_de_cuisson.get_name_top_by_interval_season">
+<a class="viewcode-back" href="../../API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.get_name_top_by_interval_season">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_name_top_by_interval_season</span><span class="p">(</span><span class="n">dictionnaire</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Fonction qui prend en entrée notre dictionnaire conçu à top_by_interval_season, </span>
+<span class="sd">        et qui renvoie le dictionnaire avec comme values les noms des recettes</span>
+
+<span class="sd">        reçoit en entrée : - un dictionnaire</span>
+<span class="sd">                        - un dataframe </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dictionnaire</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="p">:</span>
+            <span class="n">dictionnaire</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Page_temps_de_cuisson</span><span class="o">.</span><span class="n">ids_to_name</span><span class="p">(</span><span class="n">dictionnaire</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">df</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dictionnaire</span></div>
+
+    
+
+
+
+<div class="viewcode-block" id="Page_temps_de_cuisson.generate_pickles_temps_de_cuisson">
+<a class="viewcode-back" href="../../API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.generate_pickles_temps_de_cuisson">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">generate_pickles_temps_de_cuisson</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Génère les pickles de temps de cuisson</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s2">&quot;./data/preprocess/temps_de_cuisson.pkl&quot;</span><span class="p">)</span>
+        <span class="n">vector</span><span class="p">,</span> <span class="n">vector_id</span> <span class="o">=</span> <span class="n">Page_temps_de_cuisson</span><span class="o">.</span><span class="n">get_vectors</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">dictionnaire_minutes</span> <span class="o">=</span> <span class="n">Page_temps_de_cuisson</span><span class="o">.</span><span class="n">dictionnaire_minutes</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span> <span class="n">vector_id</span><span class="p">)</span>
+        <span class="n">dictionnaire_minutes</span> <span class="o">=</span> <span class="n">Page_temps_de_cuisson</span><span class="o">.</span><span class="n">filtre_minutes</span><span class="p">(</span><span class="n">dictionnaire_minutes</span><span class="p">)</span>
+        <span class="n">df_pivot</span> <span class="o">=</span> <span class="n">Page_temps_de_cuisson</span><span class="o">.</span><span class="n">generate_cursor_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">Page_temps_de_cuisson</span><span class="o">.</span><span class="n">df_to_pickle</span><span class="p">(</span><span class="n">df_pivot</span><span class="p">,</span> <span class="s2">&quot;./data/preprocess/cursor2.pkl&quot;</span><span class="p">)</span>
+        <span class="n">Page_temps_de_cuisson</span><span class="o">.</span><span class="n">generate_camemberts_significatifs</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="s2">&quot;./data/preprocess/cursor_significatif.pkl&quot;</span><span class="p">)</span> 
+        <span class="n">dictionnaire_tops_10</span> <span class="o">=</span> <span class="n">Page_temps_de_cuisson</span><span class="o">.</span><span class="n">top_by_interval_season</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">dictionnaire_final</span> <span class="o">=</span> <span class="n">Page_temps_de_cuisson</span><span class="o">.</span><span class="n">get_name_top_by_interval_season</span><span class="p">(</span><span class="n">dictionnaire_tops_10</span><span class="p">,</span><span class="n">df</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;./data/preprocess/dictionnaire_tops_10.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fichier</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">dictionnaire_final</span><span class="p">,</span> <span class="n">fichier</span><span class="p">)</span> <span class="c1">#Etape OK </span></div>
+</div>
+
+
+
+    <span class="c1">#Lancement du script </span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span> 
+    <span class="n">Page_temps_de_cuisson</span><span class="o">.</span><span class="n">generate_pickles_temps_de_cuisson</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Cecile LI, Josephine BERNARD, Dan HAYOUN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

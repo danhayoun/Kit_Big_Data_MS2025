@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utils.Classe_pickle &mdash; KIT_BIG_DATA_MS2025 v1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5cb08e4e"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            KIT_BIG_DATA_MS2025
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Présentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">KIT_BIG_DATA_MS 2025</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API_doc.html">API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../API_doc.html#backend">Backend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#script-pour-les-pages">Script pour les pages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-src.technique">technique</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-src.processing_data">processing_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-src.temps_de_cuisson">temps_de_cuisson</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#utils">utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-utils.file_manager">file_manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-utils.data_processor">data_processor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#module-utils.Classe_pickle">Classe_pickle</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../API_doc.html#frontend">Frontend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#module-Frontend.Accueil">Accueil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#module-Frontend.pages.Page_techniques">Page_techniques.py</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_techniques.RecipeRecommender"><code class="docutils literal notranslate"><span class="pre">RecipeRecommender</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer"><code class="docutils literal notranslate"><span class="pre">SeasonCorrelationAnalyzer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_techniques.TechniquePage"><code class="docutils literal notranslate"><span class="pre">TechniquePage</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../API_doc.html#module-Frontend.pages.Page_reviews">Page_reviews</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_reviews.page_plot"><code class="docutils literal notranslate"><span class="pre">page_plot</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_reviews.page_review"><code class="docutils literal notranslate"><span class="pre">page_review</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../API_doc.html#Frontend.pages.Page_reviews.page_streamlit"><code class="docutils literal notranslate"><span class="pre">page_streamlit</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Index</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../py-modindex.html">Module Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">KIT_BIG_DATA_MS2025</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">utils.Classe_pickle</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for utils.Classe_pickle</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span> 
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">date</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.dates</span> <span class="k">as</span> <span class="nn">mdates</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
+
+
+<span class="n">pages</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;temps_de_cuisson&#39;</span><span class="p">,</span><span class="s1">&#39;fun_facts&#39;</span><span class="p">,</span><span class="s1">&#39;techniques_cuisine&#39;</span><span class="p">]</span> <span class="c1">#Les 3 pages de l&#39;application </span>
+
+
+<div class="viewcode-block" id="Display">
+<a class="viewcode-back" href="../../API_doc.html#utils.Classe_pickle.Display">[docs]</a>
+<span class="k">class</span> <span class="nc">Display</span> <span class="p">:</span> 
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Classe générique pour tous les .pkl</span>
+<span class="sd">        attributs : quel page, quel chemin &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">page</span><span class="p">,</span><span class="n">pkl_path</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">if</span> <span class="n">page</span> <span class="ow">in</span> <span class="n">pages</span> <span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__page</span> <span class="o">=</span> <span class="n">page</span>
+        <span class="k">else</span> <span class="p">:</span> 
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;La page doit être une chaîne de caractères parmis :</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pages</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pkl_path</span> <span class="o">=</span> <span class="n">pkl_path</span>
+
+    <span class="c1"># Méthode publique pour accéder à l&#39;attribut privé</span>
+    <span class="k">def</span> <span class="nf">get_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__page</span>
+
+    <span class="c1"># Méthode publique pour modifier l&#39;attribut privé</span>
+    <span class="k">def</span> <span class="nf">set_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_page</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">new_page</span> <span class="ow">in</span> <span class="n">pages</span> <span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">__page</span> <span class="o">=</span> <span class="n">new_page</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;La page doit être une chaîne de caractères parmis :</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pages</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+        
+
+<span class="c1">################## CLASSES POUR LES DIFFERENTS TYPES DE PICKLE UTILISES ############################</span>
+
+<div class="viewcode-block" id="CamembertDisplay">
+<a class="viewcode-back" href="../../API_doc.html#utils.Classe_pickle.CamembertDisplay">[docs]</a>
+<span class="k">class</span> <span class="nc">CamembertDisplay</span><span class="p">(</span><span class="n">Display</span><span class="p">):</span> 
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Classe pour les dataframes pour camemberts&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page</span><span class="p">,</span> <span class="n">pkl_path</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">pkl_path</span><span class="p">)</span>  <span class="c1"># Appelle le constructeur de Display</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_dataframe</span><span class="p">()</span>  <span class="c1"># Charge le DataFrame spécifique</span>
+
+
+<div class="viewcode-block" id="CamembertDisplay.load_dataframe">
+<a class="viewcode-back" href="../../API_doc.html#utils.Classe_pickle.CamembertDisplay.load_dataframe">[docs]</a>
+    <span class="k">def</span> <span class="nf">load_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">enable_fillna</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span> <span class="c1">#Charge le dataframe, mettre enable_fillna à True si on veut remplacer les Nan par des 0 </span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Charge un DataFrame à partir du fichier .pkl.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pkl_path</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">enable_fillna</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="p">:</span>
+                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Remplace les valeurs NaN par 0</span>
+            <span class="k">else</span> <span class="p">:</span> 
+                <span class="k">return</span> <span class="n">df</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Erreur lors du chargement du fichier .pkl : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+        
+
+            
+<div class="viewcode-block" id="CamembertDisplay.plot_pie_charts_2">
+<a class="viewcode-back" href="../../API_doc.html#utils.Classe_pickle.CamembertDisplay.plot_pie_charts_2">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_pie_charts_2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_columns</span><span class="p">,</span> <span class="n">label_names</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Trace des camemberts pour chaque ligne du DataFrame.</span>
+<span class="sd">            Args:</span>
+<span class="sd">            - data_columns (list): Liste des colonnes à utiliser pour les données (ex: [&#39;Printemps_%&#39;, &#39;Hiver_%&#39;, &#39;Ete_%&#39;, &#39;Automne_%&#39;]).</span>
+<span class="sd">            - label_names (list): Liste des labels correspondants (ex: [&#39;Printemps&#39;, &#39;Hiver&#39;, &#39;Été&#39;, &#39;Automne&#39;]).</span>
+<span class="sd">            - title (str): Titre global pour la section Streamlit.&quot;&quot;&quot;</span>
+         
+            <span class="n">intervalle_mapping</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;10&#39;</span><span class="p">:</span> <span class="s2">&quot;Distribution pour l&#39;intervalle 0-10 min&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;30&#39;</span><span class="p">:</span> <span class="s2">&quot;Distribution pour l&#39;intervalle 10-30 min&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;1h&#39;</span><span class="p">:</span> <span class="s2">&quot;Distribution pour l&#39;intervalle 30-60 min&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;2h&#39;</span><span class="p">:</span> <span class="s2">&quot;Distribution pour l&#39;intervalle 1-2h&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;+&#39;</span><span class="p">:</span> <span class="s2">&quot;Distribution pour + de 2h&quot;</span>
+            <span class="p">}</span> 
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_columns</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">label_names</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Les arguments &#39;data_columns&#39; et &#39;label_names&#39; doivent être des listes.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_columns</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_names</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Les listes &#39;data_columns&#39; et &#39;label_names&#39; doivent avoir la même longueur.&quot;</span><span class="p">)</span>
+
+            <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+            <span class="n">cols</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">columns</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Divise la ligne en 2 colonnes</span>
+            <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Index de la colonne courante</span>
+
+            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+                <span class="c1"># Utiliser le mapping pour obtenir la description</span>
+                <span class="n">intervalle_description</span> <span class="o">=</span> <span class="n">intervalle_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;intervalle&#39;</span><span class="p">],</span> <span class="s2">&quot;Intervalle inconnu&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Récupérer les données et les labels pour le camembert</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">data_columns</span><span class="p">]</span>  <span class="c1"># Données à tracer</span>
+                <span class="n">labels</span> <span class="o">=</span> <span class="n">label_names</span>  <span class="c1"># Labels pour le graphique</span>
+
+                <span class="c1"># Création du graphique</span>
+                <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">intervalle_description</span><span class="p">)</span>  <span class="c1"># Utiliser directement la description</span>
+
+                <span class="c1"># Affichage dans Streamlit</span>
+                <span class="n">cols</span><span class="p">[</span><span class="n">index_col</span><span class="p">]</span><span class="o">.</span><span class="n">pyplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+                <span class="c1"># Alterner entre colonne 0 et 1</span>
+                <span class="n">index_col</span> <span class="o">=</span> <span class="p">(</span><span class="n">index_col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="CamembertDisplay.plot_interactive_pie_chart">
+<a class="viewcode-back" href="../../API_doc.html#utils.Classe_pickle.CamembertDisplay.plot_interactive_pie_chart">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_interactive_pie_chart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_columns</span><span class="p">,</span> <span class="n">label_names</span><span class="p">,</span> <span class="n">slider_label</span><span class="o">=</span><span class="s2">&quot;Sélectionner un temps de cuisson (en min)&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Camembert interactif par intervalle&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Affiche un camembert interactif en fonction d&#39;une valeur sélectionnée via un curseur.</span>
+<span class="sd">        Args:</span>
+<span class="sd">        data_columns (list): Liste des colonnes contenant les données pour le camembert (ex. [&#39;Spring_%&#39;, &#39;Winter_%&#39;, ...]).</span>
+<span class="sd">        label_names (list): Liste des labels correspondants (ex. [&#39;Spring&#39;, &#39;Winter&#39;, ...]).</span>
+<span class="sd">        slider_label (str): Texte affiché pour le curseur.</span>
+<span class="sd">        title (str): Titre pour le camembert.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_columns</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">label_names</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Les arguments &#39;data_columns&#39; et &#39;label_names&#39; doivent être des listes.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_columns</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_names</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Les listes &#39;data_columns&#39; et &#39;label_names&#39; doivent avoir la même longueur.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Curseur pour sélectionner l&#39;intervalle</span>
+        <span class="n">intervalle_max</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;intervalle&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+        <span class="n">intervalle_mapping</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; min&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">intervalle_max</span><span class="p">)}</span>
+        <span class="n">intervalle_mapping</span><span class="p">[</span><span class="mi">181</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;+180 min&#39;</span>
+        <span class="n">intervalle</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="n">slider_label</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="n">intervalle_max</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">intervalle_label</span> <span class="o">=</span> <span class="n">intervalle_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">intervalle</span><span class="p">,</span> <span class="n">intervalle</span><span class="p">)</span>
+
+        <span class="c1"># Filtrer les données pour l&#39;intervalle sélectionné</span>
+        <span class="k">if</span> <span class="n">intervalle</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;intervalle&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;intervalle&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">intervalle</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="c1"># Extraire les données pour le camembert</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">data_columns</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>  
+
+            <span class="c1"># Vérifier si toutes les valeurs sont 0</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">v</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">):</span>
+                <span class="n">st</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Aucune donnée significative pour l&#39;intervalle </span><span class="si">{</span><span class="n">intervalle_label</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+                <span class="k">return</span>
+
+            <span class="c1"># Créer le graphique du camembert</span>
+            <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">label_names</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">intervalle_label</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Afficher dans Streamlit</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">pyplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Aucun intervalle correspondant à la valeur </span><span class="si">{</span><span class="n">intervalle</span><span class="si">}</span><span class="s2"> trouvé.&quot;</span><span class="p">)</span></div>
+</div>
+
+    
+
+<div class="viewcode-block" id="DictionnaireDisplay">
+<a class="viewcode-back" href="../../API_doc.html#utils.Classe_pickle.DictionnaireDisplay">[docs]</a>
+<span class="k">class</span> <span class="nc">DictionnaireDisplay</span><span class="p">(</span><span class="n">Display</span><span class="p">):</span> 
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Classe pour les dictionnaires pour tableaux&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page</span><span class="p">,</span> <span class="n">pkl_path</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">pkl_path</span><span class="p">)</span>  <span class="c1"># Appelle le constructeur de Display</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dictionnaire</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_dictionnaire</span><span class="p">()</span>  <span class="c1"># Charge le DataFrame spécifique</span>
+<div class="viewcode-block" id="DictionnaireDisplay.load_dictionnaire">
+<a class="viewcode-back" href="../../API_doc.html#utils.Classe_pickle.DictionnaireDisplay.load_dictionnaire">[docs]</a>
+    <span class="k">def</span> <span class="nf">load_dictionnaire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Charge le dictionnaire à partir du fichier pickle spécifié dans self.pkl_path.</span>
+
+<span class="sd">        :return: Le dictionnaire chargé.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pkl_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">dictionnaire</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">dictionnaire</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Le fichier pickle &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pkl_path</span><span class="si">}</span><span class="s2">&#39; est introuvable.&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Erreur lors du chargement du dictionnaire : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="DictionnaireDisplay.afficher_tops_par_intervalle">
+<a class="viewcode-back" href="../../API_doc.html#utils.Classe_pickle.DictionnaireDisplay.afficher_tops_par_intervalle">[docs]</a>
+    <span class="k">def</span> <span class="nf">afficher_tops_par_intervalle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">intervalle_choisi</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Affiche les tops 10 recettes par saison pour un intervalle donné dans Streamlit.</span>
+
+<span class="sd">        :param intervalle_choisi: Intervalle pour lequel afficher les recettes (par exemple : 10, 30, 60, etc.)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Vérifie que le dictionnaire est chargé</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionnaire</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Le dictionnaire est vide ou non chargé.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Vérifier que l&#39;intervalle existe dans le dictionnaire</span>
+        <span class="k">if</span> <span class="n">intervalle_choisi</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionnaire</span><span class="o">.</span><span class="n">keys</span><span class="p">()]:</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L&#39;intervalle </span><span class="si">{</span><span class="n">intervalle_choisi</span><span class="si">}</span><span class="s2"> n&#39;existe pas dans les données.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Initialiser une liste pour stocker les données tabulaires</span>
+        <span class="n">tableaux</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Parcourir le dictionnaire pour l&#39;intervalle donné</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">saison</span><span class="p">,</span> <span class="n">intervalle</span><span class="p">),</span> <span class="n">recettes</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionnaire</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">intervalle</span> <span class="o">==</span> <span class="n">intervalle_choisi</span><span class="p">:</span>
+                <span class="c1"># Ajouter les recettes dans une structure tabulaire</span>
+                <span class="n">tableaux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+                    <span class="s1">&#39;Saison&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">saison</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">recettes</span><span class="p">[:</span><span class="mi">10</span><span class="p">]),</span>
+                    <span class="s1">&#39;Recette&#39;</span><span class="p">:</span> <span class="n">recettes</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>  <span class="c1"># Limiter à 10 recettes</span>
+                <span class="p">}))</span>
+
+        <span class="c1"># Afficher les tops dans Streamlit</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tops 10 des recettes par saison &quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">tableau</span> <span class="ow">in</span> <span class="n">tableaux</span><span class="p">:</span>
+            <span class="n">saison</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="s1">&#39;Saison&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">subheader</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saison : </span><span class="si">{</span><span class="n">saison</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">tableau</span><span class="p">[[</span><span class="s1">&#39;Recette&#39;</span><span class="p">]])</span></div>
+</div>
+
+
+<div class="viewcode-block" id="HistogramDisplay">
+<a class="viewcode-back" href="../../API_doc.html#utils.Classe_pickle.HistogramDisplay">[docs]</a>
+<span class="k">class</span> <span class="nc">HistogramDisplay</span><span class="p">(</span><span class="n">Display</span><span class="p">)</span> <span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page</span><span class="p">,</span> <span class="n">pkl_path</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">pkl_path</span><span class="p">)</span>  <span class="c1"># Appelle le constructeur de Display</span>
+
+<div class="viewcode-block" id="HistogramDisplay.load_dataframe">
+<a class="viewcode-back" href="../../API_doc.html#utils.Classe_pickle.HistogramDisplay.load_dataframe">[docs]</a>
+    <span class="k">def</span> <span class="nf">load_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">enable_fillna</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span> <span class="c1">#Charge le dataframe, mettre enable_fillna à True si on veut remplacer les Nan par des 0 </span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Charge un DataFrame à partir du fichier .pkl.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pkl_path</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">enable_fillna</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="p">:</span>
+                <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Remplace les valeurs NaN par 0</span>
+            <span class="k">else</span> <span class="p">:</span> 
+                <span class="k">return</span> <span class="n">df</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Erreur lors du chargement du fichier .pkl : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="nf">afficher_histogram</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pkl_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fichier</span> <span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">fichier</span><span class="p">)</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="c1"># Création de l&#39;histogramme</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Histogramme du nombre de recettes par temps de cuisson&quot;</span><span class="p">)</span>
+            <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+            <span class="n">xticks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">179</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="p">[</span><span class="mi">181</span><span class="p">]</span>  <span class="c1"># Ajouter des ticks tous les 10 et inclure 181</span>
+            <span class="n">xtick_labels</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">181</span> <span class="k">else</span> <span class="s1">&#39;180+&#39;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xticks</span><span class="p">]</span> 
+            <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;nb_recettes_total&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Distribution de nb_recettes par temps de cuisson&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;temps de cuisson en minutes&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;nb_recettes&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">xticks</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">xtick_labels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>  <span class="c1"># Rotation pour lisibilité</span>
+    
+            <span class="c1"># Affichage dans Streamlit</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">pyplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Cecile LI, Josephine BERNARD, Dan HAYOUN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

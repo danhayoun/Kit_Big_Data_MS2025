@@ -50,26 +50,31 @@
 <li class="toctree-l3"><a class="reference internal" href="API_doc.html#script-pour-les-pages">Script pour les pages</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="API_doc.html#module-src.technique">technique</a></li>
 <li class="toctree-l4"><a class="reference internal" href="API_doc.html#module-src.processing_data">processing_data</a></li>
-<li class="toctree-l4"><a class="reference internal" href="API_doc.html#cursor">cursor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_doc.html#module-src.temps_de_cuisson">temps_de_cuisson</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="API_doc.html#utils">utils</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="API_doc.html#module-utils.file_manager">file_manager</a></li>
 <li class="toctree-l4"><a class="reference internal" href="API_doc.html#module-utils.data_processor">data_processor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_doc.html#module-utils.Classe_pickle">Classe_pickle</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="API_doc.html#frontend">Frontend</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="API_doc.html#module-Frontend.Accueil">Accueil</a></li>
-<li class="toctree-l3"><a class="reference internal" href="API_doc.html#id1">cursor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="API_doc.html#module-Frontend.pages.Page_techniques">techniques</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="API_doc.html#module-Frontend.pages.Page_techniques">Page_techniques.py</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="API_doc.html#Frontend.pages.Page_techniques.RecipeRecommender"><code class="docutils literal notranslate"><span class="pre">RecipeRecommender</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="API_doc.html#Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer"><code class="docutils literal notranslate"><span class="pre">SeasonCorrelationAnalyzer</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="API_doc.html#Frontend.pages.Page_techniques.TechniquePage"><code class="docutils literal notranslate"><span class="pre">TechniquePage</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="API_doc.html#fun-facts">fun_facts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="API_doc.html#module-Frontend.pages.Page_reviews">Page_reviews</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="API_doc.html#Frontend.pages.Page_reviews.page_plot"><code class="docutils literal notranslate"><span class="pre">page_plot</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_doc.html#Frontend.pages.Page_reviews.page_review"><code class="docutils literal notranslate"><span class="pre">page_review</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="API_doc.html#Frontend.pages.Page_reviews.page_streamlit"><code class="docutils literal notranslate"><span class="pre">page_streamlit</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -115,6 +120,8 @@
  | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#P"><strong>P</strong></a>
@@ -122,15 +129,20 @@
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
+ | <a href="#W"><strong>W</strong></a>
  
 </div>
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="API_doc.html#utils.Classe_pickle.DictionnaireDisplay.afficher_tops_par_intervalle">afficher_tops_par_intervalle() (utils.Classe_pickle.DictionnaireDisplay method)</a>
+</li>
       <li><a href="API_doc.html#src.technique.TechniqueProcessor.analyze_correlation">analyze_correlation() (src.technique.TechniqueProcessor method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="API_doc.html#src.processing_data.SeasonHandler.assign_season_date">assign_season_date() (src.processing_data.SeasonHandler static method)</a>
+</li>
       <li><a href="API_doc.html#utils.data_processor.DataProcessor.average_ratings_recipe">average_ratings_recipe() (utils.data_processor.DataProcessor static method)</a>
 </li>
   </ul></td>
@@ -142,15 +154,27 @@
       <li><a href="API_doc.html#src.technique.TechniqueProcessor.binarize_step_to_technique">binarize_step_to_technique() (src.technique.TechniqueProcessor method)</a>
 </li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.boxplot">boxplot() (src.temps_de_cuisson.Page_temps_de_cuisson static method)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="API_doc.html#utils.file_manager.DataHandler.converting_list_column">converting_list_column() (utils.file_manager.DataHandler static method)</a>
+      <li><a href="API_doc.html#src.processing_data.DataProcess.calculate_seasons">calculate_seasons() (src.processing_data.DataProcess static method)</a>
+</li>
+      <li><a href="API_doc.html#utils.Classe_pickle.CamembertDisplay">CamembertDisplay (class in utils.Classe_pickle)</a>
+</li>
+      <li><a href="API_doc.html#src.processing_data.SeasonHandler.contingency_table">contingency_table() (src.processing_data.SeasonHandler static method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="API_doc.html#utils.file_manager.DataHandler.converting_list_column">converting_list_column() (utils.file_manager.DataHandler static method)</a>
+</li>
+      <li><a href="API_doc.html#src.processing_data.SeasonHandler.create_season">create_season() (src.processing_data.SeasonHandler static method)</a>
+</li>
       <li><a href="API_doc.html#src.technique.TechniqueProcessor.create_technique_df">create_technique_df() (src.technique.TechniqueProcessor method)</a>
 </li>
   </ul></td>
@@ -161,9 +185,21 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="API_doc.html#utils.file_manager.DataHandler">DataHandler (class in utils.file_manager)</a>
 </li>
+      <li><a href="API_doc.html#src.processing_data.DataProcess">DataProcess (class in src.processing_data)</a>
+</li>
+      <li><a href="API_doc.html#utils.data_processor.DataProcessor">DataProcessor (class in utils.data_processor)</a>
+</li>
+      <li><a href="API_doc.html#src.processing_data.SeasonHandler.determine_max_season">determine_max_season() (src.processing_data.SeasonHandler static method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="API_doc.html#utils.data_processor.DataProcessor">DataProcessor (class in utils.data_processor)</a>
+      <li><a href="API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.df_to_pickle">df_to_pickle() (src.temps_de_cuisson.Page_temps_de_cuisson static method)</a>
+</li>
+      <li><a href="API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.dictionnaire_minutes">dictionnaire_minutes() (src.temps_de_cuisson.Page_temps_de_cuisson static method)</a>
+</li>
+      <li><a href="API_doc.html#utils.Classe_pickle.DictionnaireDisplay">DictionnaireDisplay (class in utils.Classe_pickle)</a>
+</li>
+      <li><a href="API_doc.html#utils.Classe_pickle.Display">Display (class in utils.Classe_pickle)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -181,6 +217,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="API_doc.html#utils.data_processor.DataProcessor.filter_data">filter_data() (utils.data_processor.DataProcessor static method)</a>
 </li>
+      <li><a href="API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.filtre_minutes">filtre_minutes() (src.temps_de_cuisson.Page_temps_de_cuisson static method)</a>
+</li>
       <li>
     Frontend.Accueil
 
@@ -190,6 +228,13 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    Frontend.pages.Page_reviews
+
+      <ul>
+        <li><a href="API_doc.html#module-Frontend.pages.Page_reviews">module</a>
+</li>
+      </ul></li>
       <li>
     Frontend.pages.Page_techniques
 
@@ -203,17 +248,45 @@
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="API_doc.html#src.technique.TechniqueProcessor.get_binary_techniques_list">get_binary_techniques_list() (src.technique.TechniqueProcessor method)</a>
+      <li><a href="API_doc.html#src.temps_de_cuisson.generate_accurate_df">generate_accurate_df() (in module src.temps_de_cuisson)</a>
 </li>
-      <li><a href="API_doc.html#utils.file_manager.DataHandler.get_next_item">get_next_item() (utils.file_manager.DataHandler static method)</a>
+      <li><a href="API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.generate_camemberts_significatifs">generate_camemberts_significatifs() (src.temps_de_cuisson.Page_temps_de_cuisson static method)</a>
+</li>
+      <li><a href="API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.generate_cursor_dataframe">generate_cursor_dataframe() (src.temps_de_cuisson.Page_temps_de_cuisson static method)</a>
+</li>
+      <li><a href="API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.generate_pickles_temps_de_cuisson">generate_pickles_temps_de_cuisson() (src.temps_de_cuisson.Page_temps_de_cuisson static method)</a>
+</li>
+      <li><a href="API_doc.html#src.technique.TechniqueProcessor.get_binary_techniques_list">get_binary_techniques_list() (src.technique.TechniqueProcessor method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.get_name_top_by_interval_season">get_name_top_by_interval_season() (src.temps_de_cuisson.Page_temps_de_cuisson static method)</a>
+</li>
+      <li><a href="API_doc.html#utils.file_manager.DataHandler.get_next_item">get_next_item() (utils.file_manager.DataHandler static method)</a>
+</li>
       <li><a href="API_doc.html#Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer.get_season_for_technique">get_season_for_technique() (Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer method)</a>
 </li>
       <li><a href="API_doc.html#src.technique.TechniqueProcessor.get_technique_name">get_technique_name() (src.technique.TechniqueProcessor method)</a>
 </li>
       <li><a href="API_doc.html#Frontend.pages.Page_techniques.RecipeRecommender.get_top_recipes_by_season">get_top_recipes_by_season() (Frontend.pages.Page_techniques.RecipeRecommender static method)</a>
+</li>
+      <li><a href="API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.get_vectors">get_vectors() (src.temps_de_cuisson.Page_temps_de_cuisson static method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="API_doc.html#utils.Classe_pickle.HistogramDisplay">HistogramDisplay (class in utils.Classe_pickle)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.ids_to_name">ids_to_name() (src.temps_de_cuisson.Page_temps_de_cuisson static method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -223,11 +296,23 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="API_doc.html#utils.file_manager.DataHandler.load_clean_csv">load_clean_csv() (utils.file_manager.DataHandler static method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="API_doc.html#utils.file_manager.DataHandler.load_csv">load_csv() (utils.file_manager.DataHandler static method)</a>
 </li>
+      <li><a href="API_doc.html#src.processing_data.PreprocessingData.load_data">load_data() (src.processing_data.PreprocessingData method)</a>
+</li>
+      <li><a href="API_doc.html#utils.Classe_pickle.CamembertDisplay.load_dataframe">load_dataframe() (utils.Classe_pickle.CamembertDisplay method)</a>
+
+      <ul>
+        <li><a href="API_doc.html#utils.Classe_pickle.HistogramDisplay.load_dataframe">(utils.Classe_pickle.HistogramDisplay method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="API_doc.html#Frontend.pages.Page_techniques.TechniquePage.load_datas">load_datas() (Frontend.pages.Page_techniques.TechniquePage method)</a>
+</li>
+      <li><a href="API_doc.html#utils.Classe_pickle.DictionnaireDisplay.load_dictionnaire">load_dictionnaire() (utils.Classe_pickle.DictionnaireDisplay method)</a>
+</li>
+      <li><a href="API_doc.html#Frontend.pages.Page_reviews.page_streamlit.load_image">load_image() (Frontend.pages.Page_reviews.page_streamlit static method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -235,17 +320,25 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="API_doc.html#src.processing_data.SeasonHandler.modified_frequency">modified_frequency() (src.processing_data.SeasonHandler static method)</a>
+</li>
       <li>
     module
 
       <ul>
         <li><a href="API_doc.html#module-Frontend.Accueil">Frontend.Accueil</a>
 </li>
+        <li><a href="API_doc.html#module-Frontend.pages.Page_reviews">Frontend.pages.Page_reviews</a>
+</li>
         <li><a href="API_doc.html#module-Frontend.pages.Page_techniques">Frontend.pages.Page_techniques</a>
 </li>
         <li><a href="API_doc.html#module-src.processing_data">src.processing_data</a>
 </li>
         <li><a href="API_doc.html#module-src.technique">src.technique</a>
+</li>
+        <li><a href="API_doc.html#module-src.temps_de_cuisson">src.temps_de_cuisson</a>
+</li>
+        <li><a href="API_doc.html#module-utils.Classe_pickle">utils.Classe_pickle</a>
 </li>
         <li><a href="API_doc.html#module-utils.data_processor">utils.data_processor</a>
 </li>
@@ -258,7 +351,29 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="API_doc.html#Frontend.pages.Page_reviews.page_plot">page_plot (class in Frontend.pages.Page_reviews)</a>
+</li>
+      <li><a href="API_doc.html#Frontend.pages.Page_reviews.page_review">page_review (class in Frontend.pages.Page_reviews)</a>
+</li>
+      <li><a href="API_doc.html#Frontend.pages.Page_reviews.page_streamlit">page_streamlit (class in Frontend.pages.Page_reviews)</a>
+</li>
+      <li><a href="API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson">Page_temps_de_cuisson (class in src.temps_de_cuisson)</a>
+</li>
       <li><a href="API_doc.html#Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer.plot_heatmap">plot_heatmap() (Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="API_doc.html#Frontend.pages.Page_reviews.page_plot.plot_histogram_for_recipe">plot_histogram_for_recipe() (Frontend.pages.Page_reviews.page_plot static method)</a>
+</li>
+      <li><a href="API_doc.html#utils.Classe_pickle.CamembertDisplay.plot_interactive_pie_chart">plot_interactive_pie_chart() (utils.Classe_pickle.CamembertDisplay method)</a>
+</li>
+      <li><a href="API_doc.html#utils.Classe_pickle.CamembertDisplay.plot_pie_charts_2">plot_pie_charts_2() (utils.Classe_pickle.CamembertDisplay method)</a>
+</li>
+      <li><a href="API_doc.html#Frontend.pages.Page_reviews.page_plot.plot_season_percentage_pie">plot_season_percentage_pie() (Frontend.pages.Page_reviews.page_plot static method)</a>
+</li>
+      <li><a href="API_doc.html#src.processing_data.PreprocessingData.preprocess_data">preprocess_data() (src.processing_data.PreprocessingData method)</a>
+</li>
+      <li><a href="API_doc.html#src.processing_data.PreprocessingData">PreprocessingData (class in src.processing_data)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -270,10 +385,16 @@
 </li>
       <li><a href="API_doc.html#Frontend.pages.Page_techniques.RecipeRecommender">RecipeRecommender (class in Frontend.pages.Page_techniques)</a>
 </li>
+      <li><a href="API_doc.html#Frontend.pages.Page_reviews.page_review.run">run() (Frontend.pages.Page_reviews.page_review method)</a>
+
+      <ul>
+        <li><a href="API_doc.html#Frontend.pages.Page_techniques.TechniquePage.run">(Frontend.pages.Page_techniques.TechniquePage method)</a>
+</li>
+        <li><a href="API_doc.html#src.processing_data.PreprocessingData.run">(src.processing_data.PreprocessingData method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="API_doc.html#Frontend.pages.Page_techniques.TechniquePage.run">run() (Frontend.pages.Page_techniques.TechniquePage method)</a>
-</li>
       <li><a href="API_doc.html#src.technique.TechniqueAnalyzer.run_analysis">run_analysis() (src.technique.TechniqueAnalyzer method)</a>
 </li>
   </ul></td>
@@ -284,9 +405,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="API_doc.html#utils.file_manager.DataHandler.save_file_as_pickle">save_file_as_pickle() (utils.file_manager.DataHandler static method)</a>
 </li>
+      <li><a href="API_doc.html#src.processing_data.PreprocessingData.save_processed_data">save_processed_data() (src.processing_data.PreprocessingData method)</a>
+</li>
       <li><a href="API_doc.html#utils.data_processor.DataProcessor.scale_column_to_range">scale_column_to_range() (utils.data_processor.DataProcessor static method)</a>
 </li>
       <li><a href="API_doc.html#Frontend.pages.Page_techniques.SeasonCorrelationAnalyzer">SeasonCorrelationAnalyzer (class in Frontend.pages.Page_techniques)</a>
+</li>
+      <li><a href="API_doc.html#src.processing_data.SeasonHandler">SeasonHandler (class in src.processing_data)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -304,6 +429,13 @@
         <li><a href="API_doc.html#module-src.technique">module</a>
 </li>
       </ul></li>
+      <li>
+    src.temps_de_cuisson
+
+      <ul>
+        <li><a href="API_doc.html#module-src.temps_de_cuisson">module</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -314,9 +446,13 @@
 </li>
       <li><a href="API_doc.html#Frontend.pages.Page_techniques.TechniquePage">TechniquePage (class in Frontend.pages.Page_techniques)</a>
 </li>
+      <li><a href="API_doc.html#src.technique.TechniqueProcessor">TechniqueProcessor (class in src.technique)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="API_doc.html#src.technique.TechniqueProcessor">TechniqueProcessor (class in src.technique)</a>
+      <li><a href="API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.top_by_interval_season">top_by_interval_season() (src.temps_de_cuisson.Page_temps_de_cuisson static method)</a>
+</li>
+      <li><a href="API_doc.html#src.temps_de_cuisson.Page_temps_de_cuisson.top_liste">top_liste() (src.temps_de_cuisson.Page_temps_de_cuisson static method)</a>
 </li>
       <li><a href="API_doc.html#utils.data_processor.DataProcessor.transform_date">transform_date() (utils.data_processor.DataProcessor static method)</a>
 </li>
@@ -326,6 +462,13 @@
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    utils.Classe_pickle
+
+      <ul>
+        <li><a href="API_doc.html#module-utils.Classe_pickle">module</a>
+</li>
+      </ul></li>
       <li>
     utils.data_processor
 
@@ -342,6 +485,14 @@
         <li><a href="API_doc.html#module-utils.file_manager">module</a>
 </li>
       </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="API_doc.html#src.processing_data.DataProcess.weigthed_ratings_recipe">weigthed_ratings_recipe() (src.processing_data.DataProcess static method)</a>
+</li>
   </ul></td>
 </tr></table>
 
