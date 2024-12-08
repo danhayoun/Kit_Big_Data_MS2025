@@ -25,7 +25,7 @@ Ce projet est une application d'analyse de données développée en Python avec 
     ```
     Sinon :
     ```bash
-    pip install -r requirements.txt
+    pip install -r alt_requirements.txt
     pip install -r requirements-dev.txt
     ```
 

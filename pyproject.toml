@@ -17,7 +17,7 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = "3.11.9"
+python = ">=3.11.9,<3.12"
 plotly = "^5.24.1"
 pathlib = "^1.0.1"
 scikit-learn = "^1.5.2"
