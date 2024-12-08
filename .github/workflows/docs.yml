@@ -39,3 +39,5 @@ jobs:
     - name: Deploy to Streamlit Cloud
       run: |
         poetry run streamlit run Frontend/Accueil.py
+        sleep 10
+        pkill -f "streamlit run"
