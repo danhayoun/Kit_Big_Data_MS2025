@@ -10,7 +10,8 @@ from typing import List, Tuple, Dict
 
 
 def generate_accurate_df(df: pd.DataFrame, path: str = "data/raw/RAW_recipes.csv") -> pd.DataFrame:
-    """ Fonction qui rajoute les colonnes 'minutes', 'name' et 'intervalle au df
+    """ 
+    Fonction qui rajoute les colonnes 'minutes', 'name' et 'intervalle au df
         en entrée : - un dataframe pandas
     """
     recipes = pd.read_csv(path)  # ICI
@@ -30,14 +31,12 @@ def generate_accurate_df(df: pd.DataFrame, path: str = "data/raw/RAW_recipes.csv
 class Page_temps_de_cuisson:
     """ Classe pour définir la page temps de cuisson
         pas d'attributs
-    
     """
 
     @staticmethod
     def get_vectors(df: pd.DataFrame) -> Tuple[np.ndarray, np.ndarray]:
-        """  Fonction qui extrait le dataframe pandas et renvoie les 2 vecteurs ids 
-            et temps de cuisson (vector = vecteur temps de cuisson, vector_id = vecteur des ids)
-
+        """  
+        Fonction qui extrait le dataframe pandas et renvoie les 2 vecteurs ids et temps de cuisson (vector = vecteur temps de cuisson, vector_id = vecteur des ids)
             en entrée : - un dataframe pandas
 
         """
@@ -49,10 +48,10 @@ class Page_temps_de_cuisson:
 
     @staticmethod
     def dictionnaire_minutes(vector: np.ndarray, vector_id: np.ndarray) -> Dict[int, int]:
-        """  Fonction qui créé le dictionnaire_minutes
+        """ 
+        Fonction qui créé le dictionnaire_minutes
             en entrée : - un vecteur des temps de cuisson
                         - un vecteur des ids correspondants
-
         """
         dictionnaire_minutes = {}
         j = 0
@@ -63,8 +62,8 @@ class Page_temps_de_cuisson:
 
     @staticmethod
     def top_liste(dictionnaire: Dict[int, int]) -> List[Tuple[int, int]]:
-        """ Fonction qui créé le top des ids par temps de cuisson
-
+        """ 
+        Fonction qui créé le top des ids par temps de cuisson
             Prend en entrée un dictionnaire_minutes, et renvoie la liste des ids triée, le temps de cuisson le plus élevé à son id en première position 
         """
         top = sorted(dictionnaire.items(), key=lambda x: x[1], reverse=True)  # Liste des mots les plus utilisés
@@ -72,8 +71,9 @@ class Page_temps_de_cuisson:
 
     @staticmethod
     def boxplot(dictionnaire_minutes: Dict[int, int]) -> None:
-        """ Fonction qui trace le boxplot des temps de cuisson
-        
+        """ 
+        Fonction qui trace le boxplot des temps de cuisson
+
         Reçoit le dictionnaire {id : temps de cuisson} et plot le boxplot répartition des temps de cuisson 
         """
         occurrences_values = list(dictionnaire_minutes.values())
@@ -90,7 +90,8 @@ class Page_temps_de_cuisson:
 
     @staticmethod
     def filtre_minutes(dictionnaire_minutes: Dict[int, int]) -> Dict[int, int]:
-        """ Fonction qui filtre le dictionnaire pour enlever les valeurs extrêmes
+        """ 
+        Fonction qui filtre le dictionnaire pour enlever les valeurs extrêmes
             reçoit en entrée : - un dictionnaire dictionnaire_minutes
         
         """
@@ -106,7 +107,8 @@ class Page_temps_de_cuisson:
 
     @staticmethod
     def generate_cursor_dataframe(df: pd.DataFrame) -> pd.DataFrame:
-        """ Fonction pour créer le camembert interactif, avec le curseur
+        """ 
+        Fonction pour créer le camembert interactif, avec le curseur
             reçoit en entrée : un dataframe pandas
         """
         df_pivot = pd.DataFrame({
@@ -135,10 +137,9 @@ class Page_temps_de_cuisson:
 
     @staticmethod
     def df_to_pickle(df_pivot: pd.DataFrame, path_pickle: str) -> int:
-        """ Fonction pour envoyer le dataframe réduit, utilisé pour le camembert interactif, vers un .pkl
-            reçoit en entrée : - un dataframe
-                            - un chemin vers le pickle où sauvegarder le df 
-        
+        """
+        Fonction pour envoyer le dataframe réduit, utilisé pour le camembert interactif, vers un .pkl 
+        reçoit en entrée : un dataframe et un chemin vers le pickle où sauvegarder le df
         """
         df_pivot = df_pivot.fillna(0)
         df_pivot.to_pickle(path_pickle)
@@ -146,10 +147,9 @@ class Page_temps_de_cuisson:
 
     @staticmethod
     def generate_camemberts_significatifs(df : pd.DataFrame, path : str) -> pd.DataFrame: 
-        """ Fonction pour générer les 5 camemberts significatifs
-            reçoit en entrée : - un dataframe
-                            - un chemin vers la sortie .pkl
-        
+        """ 
+        Fonction pour générer les 5 camemberts significatifs
+        reçoit en entrée : un dataframe et un chemin vers la sortie .pkl
         """
         df_significatif = pd.DataFrame({
             'intervalle': [10,30,60,120,121],
@@ -200,9 +200,9 @@ class Page_temps_de_cuisson:
 
     @staticmethod
     def top_by_interval_season(df: pd.DataFrame) -> Dict[Tuple[str, int], List[int]] :
-        """ Fonction qui créé un dictionnaire, regroupant les top 10 des recettes par saison et par intervalle
-            reçoit en entrée : - un dataframe
-        
+        """ 
+        Fonction qui créé un dictionnaire, regroupant les top 10 des recettes par saison et par intervalle
+        reçoit en entrée : - un dataframe
         """
         Liste_saisons = ['Winter','Summer','Fall','Spring']
         liste_cook_times = [10,30,60,120,121] 
@@ -222,10 +222,9 @@ class Page_temps_de_cuisson:
 
     @staticmethod
     def ids_to_name(l: List[int],df: pd.DataFrame) -> List[str] : 
-        """ Fonction qui prend en entrée la liste des ids des recettes et renvoit la liste des recettes
-            reçoit en entrée : - une liste
-                            - un dataframe
-        
+        """ 
+        Fonction qui prend en entrée la liste des ids des recettes et renvoit la liste des recettes
+        reçoit en entrée : une liste et un dataframe
         """
         l_names = []
 
@@ -236,9 +235,10 @@ class Page_temps_de_cuisson:
 
     @staticmethod
     def get_name_top_by_interval_season(dictionnaire: Dict[Tuple[str, int], List[int]],df: pd.DataFrame) -> Dict[Tuple[str, int], List[str]] :
-        """ Fonction qui prend en entrée notre dictionnaire conçu à top_by_interval_season, 
+        """ 
+        Fonction qui prend en entrée notre dictionnaire conçu à top_by_interval_season, 
         et qui renvoie le dictionnaire avec comme values les noms des recettes
-        
+
         reçoit en entrée : - un dictionnaire
                         - un dataframe 
         """
@@ -251,6 +251,9 @@ class Page_temps_de_cuisson:
 
     @staticmethod
     def generate_pickles_temps_de_cuisson() -> None:
+        """
+        Génère les pickles de temps de cuisson
+        """
         df = pd.read_pickle("./data/preprocess/temps_de_cuisson.pkl")
         vector, vector_id = Page_temps_de_cuisson.get_vectors(df)
         dictionnaire_minutes = Page_temps_de_cuisson.dictionnaire_minutes(vector, vector_id)
