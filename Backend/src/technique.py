@@ -1,4 +1,5 @@
 import pandas as pd
+print("technique", pd.__version__)
 import pickle
 from typing import List, Any
 import logging

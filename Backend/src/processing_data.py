@@ -2,10 +2,6 @@ import numpy as np
 from pathlib import Path
 import pandas as pd
 import os
-import sys
-
-# Ajouter le répertoire parent de 'utils' au chemin de recherche des modules
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 #---------------------------------------------------------------
 
@@ -63,18 +59,6 @@ class SeasonHandler:
         contingency_table['count'] = pd.DataFrame(number_total_recipe_id)
         freq_contingency_table = contingency_table.div(contingency_table['count'], axis=0).drop(columns='count')
         return freq_contingency_table
-    
-    @staticmethod
-    def filter_data(interaction: pd.DataFrame, columns: list[str], i: int = 5, filter_count: bool = False) -> pd.DataFrame:
-        """
-        Filter interaction data based on column values and count threshold.
-        Returns:
-            pd.DataFrame: Filtered interaction data.
-        """
-        recipe_season_count = interaction.groupby(columns).size().reset_index(name='count')
-        if filter_count:
-            recipe_season_count = recipe_season_count.loc[recipe_season_count[recipe_season_count['count'] >= i].index]
-        return recipe_season_count
 
     @staticmethod
     def contingency_table(recipe_season_count: pd.DataFrame) -> pd.DataFrame:
@@ -184,13 +168,13 @@ class PreprocessingData:
 
         # Assign seasons and Filter data
         interaction['season'] = interaction['date'].apply(SeasonHandler.assign_season_date)
-        recipe_count = SeasonHandler.filter_data(interaction, "id", i = self.k, filter_count = True)
+        recipe_count = DataProcessor.filter_data(interaction, "id", i = self.k, filter_count = True)
         
         # refactor for recipe and interaction of origin
         recipe = recipe[recipe['id'].isin(recipe_count["id"])]
         interaction = interaction[interaction['id'].isin(recipe_count["id"])]
     
-        recipe_season_count = SeasonHandler.filter_data(interaction, ['id', 'season'])
+        recipe_season_count = DataProcessor.filter_data(interaction, ['id', 'season'])
         contigency_table = SeasonHandler.contingency_table(recipe_season_count)
         contigency_table = SeasonHandler.modified_frequency(contigency_table)
 
