@@ -5,12 +5,19 @@ description = "Documentation pour le projet KIT_BIG_DATA_MS2025"
 authors = ["Cécile <74317560+Cecile-L@users.noreply.github.com>"]
 readme = "README.md"
 packages = [
-    { include = "Backend"},
-    { include = "Frontend"}
+    { include = "src", from ="Backend"},
+    { include = "utils", from ="Backend"},
+    { include = "tests", from ="Backend"},
+    { include = "Frontend"},
+    { include = "source"}
+]
+include = [
+    { path = "data/preprocess/*.pkl" },   # Inclure tous les fichiers pickle du dossier data/preprocess
+    { path = "data/images/" } # Inclure tous les images du dossier data/images
 ]
 
 [tool.poetry.dependencies]
-python = "3.11.9"
+python = ">=3.11.9,<3.12"
 plotly = "^5.24.1"
 pathlib = "^1.0.1"
 scikit-learn = "^1.5.2"
@@ -40,4 +47,7 @@ ipykernel = "^6.29.5"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["Backend/tests"]
 

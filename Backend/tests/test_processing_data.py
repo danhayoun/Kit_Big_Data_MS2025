@@ -5,14 +5,14 @@ import os
 import numpy as np
 import sys
 
-from Backend.processing_data import SeasonHandler, DataProcess#, PreprocessingData
-from Backend.utils.data_processor import DataProcessor
-from Backend.utils.file_manager import FileManager
+from src.processing_data import SeasonHandler, DataProcess#, PreprocessingData
+from utils.data_processor import DataProcessor
+from utils.file_manager import DataHandler
 
 ABSOLUTE_PATH = os.path.abspath(__file__)
 
 # TO NOTE: I am using here some make up data so that I can check the functions.
-@pytest.fixture # éviter répétitionquand utiliser dans plusieurs tests 
+@pytest.fixture # éviter répétition quand utiliser dans plusieurs tests 
 def sample_data() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """
     Provide fictive sample data for testing purposes.
@@ -110,11 +110,10 @@ def test_reassign_season(sample_data: tuple[pd.DataFrame, pd.DataFrame, pd.DataF
     expected_seasons = ['Spring', 'Spring', 'Fall', 'Spring', ['Spring', 'Fall']]
     
     recipe['season'] = DataProcess.calculate_seasons(
-            contigency_table,
-            id_season_dict,
-            recipe
-        )
-
+        contigency_table,
+        id_season_dict,
+        recipe
+    )
     
     assert recipe['season'][:4].tolist() == expected_seasons[:4], f"Expected {expected_seasons}, but got {recipe['season'].tolist()}"
     
