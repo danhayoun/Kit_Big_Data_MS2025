@@ -1,4 +1,4 @@
-name: Build Documentation
+name: Build Documentation and testing Streamlit
 
 on: 
   push:
@@ -35,3 +35,7 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./build
+
+    - name: Deploy to Streamlit Cloud
+      run: |
+        poetry run streamlit run Frontend/Accueil.py
