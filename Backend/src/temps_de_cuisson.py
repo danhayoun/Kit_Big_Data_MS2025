@@ -19,7 +19,7 @@ class Page_temps_de_cuisson :
             en entrée : - un dataframe pandas
 
         """
-        recipes = pd.read_csv("./data/raw/RAW_recipes.csv")
+        recipes = pd.read_csv("data/raw/RAW_recipes.csv")
         df = pd.merge(recipes[['id','name','minutes']], df, on='id', how='right') 
 
         return df 
