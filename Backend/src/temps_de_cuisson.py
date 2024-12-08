@@ -11,28 +11,18 @@ import pickle
 import bisect
 
 
-class Page_temps_de_cuisson :
+# A l'aide de ces fonctions, nous avons généré le dataframe "temps_de_cuisson.pkl", que nous avons utilisé dans toute la suite.
 
-    @staticmethod
-    def generate_accurate_df(df,path="data/raw/RAW_recipes.csv") :
-        """ Fonction qui rajoute les colonnes 'minutes' et 'name' au df
+#Cette fonction ne peut marcher que si l'on importe RAW_recipes.csv dans data/raw
+
+def generate_accurate_df(df,path="data/raw/RAW_recipes.csv") :
+        """ Fonction qui rajoute les colonnes 'minutes', 'name' et 'intervalle au df
             en entrée : - un dataframe pandas
-
         """
         recipes = pd.read_csv(path) #ICI
         df = pd.merge(recipes[['id','name','minutes']], df, on='id', how='right') 
 
-        return df 
 
-
-
-    #Je veux que cette fonction rajoute une colonne "intervalle" sur chaque recette désormais. Ainsi, je pourrais rechercher facilement, dans l'intervalle 10-30min par exemple, les 10 recettes les mieux notées 
-    @staticmethod
-    def add_intervalle(df) :
-        """ Fonction qui rajoute la colonne 'intervalle' au df
-            en entrée : - un dataframe pandas
-
-        """
 
         liste_cook_times = [10,30,60,120,121] #Un peu mal dit mais bon  
 
@@ -45,12 +35,17 @@ class Page_temps_de_cuisson :
             if(position <len(liste_cook_times)) :
                 df.at[i,'intervalle'] = liste_cook_times[position] #On remarque que la valeur position correspond à l'intervalle auquel minutes appartient. En effet, si minutes <10, alors position = 0 et on veut récupérer la valeur 10. Cette valeur correspond bien à la position 0 de notre liste. En effet, la méthode  bisect nous donne les positions sans pour autant rajouter une nouvelle valeur dans la liste.
             else : 
-                df.at[i,'intervalle'] = 121
+                df.at[i,'intervalle'] = 121            
+        return df
 
 
 
-            
-        return df 
+
+
+class Page_temps_de_cuisson :
+
+
+ 
 
     @staticmethod
     def get_vectors(df) :
@@ -319,11 +314,8 @@ class Page_temps_de_cuisson :
     
     @staticmethod
     def generate_pickles_temps_de_cuisson() :
-        df = pd.read_pickle("./data/preprocess/recipe_filtered.pkl")
 
-        df = Page_temps_de_cuisson.generate_accurate_df(df)
-
-        df = Page_temps_de_cuisson.add_intervalle(df) #ajout colonne intervalle
+        df = pd.read_pickle("./data/preprocess/temps_de_cuisson.pkl")
 
         vector,vector_id = Page_temps_de_cuisson.get_vectors(df)
 

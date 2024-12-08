@@ -15,27 +15,6 @@ import src.temps_de_cuisson as cr
 
 
 
-def test_generate_accurate_df() :
-    df = pd.read_pickle("./data/preprocess/recipe_filtered.pkl")
-    assert 'minutes' not in df.columns
-    assert 'name' not in df.columns
-
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
-    recipe_path = os.path.join(base_dir, "data/raw/RAW_recipes.csv")
-
-    df = cr.Page_temps_de_cuisson.generate_accurate_df(df, recipe_path)
-    assert 'minutes','name' in df.columns
-
-def test_add_intervalle() :
-    df = pd.read_pickle("./data/preprocess/recipe_filtered.pkl")
-
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
-    recipe_path = os.path.join(base_dir, "data/raw/RAW_recipes.csv")
-
-    df = cr.Page_temps_de_cuisson.generate_accurate_df(df,recipe_path)
-    assert 'intervalle' not in df.columns
-    df = cr.Page_temps_de_cuisson.add_intervalle(df)
-    assert 'intervalle' in df.columns
 
 def test_get_vectors() :
 
