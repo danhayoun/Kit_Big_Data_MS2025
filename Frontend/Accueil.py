@@ -95,7 +95,7 @@ st.markdown(
             <li>Une par rapport aux <strong>techniques de cuisine</strong> utilisées, en fonction de la saison.</li>
             <li>Et une dernière page, plus insolite, regroupant diverses observations remarquables que nous pouvons faire sur le jeu de données.</li>
         </ul>
-        <p>✏️Ci-dessous, vous retrouverez des explications sur la méthodologie employée lors de cette étude.</p>
+        <p>✏️Vous retrouverez des explications sur la méthodologie employée lors de cette étude dans la page commentaires.</p>
         <p>Nous avons commencé par un pré-traitement des données, expliqué à la page <strong>fun_facts</strong>.</p>
     </div>
     """,
