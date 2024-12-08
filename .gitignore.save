@@ -110,7 +110,12 @@ dmypy.json
 # data
 /data/raw/
 /data/preprocess/*.csv
-data.txt
+data.txt<<<<<<< HEAD
+
+*.DS_Store
+=======
 # Vscode
 *.DS_Store
 
+
+>>>>>>> main
