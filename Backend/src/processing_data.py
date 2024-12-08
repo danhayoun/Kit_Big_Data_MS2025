@@ -2,10 +2,6 @@ import numpy as np
 from pathlib import Path
 import pandas as pd
 import os
-import sys
-
-# Ajouter le répertoire parent de 'utils' au chemin de recherche des modules
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 #---------------------------------------------------------------
 

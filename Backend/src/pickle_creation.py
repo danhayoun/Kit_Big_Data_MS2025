@@ -1,14 +1,9 @@
 import pandas as pd
 print("pickle creation", pd.__version__)
 from pathlib import Path
-from Backend.technique import DataLoader
-from Backend.utils.data_processor import DataProcessor
-from Backend.utils.file_manager import FileManager 
-#from technique import DataLoader
-#from utils.data_processor import DataProcessor
-#from utils.file_manager import FileManager
+from utils.data_processor import DataProcessor
+from utils.file_manager import DataHandler
 import os
-#from utils.data_processor import DataProcessor
 ABSOLUTE_PATH = os.path.abspath(__file__)
 
 class pickle_creation:
@@ -26,15 +21,15 @@ class pickle_creation:
         self.path_data_csv_recipe = path_data_csv_recipe
     
     def create_dataframe(self):
-        df_pickle = DataLoader.load_pickle(self.data_path)
-        df_csv = DataLoader.load_csv(self.data_path_csv)
-        df_csv_recipe = DataLoader.load_csv(self.path_data_csv_recipe)
+        df_pickle = DataHandler.load_pickle(self.data_path)
+        df_csv = DataHandler.load_csv(self.data_path_csv)
+        df_csv_recipe = DataHandler.load_csv(self.path_data_csv_recipe)
         df_pickle_modif = page_review_info.create_review_per_year(df_csv, df_pickle)
         df_pickle_modif = df_pickle_modif.merge(df_csv_recipe[['id', 'name']],how='left',on='id')
         df_pickle_modif['count_for_year'] = df_pickle_modif['review_per_year'].apply(lambda x: page_review_info.extract_reviews(x))
         df_pickle_modif = df_pickle_modif.drop(['rating'], axis=1)
         df_pickle_modif = df_pickle_modif.drop(['review_per_year'], axis=1)
-        FileManager.save_file_as_pickle(df_pickle_modif, self.data_path / ".." / "recipe_with_years.pkl")
+        DataHandler.save_file_as_pickle(df_pickle_modif, self.data_path / ".." / "recipe_with_years.pkl")
 
 class file:
     def extract_reviews_for_year(review_dict, year):

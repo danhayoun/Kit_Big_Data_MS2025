@@ -1,8 +1,8 @@
 import pytest
 import pandas as pd
 import os
-from Backend.pickle_creation import page_review_info, file
-from Backend.utils.data_processor import DataProcessor
+from src.pickle_creation import page_review_info, file
+from utils.data_processor import DataProcessor
 
 ABSOLUTE_PATH = os.path.abspath(__file__)
 
