@@ -7,7 +7,6 @@ seaborn == 0.12.2
 scikit-learn
 requests
 pathlib
-pickle
 plotly
 spacy == 3.7.2
-sphinx
+## on enlève pickle qui n'est pas disponible en tant que package à installer.

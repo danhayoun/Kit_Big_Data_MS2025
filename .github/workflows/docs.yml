@@ -1,6 +1,6 @@
 name: Build Documentation
 
-on:
+on: 
   push:
     branches:
       - main
@@ -8,20 +8,30 @@ on:
 jobs:
   build-docs:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.x
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11.9
+        
+    - name: Install Poetry on Max and Linux
+      run: 
+        curl -sSL https://install.python-poetry.org | python3 -
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install -r requirements-dev.txt
+    - name: Install dependencies
+      run: |
+        poetry install
 
-      - name: Build documentation
-        run: |
-          sphinx-build -b html source/ build/
+    - name: Build documentation
+      run: |
+        poetry run sphinx-build -b html source/ build/
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build
