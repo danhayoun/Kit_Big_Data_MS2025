@@ -118,6 +118,10 @@ class TechniquePage:
         Method to run the Streamlit Technique Page
         """
         st.title("Analyse des Corrélations entre Techniques et Saisons")
+        
+        st.write(
+            "Nous analysons les corrélations entre les différentes techniques listés par l'équipe de mangetamain et les 4 saisons de l'année sur une dataset réduite avec des recettes commentées au moins 5 fois. \n Nous voyons que nous obtenons malheureusement pas une forte corrélation ; la plus importante étant la technique grill avec l'été.  \n Pour y remédier, nous aurions pu essayer de réaliser une réduction de dimensions avec PCA pour dévoiler des tendances plus complexes.\n Sachant que notre dataset est plutôt équilibré entre chaque saison, nous aurions pu essayer de faire un filtrage des techniques pour voir si une amélioration est possible."
+            )
         self.load_datas()
 
         if self.season_correlations is not None:
@@ -129,6 +133,9 @@ class TechniquePage:
                 st.session_state.selected_technique = None
 
             st.write("### Sélectionnez une technique pour découvrir les corrélations")
+            
+            st.write("Nous renvoyons ici avec quelle saison la technique sélectionnée est le plus corrélé, à condition que la différence entre les coefficients de corrélations les plus extrêmes pour cette technique est supérieur à 0.1.")
+            
             techniques_list = list(self.season_correlations.index)
             cols = st.columns(8)
             for idx, technique in enumerate(techniques_list):
@@ -141,23 +148,26 @@ class TechniquePage:
                 season, correlation_value = self.analyzer.get_season_for_technique(selected_technique)
 
                 if correlation_value is None:
-                    st.subheader(f"La technique {selected_technique} n'est pas caractéristique d'une saison propre.")
+                    st.subheader(f"La technique {selected_technique} n'est pas spécifique à une saison propre.")
                 else:
                     st.subheader(
-                        f"La saison la plus corrélée avec la technique {selected_technique} est **{season}** "
+                        f"La saison la plus caractéristique avec la technique {selected_technique} est **{season}** "
                         f"avec une corrélation de {correlation_value:.4f}."
                     )
-                    st.divider()
-                    st.write(f"### Choisissez une saison pour voir les recettes pour la technique {selected_technique}:")
-                    seasons_list = ['Winter', 'Summer', 'Spring', 'Fall']
-                    selected_season = st.radio("Saisons disponibles :", seasons_list)
+                st.divider()
+                st.write(f"### Choisissez une saison pour voir les recettes pour la technique {selected_technique}:")
+                
+                st.write("Nous renvoyons ici avec, en fonction de la saison et de la technique sélectionnée ,les 10 recettes avec les meilleurs avis pondérés.")
+                
+                seasons_list = ['Winter', 'Summer', 'Spring', 'Fall']
+                selected_season = st.radio("Saisons disponibles :", seasons_list)
 
-                    if selected_season:
-                        top_recipes = RecipeRecommender.get_top_recipes_by_season(
-                            self.techniques, selected_technique, selected_season
-                        )
-                        st.write(f"### Les 10 recettes les mieux notées pour {selected_season} sont :")
-                        st.table(top_recipes)
+                if selected_season:
+                    top_recipes = RecipeRecommender.get_top_recipes_by_season(
+                        self.techniques, selected_technique, selected_season
+                    )
+                    st.write(f"### Les 10 recettes les mieux notées pour {selected_season} sont :")
+                    st.table(top_recipes)
 
 
 if __name__ == "__main__":
