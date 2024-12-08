@@ -173,7 +173,7 @@ class Page_temps_de_cuisson:
                     count = df[(df['season'] == i) & (liste_cook_times[j-1] < df['minutes'] ) & (df['minutes'] <= liste_cook_times[j])]
                 else : 
                     count = df[(df['season'] == i) & (df['minutes'] > liste_cook_times[-1] )]
-                    #print(f"[DEBUG] season: {i}, Intervalle: >= {liste_cook_times[-1]}, Lignes trouvées: {count.shape[0]}")
+                    print(f"[DEBUG] season: {i}, Intervalle: >= {liste_cook_times[-1]}, Lignes trouvées: {count.shape[0]}")
 
                 df_significatif.loc[df_significatif['intervalle'] == liste_cook_times[j], i] = count.shape[0]
         #Pourcentages 
