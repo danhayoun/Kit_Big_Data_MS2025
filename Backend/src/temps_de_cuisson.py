@@ -143,7 +143,6 @@ class Page_temps_de_cuisson:
         df_pivot = df_pivot.fillna(0)
         df_pivot.to_pickle(path_pickle)
 
-##########A PARTIR DE LA IL A PAS FAIT SON JOB  ################
 
     @staticmethod
     def generate_camemberts_significatifs(df : pd.DataFrame, path : str) -> pd.DataFrame: 
