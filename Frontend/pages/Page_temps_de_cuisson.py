@@ -121,7 +121,7 @@ st.write("""
 Nous remarquons aussi que l'automne est bien plus présents pour des temps de cuisson supérieurs à 1h. Il semble ainsi que les saisons les plus froids soient celles où on réalise les recette les plus longues tandis que les saisons chaudes (printemps, été) sont celles où les recette sont les plus courtes.
 """)
 
-st.write("nous vous laissons maintenant avec un top 10, pour chaque saison et chaque intervalle considéré plus haut, afin de vous laisser choisir la recette qui convient le mieux à votre saison ainsi qu'au temps que vous avez devant vous 🙂")
+st.write("nous vous laissons maintenant avec un top 10, pour chaque saison et chaque intervalle considéré plus haut, afin de vous laisser choisir la recette qui convient le mieux à votre saison ainsi qu'au temps que vous avez devant vous 🙂 ")
 dictionnaire = DictionnaireDisplay('temps_de_cuisson','../../data/preprocess/dictionnaire_tops_10.pkl')
 
 intervalle_mapping = {
