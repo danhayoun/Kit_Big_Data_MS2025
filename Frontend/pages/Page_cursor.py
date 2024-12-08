@@ -6,14 +6,7 @@ import pickle
 import sys
 import os
 
-# Ajouter la racine du projet au PYTHONPATH
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-
-
-
-from Backend.utils.Classe_pickle import Display, CamembertDisplay, DictionnaireDisplay
-
-
+from utils.Classe_pickle import Display, CamembertDisplay, DictionnaireDisplay
 
 
 # Titre de l'application
@@ -68,7 +61,7 @@ Modifiez les paramètres ci-dessous pour voir comment les résultats changent.
 
 # Charger le fichier .pkl
 
-with open('../../data/preprocess/cursor2.pkl', 'rb') as fichier :
+with open('./data/preprocess/cursor2.pkl', 'rb') as fichier :
     df = pd.read_pickle(fichier)
     df = df.fillna(0)
 
@@ -88,7 +81,7 @@ data_columns = ['Spring_%', 'Winter_%', 'Summer_%', 'Fall_%']
 label_names = ['Spring', 'Winter', 'Summer', 'Fall']
 
 
-pickle = CamembertDisplay('temps_de_cuisson','../../data/preprocess/cursor2.pkl') 
+pickle = CamembertDisplay('temps_de_cuisson','./data/preprocess/cursor2.pkl') 
 
 pickle.plot_interactive_pie_chart(
     data_columns=['Spring_%', 'Winter_%', 'Summer_%', 'Fall_%'],
@@ -100,11 +93,11 @@ pickle.plot_interactive_pie_chart(
 
 
  
-pickle = CamembertDisplay('temps_de_cuisson','../../data/preprocess/cursor_significatif.pkl')
+pickle = CamembertDisplay('temps_de_cuisson','./data/preprocess/cursor_significatif.pkl')
 
 pickle.plot_pie_charts_2(data_columns, label_names, title="Camemberts par intervalle de temps")
 
-dictionnaire = DictionnaireDisplay('temps_de_cuisson','../../data/preprocess/dictionnaire_tops_10.pkl')
+dictionnaire = DictionnaireDisplay('temps_de_cuisson','./data/preprocess/dictionnaire_tops_10.pkl')
 
 intervalle_mapping = {
     '0-10 min': 10,

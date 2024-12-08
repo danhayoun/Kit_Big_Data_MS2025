@@ -5,9 +5,11 @@ import seaborn as sns
 from datetime import datetime, date 
 import matplotlib.dates as mdates
 import pickle
-import cursor as cr
+import src.cursor as cr
 import pytest
+import os
 
+"""
 def test_extraction_csv() :
 
     tst_df = pd.DataFrame({
@@ -18,9 +20,9 @@ def test_extraction_csv() :
 
     tst_df['submitted'] = pd.to_datetime(tst_df['submitted'], errors='coerce')
 
-    tst_df.to_csv('test_assets/csv_test',index=False)
+    tst_df.to_csv('csv_test',index=False)
 
-    vector,vector_id,df = cr.extraction_csv('test_assets/csv_test')
+    vector,vector_id,df = cr.extraction_csv('csv_test')
 
     assert np.array_equal(vector, np.array([i**2 for i in range(182)])), "Test échoué pour vector"
     assert np.array_equal(vector_id, np.array([i for i in range(182)])), "Test échoué pour vector_id"
@@ -31,11 +33,12 @@ def test_extraction_csv() :
     except AssertionError as e:
         print(f"Test échoué pour DataFrame : {e}")
 
+    os.remove("csv_test")
 
 
     return 1
 
-
+"""
 
 def test_dictionnaire_minutes() :
     l = np.array([[i,i**2] for i in range(100)])

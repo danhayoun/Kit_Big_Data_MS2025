@@ -1,35 +1,64 @@
 .. _API_doc:
 
+==================
 API Documentation
 ==================
 La documentation de l'API est disponible ci-dessous :
 
-Backend.technique
-------------------
-.. automodule:: Backend.technique
+Backend
+========
+
+Script pour les pages
+----------------------
+
+technique
+~~~~~~~~~~
+.. automodule:: src.technique
+    :members: 
+    
+processing_data
+~~~~~~~~~~~~~~~~
+.. automodule:: src.processing_data
     :members: 
 
-Backend.utils.file_manager
-----------------------------
-.. automodule:: Backend.utils.file_manager
+cursor
+~~~~~~~
+.. automodule:: src.cursor
+    :members: 
+
+utils
+------ 
+
+file_manager
+~~~~~~~~~~~~~~~~~~~~~~
+.. automodule:: utils.file_manager
     :members:
 
-Backend.utils.data_processor
-----------------------------
-.. automodule:: Backend.utils.data_processor
+data_processor
+~~~~~~~~~~~~~~~~~~~~~~
+.. automodule:: utils.data_processor
     :members:
 
-Backend.processing_data
--------------------------
-.. automodule:: Backend.processing_data
-    :members: SeasonHandler
 
-Frontend.techniques
--------------------
-.. automodule:: Frontend.techniques
+Frontend
+=========
+
+Accueil
+--------
+.. automodule:: Frontend.Accueil
     :members:
 
-Frontend.Webapp
+cursor
 ----------------------
-.. automodule:: Frontend.Webapp
+.. automodule:: Frontend.pages.Page_cursor
+    :members:
+
+techniques
+--------------------------
+.. automodule:: Frontend.pages.Page_techniques
+    :members:
+
+fun_facts
+------------------------
+.. automodule:: Frontend.pages.Page_fun_facts
     :members:

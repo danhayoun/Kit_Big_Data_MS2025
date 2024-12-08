@@ -8,7 +8,7 @@ st.set_page_config(page_title="Accueil", page_icon="🏠")
 
 
 
-image_path = "Images/aliments-confinement.jpg"
+image_path = "./data/images/aliments-confinement.jpg"
 
 st.image(image_path,width=1200,use_container_width=False)
 
