@@ -1,8 +1,7 @@
 import pytest
 import pandas as pd
 import os
-from matplotlib.testing.decorators import check_figures_equal
-from Backend.pickle_creation import create_review_per_year, extract_reviews, extract_reviews_for_year, get_recipes_by_review_count, get_histogram_recipe
+from Backend.pickle_creation import page_review_info, file
 from Backend.utils.data_processor import DataProcessor
 
 ABSOLUTE_PATH = os.path.abspath(__file__)
@@ -37,7 +36,7 @@ def test_create_review_per_year() -> None:
     expanded_df_csv = DataProcessor.expand_rows_by_count(df_csv).drop(columns=['count']).reset_index(drop=True)
     
     # Utilisation de la fonction create_review_per_year
-    df_result = create_review_per_year(expanded_df_csv, df_pickle)
+    df_result = page_review_info.create_review_per_year(expanded_df_csv, df_pickle)
 
     #print(df_result['review_per_year'])
     assert df_result.loc[df_result['id'] == 1, 'review_per_year'].values[0] == {
@@ -63,13 +62,13 @@ def test_extract_reviews_for_year():
     }
     year_1 = 2023
     expected_result_1 = {2023:8,2022:7}
-    result = extract_reviews(review_dict_1)
+    result = page_review_info.extract_reviews(review_dict_1)
     assert result == expected_result_1, (
         f"Test failed. Expected {expected_result_1}, got {result}"
     )
     
     expected_result_2 = 8
-    result2 = extract_reviews_for_year(result, year_1)
+    result2 = file.extract_reviews_for_year(result, year_1)
     assert result2 == expected_result_2, (
         f"Test failed for year {year_1}. Expected {expected_result_2}, got {result2}"
     )
@@ -78,30 +77,30 @@ def test_get_recipes_by_review_count(sample_data: pd.DataFrame):
     # Exemple de données
     test_data = sample_data
     # Test avec max_count = 5
-    recipes = get_recipes_by_review_count(test_data, max_count=5)
+    recipes = page_review_info.get_recipes_by_review_count(test_data, max_count=5)
     assert recipes.tolist() == ['Lemon Tart']
 
-    recipes = get_recipes_by_review_count(test_data, max_count=10)
+    recipes = page_review_info.get_recipes_by_review_count(test_data, max_count=10)
     assert recipes.tolist() == ['Apple Pie', 'Chocolate Cake', 'Lemon Tart']
     
     # Test avec max_count = 1 (aucune recette ne doit correspondre)
-    recipes = get_recipes_by_review_count(test_data, max_count=1)
+    recipes = page_review_info.get_recipes_by_review_count(test_data, max_count=1)
     assert recipes.empty
     
 def test_get_histogram_recipe(sample_data: pd.DataFrame):
     test_data = sample_data
     # Test for a valid recipe
     recipe_name = "Chocolate Cake"
-    result = get_histogram_recipe(test_data, recipe_name)
+    result = page_review_info.get_histogram_recipe(test_data, recipe_name)
     assert result == {2020: 3, 2021: 4}, f"Expected {{2020: 3, 2021: 4}}, but got {result}"
 
     # Test for another valid recipe
     recipe_name = "Lemon Tart"
-    result = get_histogram_recipe(test_data, recipe_name)
+    result = page_review_info.get_histogram_recipe(test_data, recipe_name)
     assert result == {2020: 2, 2021: 2}, f"Expected {{2020: 2, 2021: 2}}, but got {result}"
 
     # Test for missing recipe
     recipe_name = "Nonexistent Recipe"
     with pytest.raises(ValueError) as exc_info:
-        get_histogram_recipe(test_data, recipe_name)
+        page_review_info.get_histogram_recipe(test_data, recipe_name)
     assert str(exc_info.value) == f"Recipe '{recipe_name}' not found in the dataset."

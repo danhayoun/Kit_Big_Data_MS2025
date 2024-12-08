@@ -1,12 +1,12 @@
 import pandas as pd
 print("pickle creation", pd.__version__)
 from pathlib import Path
-#from Backend.technique import DataLoader
-#from Backend.utils.data_processor import DataProcessor
-#from Backend.utils.file_manager import FileManager 
-from technique import DataLoader
-from utils.data_processor import DataProcessor
-from utils.file_manager import FileManager
+from Backend.technique import DataLoader
+from Backend.utils.data_processor import DataProcessor
+from Backend.utils.file_manager import FileManager 
+#from technique import DataLoader
+#from utils.data_processor import DataProcessor
+#from utils.file_manager import FileManager
 import os
 #from utils.data_processor import DataProcessor
 ABSOLUTE_PATH = os.path.abspath(__file__)
@@ -25,22 +25,31 @@ class pickle_creation:
         self.data_path_csv = path_data_csv
         self.path_data_csv_recipe = path_data_csv_recipe
     
-    def extract_reviews(self, review_dict):
-        """
-        Extracts a dictionary containing the total number of reviews per year 
-        from a dictionary with dates as keys and counts as values.
-        """
-        if not isinstance(review_dict, dict):
-            return {}
+    def create_dataframe(self):
+        df_pickle = DataLoader.load_pickle(self.data_path)
+        df_csv = DataLoader.load_csv(self.data_path_csv)
+        df_csv_recipe = DataLoader.load_csv(self.path_data_csv_recipe)
+        df_pickle_modif = page_review_info.create_review_per_year(df_csv, df_pickle)
+        df_pickle_modif = df_pickle_modif.merge(df_csv_recipe[['id', 'name']],how='left',on='id')
+        df_pickle_modif['count_for_year'] = df_pickle_modif['review_per_year'].apply(lambda x: page_review_info.extract_reviews(x))
+        df_pickle_modif = df_pickle_modif.drop(['rating'], axis=1)
+        df_pickle_modif = df_pickle_modif.drop(['review_per_year'], axis=1)
+        FileManager.save_file_as_pickle(df_pickle_modif, self.data_path / ".." / "recipe_with_years.pkl")
 
-        year_review_counts = {}
-        for date, count in review_dict.items():
-            year = date.year
-            year_review_counts[year] = year_review_counts.get(year, 0) + count
-
-        return year_review_counts
-            
-    def create_review_per_year(self, df_csv: pd.DataFrame, df_pickle: pd.DataFrame) -> pd.DataFrame:
+class file:
+    def extract_reviews_for_year(review_dict, year):
+        """
+        Extrait le nombre total de reviews pour une année donnée depuis un dictionnaire de dates.
+        """
+        return sum(value for key, value in review_dict.items() if key == year)
+    
+class page_review_info:
+    """
+    Class page_review_info is just to handle the fonctions for the page_review class
+    """
+    
+    @staticmethod
+    def create_review_per_year(df_csv: pd.DataFrame, df_pickle: pd.DataFrame) -> pd.DataFrame:
         """
         Add a column with a dictionnary of the number of review per date.
         """
@@ -59,28 +68,22 @@ class pickle_creation:
         
         return df_pickle
     
-    def create_dataframe(self):
-        df_pickle = DataLoader.load_pickle(self.data_path)
-        df_csv = DataLoader.load_csv(self.data_path_csv)
-        df_csv_recipe = DataLoader.load_csv(self.path_data_csv_recipe)
-        df_pickle_modif = self.create_review_per_year(df_csv, df_pickle)
-        df_pickle_modif = df_pickle_modif.merge(df_csv_recipe[['id', 'name']],how='left',on='id')
-        df_pickle_modif['count_for_year'] = df_pickle_modif['review_per_year'].apply(lambda x: self.extract_reviews(x))
-        df_pickle_modif = df_pickle_modif.drop(['rating'], axis=1)
-        df_pickle_modif = df_pickle_modif.drop(['review_per_year'], axis=1)
-        FileManager.save_file_as_pickle(df_pickle_modif, self.data_path / ".." / "recipe_with_years.pkl")
+    @staticmethod
+    def extract_reviews(review_dict):
+        """
+        Extracts a dictionary containing the total number of reviews per year 
+        from a dictionary with dates as keys and counts as values.
+        """
+        if not isinstance(review_dict, dict):
+            return {}
 
-class file:
-    def extract_reviews_for_year(review_dict, year):
-        """
-        Extrait le nombre total de reviews pour une année donnée depuis un dictionnaire de dates.
-        """
-        return sum(value for key, value in review_dict.items() if key == year)
+        year_review_counts = {}
+        for date, count in review_dict.items():
+            year = date.year
+            year_review_counts[year] = year_review_counts.get(year, 0) + count
+
+        return year_review_counts
     
-class page_review_info:
-    """
-    Class page_review_info is just to handle the fonctions for the page_review class
-    """
     @staticmethod
     def get_recipes_by_review_count(data: pd.DataFrame, max_count: int) -> pd.Series:
         """

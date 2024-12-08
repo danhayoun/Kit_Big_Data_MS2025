@@ -1,6 +1,10 @@
 import pandas as pd
 
 class DataProcessor:
+    """
+    This class provides utility methods for processing and analyzing recipe and interaction data.
+    It includes functionality for transforming dates, filtering data, scaling values, and performing other data operations.
+    """
     @staticmethod
     def transform_date(date: pd.Series) -> pd.Series:
         """
