@@ -78,7 +78,7 @@ def test_filter_data(sample_data: tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame
 
     expected_filtered_ids = [2, 4, 5] ## la solution
     
-    filtered_data = SeasonHandler.filter_data(interaction_data, "id", i=6, filter_count=True)
+    filtered_data = DataProcessor.filter_data(interaction_data, "id", i=6, filter_count=True)
     filtered_ids = filtered_data['id'].unique().tolist()
 
     assert set(filtered_ids) == set(expected_filtered_ids), (
