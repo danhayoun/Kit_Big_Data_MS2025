@@ -19,7 +19,7 @@ class Page_temps_de_cuisson :
             en entrée : - un dataframe pandas
 
         """
-        recipes = pd.read_csv("../../../data/raw/RAW_recipes.csv")
+        recipes = pd.read_csv("./data/raw/RAW_recipes.csv")
         df = pd.merge(recipes[['id','name','minutes']], df, on='id', how='right') 
 
         return df 
@@ -319,7 +319,7 @@ class Page_temps_de_cuisson :
     
     @staticmethod
     def generate_pickles_temps_de_cuisson() :
-        df = pd.read_pickle("../../../data/raw/recipe_filtered.pkl")
+        df = pd.read_pickle("./data/preprocess/recipe_filtered.pkl")
 
         df = Page_temps_de_cuisson.generate_accurate_df(df)
 
@@ -333,9 +333,9 @@ class Page_temps_de_cuisson :
 
         df_pivot = Page_temps_de_cuisson.generate_cursor_dataframe(df)
 
-        Page_temps_de_cuisson.df_to_pickle(df_pivot,"../../../data/preprocess/cursor2.pkl")
+        Page_temps_de_cuisson.df_to_pickle(df_pivot,"./data/preprocess/cursor2.pkl")
 
-        Page_temps_de_cuisson.generate_camemberts_significatifs(df,"../../../data/preprocess/cursor_significatif.pkl") 
+        Page_temps_de_cuisson.generate_camemberts_significatifs(df,"./data/preprocess/cursor_significatif.pkl") 
 
 
         dictionnaire_tops_10 = Page_temps_de_cuisson.top_by_interval_season(df)
@@ -343,7 +343,7 @@ class Page_temps_de_cuisson :
 
         #print(dictionnaire_final)
 
-        with open("../../../data/preprocess/dictionnaire_tops_10.pkl", "wb") as fichier:
+        with open("./data/preprocess/dictionnaire_tops_10.pkl", "wb") as fichier:
             pickle.dump(dictionnaire_final, fichier) #Etape OK 
 
 
