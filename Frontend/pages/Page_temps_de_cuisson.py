@@ -17,10 +17,6 @@ st.write("""
 ### Bienvenue sur la page interactive du temps de cuisson. Ici, nous étudions les liens entre temps de cuisson et saisons. 
 """)
 
-
-
-
-
 st.write("Dans un premier temps, nous avons voulu tracer la répartition des saisons des recettes, pour des valeurs de temps de cuisson fixées. ")
 st.write("Point méthode : nous ne comptons pas le nombre de recettes déposées seulement, nous les pondérons par leur nombre de commentaires. Ainsi, plus une recette possède de commentaires, plus elle aura du poids dans le graphique. ")
 
@@ -35,7 +31,6 @@ f.afficher_histogram()
 data_columns = ['Spring_%', 'Winter_%', 'Summer_%', 'Fall_%']
 label_names = ['Spring', 'Winter', 'Summer', 'Fall']
 
-
 pickle = CamembertDisplay('temps_de_cuisson','./data/preprocess/cursor2.pkl') 
 
 pickle.plot_interactive_pie_chart(
@@ -44,7 +39,6 @@ pickle.plot_interactive_pie_chart(
     slider_label="Sélectionner un temps de cuisson (en min)",
     title="Répartition des recettes pour un temps de cuisson de"
 )
-
 
 st.write("nous avons ensuite trouvé que ces graphes n'étaient pas suffisament représentatifs pour tirer des conclusions, par rapport au temps des recettes en fonction des saisons.")
 
@@ -72,6 +66,7 @@ intervalle_mapping = {
     '1-2h': 120,
     'plus de 2h': 121
 }
+
 option_choisie = st.selectbox("Choisissez un intervalle :", options=list(intervalle_mapping.keys()))
 intervalle_choisi = intervalle_mapping[option_choisie]
 

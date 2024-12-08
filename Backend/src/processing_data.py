@@ -17,6 +17,7 @@ ABSOLUTE_PATH = os.path.abspath(__file__)
 #--------------------------
 #--------------------------
 class SeasonHandler:
+    """Class pour déterminer la saison"""
     @staticmethod
     def create_season(year: int) -> tuple[pd.Timestamp, pd.Timestamp, pd.Timestamp, pd.Timestamp]:
         """
@@ -93,6 +94,7 @@ class SeasonHandler:
     
 #--------------------------
 class DataProcess:
+    """Class pour data process"""
     @staticmethod
     def weigthed_ratings_recipe(interaction: pd.DataFrame, recipe: pd.DataFrame) -> pd.DataFrame:
         """
@@ -129,6 +131,7 @@ class DataProcess:
 ### Pipeline of Preprocessing the Data ###
 #--------------------------
 class PreprocessingData:
+    """Class pour clean la data"""
     def __init__(self, folder_path: Path, output_path: Path, k: int = 5) -> None:
         """
         Initializes the PreprocessingData class
