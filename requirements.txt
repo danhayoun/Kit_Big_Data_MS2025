@@ -1,5 +1,5 @@
 datetime == 5.5
-spacy = 3.7.2
+spacy == 3.7.2
 scikit-learn == 1.5.2
 streamlit == 1.40.2
 pathlib == 1.0.1

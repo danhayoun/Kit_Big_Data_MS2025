@@ -5,12 +5,15 @@ description = "Documentation pour le projet KIT_BIG_DATA_MS2025"
 authors = ["Cécile <74317560+Cecile-L@users.noreply.github.com>"]
 readme = "README.md"
 packages = [
-    { include = "Backend"},
+    { include = "src", from ="Backend"},
+    { include = "utils", from ="Backend"},
+    { include = "tests", from ="Backend"},
     { include = "Frontend"},
     { include = "source"}
 ]
 include = [
-    { path = "data/preprocess/*.pkl" }   # Inclure tous les fichiers pickle du dossier data/preprocess
+    { path = "data/preprocess/*.pkl" },   # Inclure tous les fichiers pickle du dossier data/preprocess
+    { path = "data/images/" } # Inclure tous les images du dossier data/images
 ]
 
 [tool.poetry.dependencies]

@@ -10,8 +10,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 #---------------------------------------------------------------
 
 # import classes from utils
-from Backend.utils.file_manager import FileManager
-from Backend.utils.data_processor import DataProcessor
+from utils.file_manager import DataHandler
+from utils.data_processor import DataProcessor
 
 ABSOLUTE_PATH = os.path.abspath(__file__)
 
@@ -160,9 +160,9 @@ class PreprocessingData:
             tuple[pd.DataFrame, pd.DataFrame]
         """
         csv_files = [file.name for file in self.folder_path.glob('*.csv')]
-        raw_data = FileManager.read_raw_files(csv_files, self.folder_path)
-        _, interaction = FileManager.get_next_item(raw_data)
-        _, recipe = FileManager.get_next_item(raw_data, index=2)
+        raw_data = DataHandler.read_raw_files(csv_files, self.folder_path)
+        _, interaction = DataHandler.get_next_item(raw_data)
+        _, recipe = DataHandler.get_next_item(raw_data, index=2)
         return interaction, recipe
 
     def preprocess_data(self, interaction: pd.DataFrame, recipe: pd.DataFrame) -> pd.DataFrame:
@@ -212,7 +212,7 @@ class PreprocessingData:
         """
         Saves the processed recipe data to the specified output path as a pickle file.
         """
-        FileManager.save_file_as_pickle(recipe, self.output_path)
+        DataHandler.save_file_as_pickle(recipe, self.output_path)
         print(f"Processed data saved to {self.output_path}")
 
     def run(self) -> None:

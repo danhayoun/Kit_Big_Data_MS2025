@@ -13,7 +13,7 @@ import bisect
 ###################Fonction qui rajoute les colonnes 'minutes' et 'name' au df #################
 
 def generate_accurate_df(df) :
-    recipes = pd.read_csv("../../../data/raw/RAW_recipes.csv")
+    recipes = pd.read_csv("./data/raw/RAW_recipes.csv")
     df = pd.merge(recipes[['id','name','minutes']], df, on='id', how='right') 
 
     return df 

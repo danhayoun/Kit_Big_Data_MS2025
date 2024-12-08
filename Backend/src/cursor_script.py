@@ -5,11 +5,11 @@ import seaborn as sns
 from datetime import datetime, date 
 import matplotlib.dates as mdates
 import pickle
-import cursor as cr
+import Backend.src.cursor as cr
 
 
 
-df = pd.read_pickle("../../../data/raw/recipe_filtered.pkl")
+df = pd.read_pickle("./data/preprocess/recipe_filtered.pkl")
 
 df = cr.generate_accurate_df(df)
 
@@ -23,9 +23,9 @@ dictionnaire_minutes = cr.filtre_minutes(dictionnaire_minutes)
 
 df_pivot = cr.generate_cursor_dataframe(df)
 
-cr.df_to_pickle(df_pivot,"../../../data/preprocess/cursor2.pkl")
+cr.df_to_pickle(df_pivot,"./data/preprocess/cursor2.pkl")
 
-cr.generate_camemberts_significatifs(df,"../../../data/preprocess/cursor_significatif.pkl") 
+cr.generate_camemberts_significatifs(df,"./data/preprocess/cursor_significatif.pkl") 
 
 
 dictionnaire_tops_10 = cr.top_by_interval_season(df)
@@ -33,5 +33,5 @@ dictionnaire_final = cr.get_name_top_by_interval_season(dictionnaire_tops_10,df)
 
 print(dictionnaire_final)
 
-with open("../../../data/preprocess/dictionnaire_tops_10.pkl", "wb") as fichier:
+with open("./data/preprocess/dictionnaire_tops_10.pkl", "wb") as fichier:
     pickle.dump(dictionnaire_final, fichier) #Etape OK 
