@@ -5,16 +5,14 @@ import pandas as pd
 import plotly.graph_objects as go
 import os 
 
-
+st.set_page_config(layout="wide")
 # Ajouter le répertoire racine au chemin de recherche des modules
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-if project_root not in sys.path:
-    sys.path.append(project_root)
 
-from pages.technique import DataLoader
+from utils.file_manager import DataHandler
 
 class SeasonCorrelationAnalyzer:
     """Class for analyzing season correlations."""
+    
     def __init__(self, season_correlations: pd.DataFrame) -> None:
         self.season_correlations = season_correlations
 
@@ -109,7 +107,7 @@ class TechniquePage:
         """
         Load all the needed pickle for the technique page (season_correlations & techniques)
         """
-        data_loader = DataLoader()
+        data_loader = DataHandler()
         self.season_correlations = data_loader.load_pickle("./data/preprocess/season_correlations.pkl")
         self.techniques = data_loader.load_pickle("./data/preprocess/techniques.pkl")
         if self.season_correlations is not None:
@@ -119,7 +117,6 @@ class TechniquePage:
         """
         Method to run the Streamlit Technique Page
         """
-        st.set_page_config(layout="wide")
         st.title("Analyse des Corrélations entre Techniques et Saisons")
         self.load_datas()
 

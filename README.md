@@ -12,13 +12,18 @@ Ce projet est une application d'analyse de données développée en Python avec 
     cd Kit_Big_Data_MS2025
     ```
 
-2. **Créer un environnement virtuel :**
+2. **Télécharger poetry :**
     ```bash
-    python -m venv venv
-    source venv/bin/activate  # Sur Windows : venv\Scripts\activate
+    curl -sSL https://install.python-poetry.org | python3 -
     ```
 
 3. **Installer les dépendances :**
+    
+    Si vous avez installé poetry :
+    ```bash
+    poetry install
+    ```
+    Sinon :
     ```bash
     pip install -r requirements.txt
     pip install -r requirements-dev.txt
@@ -27,6 +32,11 @@ Ce projet est une application d'analyse de données développée en Python avec 
 ## Utilisation
 
 Pour lancer l'application Streamlit :
-
+Avec poetry :
+```bash
+poetry run streamlit run app/main.py
+```
+Sinon :
 ```bash
 streamlit run app/main.py
+```

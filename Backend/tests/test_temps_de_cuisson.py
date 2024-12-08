@@ -9,10 +9,9 @@ import sys
 import os
 import pytest
 
-# Ajouter la racine du projet au PYTHONPATH
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-import Backend.src.temps_de_cuisson.temps_de_cuisson as cr 
+
+import src.temps_de_cuisson as cr
 
 
 
@@ -20,14 +19,14 @@ def test_generate_accurate_df() :
     df = pd.read_pickle("./data/raw/recipe_filtered.pkl")
     assert 'minutes' not in df.columns
     assert 'name' not in df.columns
-    df = cr.generate_accurate_df(df)
+    df = cr.Page_temps_de_cuisson.generate_accurate_df(df)
     assert 'minutes','name' in df
 
 def test_add_intervalle() :
     df = pd.read_pickle("./data/raw/recipe_filtered.pkl")
-    df = cr.generate_accurate_df(df)
+    df = cr.Page_temps_de_cuisson.generate_accurate_df(df)
     assert 'intervalle' not in df.columns
-    df = cr.add_intervalle(df)
+    df = cr.Page_temps_de_cuisson.add_intervalle(df)
     assert 'intervalle' in df.columns
 
 def test_get_vectors() :
@@ -41,7 +40,7 @@ def test_get_vectors() :
     tst_df['submitted'] = pd.to_datetime(tst_df['submitted'], errors='coerce')
 
 
-    vector,vector_id = cr.get_vectors(tst_df)
+    vector,vector_id = cr.Page_temps_de_cuisson.get_vectors(tst_df)
 
     assert np.array_equal(vector, np.array([i**2 for i in range(182)])), "Test échoué pour vector"
     assert np.array_equal(vector_id, np.array([i for i in range(182)])), "Test échoué pour vector_id"
@@ -54,7 +53,7 @@ def test_dictionnaire_minutes() :
     dictionnaire_verif = {i : j for i,j in zip(l[:,0],l[:,1])}
     vector_id = l[:,0]
     vector = l[:,1]
-    dictionnaire_obtenu = cr.dictionnaire_minutes(vector,vector_id)
+    dictionnaire_obtenu = cr.Page_temps_de_cuisson.dictionnaire_minutes(vector,vector_id)
     assert dictionnaire_verif == dictionnaire_obtenu, "Les deux dictionnaires sont différents"
 
 
@@ -63,7 +62,7 @@ def test_dictionnaire_minutes() :
 def test_top_liste() :
     l = np.array([[i,i**2] for i in range(100)])
     dictionnaire_verif = {i : j for i,j in zip(l[:,0],l[:,1])} #On réutilise des mêmes dictionnaires car on les connait mieux 
-    top = cr.top_liste(dictionnaire_verif)
+    top = cr.Page_temps_de_cuisson.top_liste(dictionnaire_verif)
     l_test = [(i,i**2) for i in range(100)]
     l_test = l_test[::-1]
     assert top == l_test , "la liste obtenu est incorrecte "
@@ -73,14 +72,14 @@ def test_top_liste() :
 def test_boxplot() :
     l = np.array([[i,i**2] for i in range(100)])
     dictionnaire_verif = {i : j for i,j in zip(l[:,0],l[:,1])} #On réutilise des mêmes dictionnaires car on les connait mieux 
-    cr.boxplot(dictionnaire_verif)
+    cr.Page_temps_de_cuisson.boxplot(dictionnaire_verif)
 
 
 
 def test_filtre_minutes() :
     l = np.array([[i,i**2] for i in range(100)])
     dictionnaire = {i : j for i,j in zip(l[:,0],l[:,1])} #On réutilise des mêmes dictionnaires car on les connait mieux 
-    dictionnaire = cr.filtre_minutes(dictionnaire)
+    dictionnaire = cr.Page_temps_de_cuisson.filtre_minutes(dictionnaire)
     l_verif = np.array([[i,i**2] for i in range(1,32)]) #Jusqu'à 31, x**2 ne dépasse pas 1000
     dictionnaire_verif = {i : j for i,j in zip(l_verif[:,0],l_verif[:,1])}
 
@@ -94,7 +93,7 @@ def test_generate_cursor_dataframe():
         'minutes': [i % 181 + 1 for i in range(200)],  # Valeurs de 1 à 181 en boucle
     })
     
-    result = cr.generate_cursor_dataframe(df)
+    result = cr.Page_temps_de_cuisson.generate_cursor_dataframe(df)
     
 
     assert isinstance(result, pd.DataFrame), "Le résultat doit être un DataFrame."
@@ -130,7 +129,7 @@ def test_df_to_pickle() :
         'id': [i for i in range(182)],
         'minutes': [i**2 for i in range(182)],
     })
-    cr.df_to_pickle(tst_df,"tst_df.pkl")
+    cr.Page_temps_de_cuisson.df_to_pickle(tst_df,"tst_df.pkl")
 
     df = pd.read_pickle("tst_df.pkl")
     df = df.astype(int) #car le chargement donne des flottants, donc la fonction assert renvoie une erreur : les types des données sont différents. Or on ne se soucie pas de leurs types (ce sont des entiers ou des flottants) donc on force tout à int.
@@ -149,9 +148,9 @@ def test_generate_camemberts_significatifs():
     
     output_path = "df_significatif_test.pkl"
     
-    df_significatif = cr.generate_camemberts_significatifs(df, output_path)
+    df_significatif = cr.Page_temps_de_cuisson.generate_camemberts_significatifs(df, output_path)
     
-    assert os.path.exists(output_path), "Le fichier de sortie n'a pas été créé."
+    assert os.path.exists(output_path), "Le fichier de sortie n'a pas été cr.Page_temps_de_cuissonéé."
     
     df_significatif_loaded = pd.read_pickle(output_path)
     
@@ -182,7 +181,7 @@ def test_top_by_interval_season():
         'weighted_rating': [4.5, 3.0, 5.0, 4.0, 4.2, 4.8, 3.5, 4.7, 4.6, 5.0]
     })
     
-    result = cr.top_by_interval_season(df)
+    result = cr.Page_temps_de_cuisson.top_by_interval_season(df)
     
     assert isinstance(result, dict), "Le résultat doit être un dictionnaire."
 
@@ -215,7 +214,7 @@ def test_ids_to_name():
     l = [1, 3, 4]
 
     # Appeler la fonction
-    result = cr.ids_to_name(l, df)
+    result = cr.Page_temps_de_cuisson.ids_to_name(l, df)
 
     # Résultat attendu
     expected = ['Alice', 'Charlie', 'Diana']
@@ -247,7 +246,7 @@ def test_get_name_top_by_interval_season():
     }
 
     # Appeler la fonction
-    result = cr.get_name_top_by_interval_season(dictionnaire, df)
+    result = cr.Page_temps_de_cuisson.get_name_top_by_interval_season(dictionnaire, df)
 
     # Vérifier que le résultat correspond au dictionnaire attendu
     assert result == expected, f"Résultat attendu : {expected}, mais obtenu : {result}"

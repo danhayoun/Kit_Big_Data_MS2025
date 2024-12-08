@@ -1,12 +1,11 @@
-datetime
-streamlit
-pandas
-numpy == 1.23.5
-matplotlib == 3.9.2
-seaborn == 0.12.2
-scikit-learn
-requests
-pathlib
-plotly
+datetime == 5.5
 spacy == 3.7.2
-## on enlève pickle qui n'est pas disponible en tant que package à installer.
+scikit-learn == 1.5.2
+streamlit == 1.40.2
+pathlib == 1.0.1
+pandas == 2.2.3
+plotly == 5.24.1
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1.tar.gz
+numpy == 1.23.5
+seaborn == 0.12.2
+matplotlib == 3.9.2

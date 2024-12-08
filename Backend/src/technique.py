@@ -1,10 +1,10 @@
-import ast
 import pandas as pd
 import pickle
 from typing import List, Any
 import logging
 import spacy
-import streamlit as st
+
+from utils.file_manager import DataHandler
 
 # Configure logging
 logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -71,54 +71,6 @@ TECHNIQUES_LIST = [
     'whip',
     'whisk',
 ]
-
-class DataLoader:
-    """Class responsible for loading and converting data"""
-    
-    @staticmethod
-    def load_csv(filepath: str) -> pd.DataFrame:
-        """
-        Read a csv file into DataFrame
-        """
-        return pd.read_csv(filepath)
-    
-    @staticmethod
-    def load_pickle(filepath: str) -> pd.DataFrame:
-        try:
-            with open(filepath, "rb") as f:
-                df = pickle.load(f)
-            return df
-        except FileNotFoundError as e:
-            st.error(f"Erreur de chargement des données : {e}")
-            return None
-
-    @staticmethod
-    def converting_list_column(df: pd.DataFrame,column_list_to_convert) -> None:
-        """
-        Convert the csv's imported list which was transform wrongly to a string to a python list
-        """
-        for col in column_list_to_convert:
-            if col !='tags': # si on veut traiter la colonne tags, il faudra gérer les erreurs de frappe de l'utilisateur
-                if isinstance(df[col][0], str) and df[col][0].startswith('['):
-                    df[col] = df[col].apply(ast.literal_eval)
-
-    def load_clean_csv(self, csv_path: str,  column_list_to_convert = None, date = None) -> pd.DataFrame:
-        """
-        Load data from CSV files and convert necessary columns into python type
-        """
-        try :
-            df = self.load_csv(csv_path)
-            if column_list_to_convert:
-                self.converting_list_column(df, column_list_to_convert= column_list_to_convert)
-            if date and date in df.columns:
-                df[date] = pd.to_datetime(df[date])
-            return df
-        except FileNotFoundError:
-            logging.error(f"Error: The file at {csv_path} was not found.")
-            return pd.DataFrame()
-        except Exception as e:
-            logging.error(f"An error occurred: {e}")
-            return pd.DataFrame()
     
 class TechniqueProcessor:
     """Class responsible for processing recipe techniques."""
@@ -128,10 +80,10 @@ class TechniqueProcessor:
     
     def binarize_step_to_technique(self, steps: Any) -> List[int]:
         """
-        Transform steps into a binary list indicating the presence of techniques.
+        Transform steps into a binary list indicating the presence of techniques
         
         Parameters:
-        steps (Any): The steps to analyze, typically a spaCy Doc object.
+        steps (spaCy Doc object): The steps to analyze
         
         Returns:
         List[int]: A binary list indicating the presence of techniques.
@@ -145,7 +97,7 @@ class TechniqueProcessor:
         
     def get_binary_techniques_list(self, raw_recipes_df: pd.DataFrame) -> List[List[int]]:
         """
-        Analyze steps using spaCy to detect techniques.
+        Analyze steps using spaCy to detect techniques
         
         Parameters:
         raw_recipes_df (pd.DataFrame): The DataFrame containing the raw recipes data.
@@ -192,12 +144,6 @@ class TechniqueProcessor:
         techniques_df["weighted_rating"] = df["weighted_rating"] 
         return techniques_df
 
-class CorrelationAnalyzer:
-    """Class responsible for analyzing correlations between techniques and seasons."""
-    
-    def __init__(self, techniques_list: List[str]) -> None:
-        self.techniques_list = techniques_list
-
     def analyze_correlation(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Analyze the correlation between techniques and seasons.
@@ -217,32 +163,33 @@ class CorrelationAnalyzer:
         correlation_matrix = df[self.techniques_list + list(season_dummies.columns)].corr()
 
         # Extract correlations between techniques and seasons
-        return correlation_matrix.loc[self.techniques_list, season_dummies.columns]
-
-# Main execution
-if __name__ == "__main__":
-    data_loader = DataLoader()
-    technique_processor = TechniqueProcessor(TECHNIQUES_LIST)
-    correlation_analyzer = CorrelationAnalyzer(TECHNIQUES_LIST)
+        return correlation_matrix.loc[self.techniques_list, season_dummies.columns]  
+          
+class TechniqueAnalyzer:
+    """Main class to run the recipe analysis by techniques and season"""
     
-    # Load data
-    recipes = data_loader.load_clean_csv('data/raw/RAW_recipes.csv',['steps'])
-    interactions = data_loader.load_clean_csv('data/raw/RAW_interactions.csv', date = 'date')
-    filter_recipes = pd.read_pickle('data/preprocess/recipe_filtered.pkl')
+    def __init__(self, techniques_list: List[str]) -> None:
+        self.data_loader = DataHandler()
+        self.technique_processor = TechniqueProcessor(techniques_list)
+    
+    def run_analysis(self) -> None:
+        """Run the main analysis process."""
+        recipes = self.data_loader.load_clean_csv('data/raw/RAW_recipes.csv', ['steps'])
+        interactions = self.data_loader.load_clean_csv('data/raw/RAW_interactions.csv', date='date')
+        filter_recipes = pd.read_pickle('data/preprocess/recipe_filtered.pkl')
 
-    df_steps = pd.merge(recipes[['id','name','steps']], filter_recipes, on='id', how='right')
+        df_steps = pd.merge(recipes[['id', 'name', 'steps']], filter_recipes, on='id', how='right')
 
-    # Process techniques
-    techniques = technique_processor.create_technique_df(df_steps)
+        techniques = self.technique_processor.create_technique_df(df_steps)
 
-    # Save processed techniques
-    with open("data/preprocess/techniques.pkl", "wb") as f:
-        pickle.dump(techniques, f)
+        with open("data/preprocess/techniques.pkl", "wb") as f:
+            pickle.dump(techniques, f)
 
-    # Merge data and analyze correlations
-    #df_tech_by_date = pd.merge(techniques, interactions[['recipe_id', 'date']],on='recipe_id', how='outer')
-    season_correlations = correlation_analyzer.analyze_correlation(techniques)
+        season_correlations = self.technique_processor.analyze_correlation(techniques)
 
-    # Save correlation analysis results
-    with open("data/preprocess/season_correlations.pkl", "wb") as f:
-        pickle.dump(season_correlations, f)
+        with open("data/preprocess/season_correlations.pkl", "wb") as f:
+            pickle.dump(season_correlations, f)
+
+if __name__ == "__main__":
+    analyzer = TechniqueAnalyzer(TECHNIQUES_LIST)
+    analyzer.run_analysis()

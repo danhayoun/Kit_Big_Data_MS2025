@@ -6,14 +6,7 @@ import pickle
 import sys
 import os
 
-# Ajouter la racine du projet au PYTHONPATH
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-
-
-
-from Backend.utils.Classe_pickle import Display, CamembertDisplay, DictionnaireDisplay
-
-
+from utils.Classe_pickle import Display, CamembertDisplay, DictionnaireDisplay
 
 
 # Titre de l'application
@@ -66,13 +59,14 @@ st.write("""
 
 # Charger le fichier .pkl
 
+
 st.write("Dans un premier temps, nous avons voulu tracer la répartition des saisons des recettes, pour des valeurs de temps de cuisson fixées. ")
 st.write("Point méthode : nous ne comptons pas le nombre de recettes déposées seulement, nous les pondérons par leur nombre de commentaires. Ainsi, plus une recette possède de commentaires, plus elle aura du poids dans le graphique. ")
 
 st.write("\n")
 st.write("Il nous a paru important de montrer l'histogramme des recettes par temps de cuisson, car pour certaines valeurs de temps de cuisson choisis, il y a très peu de recettes et les valeurs sont donc moins significatves.")
 st.write("Par exemple, pour un temps de 179 minutes, il n'ya même pas de recette associée dans notre jeu de données.")
-with open('../../data/preprocess/cursor2.pkl', 'rb') as fichier :
+with open('./data/preprocess/cursor2.pkl', 'rb') as fichier :
     df = pd.read_pickle(fichier)
     df = df.fillna(0)
 
@@ -96,7 +90,7 @@ data_columns = ['Spring_%', 'Winter_%', 'Summer_%', 'Fall_%']
 label_names = ['Spring', 'Winter', 'Summer', 'Fall']
 
 
-pickle = CamembertDisplay('temps_de_cuisson','../../data/preprocess/cursor2.pkl') 
+pickle = CamembertDisplay('temps_de_cuisson','./data/preprocess/cursor2.pkl') 
 
 pickle.plot_interactive_pie_chart(
     data_columns=['Spring_%', 'Winter_%', 'Summer_%', 'Fall_%'],
@@ -111,7 +105,7 @@ st.write("nous avons ensuite trouvé que ces graphes n'étaient pas suffisament 
 st.write("nous avons donc choisi de regarder 5 autres diagrammes, que nous considérons plus significatifs :")
 
  
-pickle = CamembertDisplay('temps_de_cuisson','../../data/preprocess/cursor_significatif.pkl')
+pickle = CamembertDisplay('temps_de_cuisson','./data/preprocess/cursor_significatif.pkl')
 
 pickle.plot_pie_charts_2(data_columns, label_names, title="Camemberts par intervalle de temps")
 
@@ -122,7 +116,8 @@ Nous remarquons aussi que l'automne est bien plus présents pour des temps de cu
 """)
 
 st.write("nous vous laissons maintenant avec un top 10, pour chaque saison et chaque intervalle considéré plus haut, afin de vous laisser choisir la recette qui convient le mieux à votre saison ainsi qu'au temps que vous avez devant vous 🙂 ")
-dictionnaire = DictionnaireDisplay('temps_de_cuisson','../../data/preprocess/dictionnaire_tops_10.pkl')
+dictionnaire = DictionnaireDisplay('temps_de_cuisson','./data/preprocess/dictionnaire_tops_10.pkl')
+
 
 intervalle_mapping = {
     '0-10 min': 10,

@@ -26,8 +26,7 @@ Pour installer ce projet, suivez les étapes ci-dessous :
 
 .. code-block:: bash
 
-   pip install -r requirements.txt
-
+   poetry install
 
 
 .. Hidden TOCs
