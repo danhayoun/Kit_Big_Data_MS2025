@@ -158,6 +158,7 @@ def generate_cursor_dataframe(df) :
 
     df_pivot['nb_recettes_total'] = (df_pivot['Summer']+df_pivot['Winter']+df_pivot['Spring']+df_pivot['Fall'])
     # Affiche le résultat
+    df_pivot = df_pivot.fillna(0)
     return df_pivot
 
 
