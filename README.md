@@ -4,6 +4,9 @@
 
 Ce projet est une application d'analyse de données développée en Python avec Streamlit comme front-end. Il permet de visualiser, analyser et interpréter des données de manière interactive.
 
+## Application
+Vous pouvez accéder à l'application via le lien suivant : https://kitbigdatams2025-dcj.streamlit.app/
+
 ## Installation
 
 1. **Cloner le dépôt :**
